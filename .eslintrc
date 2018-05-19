@@ -16,7 +16,7 @@
       "plugin:react/recommended",
       "plugin:prettier/recommended"
    ],
-   "plugins": ["react", "prettier", "jsx-a11y", "import"],
+   "plugins": ["react", "prettier"],
    "settings": {
       "react": {
          "createClass": "createReactClass",

@@ -1,6 +1,8 @@
 [ignore]
 .*/node_modules/.*
 .*/build/.*
+<PROJECT_ROOT>/src/index.js
+<PROJECT_ROOT>/src/serviceWorker.js
 
 [include]
 
@@ -9,5 +11,5 @@
 [lints]
 
 [options]
-
+all=true
 [strict]
