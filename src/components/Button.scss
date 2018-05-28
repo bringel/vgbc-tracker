@@ -1,0 +1,30 @@
+@import "../theme";
+
+.btn {
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.blue-button {
+  background-color: $blue;
+}
+
+.green-button {
+  background-color: $green;
+}
+
+
+.red-button {
+  background-color: $red;
+}
+
+.orange-button {
+  background-color: $orange
+}
+
+.purple-button {
+  background-color: $purple;
+}
