@@ -29,5 +29,8 @@
    "globals": {
       "Promise": false,
       "process": false
-   }
+   },
+   "rules": {
+      "no-console": "off"
+     }
 }

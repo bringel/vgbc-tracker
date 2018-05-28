@@ -9,7 +9,9 @@ type Props = {
 };
 
 const button = (props: Props) => (
-  <button className={`btn ${props.buttonStyle}-button ${props.className}`}>{props.children}</button>
+  <button {...props} className={`btn ${props.buttonStyle}-button ${props.className}`}>
+    {props.children}
+  </button>
 );
 
 button.defaultProps = {
