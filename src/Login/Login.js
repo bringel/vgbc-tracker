@@ -11,7 +11,18 @@ class Login extends Component<{}> {
       .auth()
       .signInWithPopup(loginProvider)
       .then((result) => {
-        console.log(result);
+        const { displayName, email, photoURL, uid } = result.user;
+
+        const db = firebase.firestore();
+        db
+          .collection('users')
+          .doc(uid)
+          .set({
+            displayName,
+            email,
+            photoURL,
+            isAdmin: false
+          });
       });
   };
 

@@ -5,11 +5,12 @@ import './Button.scss';
 type Props = {
   children: any,
   buttonStyle: 'blue' | 'green' | 'red' | 'orange' | 'purple',
-  className: string
+  className: string,
+  onClick: () => void
 };
 
 const button = (props: Props) => (
-  <button {...props} className={`btn ${props.buttonStyle}-button ${props.className}`}>
+  <button onClick={props.onClick} className={`btn ${props.buttonStyle}-button ${props.className}`}>
     {props.children}
   </button>
 );
