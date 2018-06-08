@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import './Dashboard.scss';
 
-class Dashboard extends Component<{}> {
+type Props = {
+  loggedIn: boolean
+};
+
+class Dashboard extends Component<Props> {
   render() {
-    return <div className="dashboard" />;
+    return this.props.loggedIn ? <div className="dashboard" /> : <Redirect to="/login" />;
   }
 }
 
