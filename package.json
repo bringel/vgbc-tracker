@@ -26,6 +26,7 @@
     ]
   },
   "devDependencies": {
+    "empty": "^0.10.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-prettier": "^2.6.0",

@@ -12,4 +12,7 @@ flow-typed
 
 [options]
 all=true
-[strict]
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.scss
+module.name_mapper.extension='scss' -> 'empty/object'[strict]
