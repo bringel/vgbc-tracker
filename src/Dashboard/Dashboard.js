@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import firebase from '../services/firebase';
+
+import Header from '../components/Header';
+
 import './Dashboard.scss';
 
 type Props = {
@@ -9,7 +13,14 @@ type Props = {
 
 class Dashboard extends Component<Props> {
   render() {
-    return this.props.loggedIn ? <div className="dashboard" /> : <Redirect to="/login" />;
+    const user = firebase.auth().currentUser;
+    return this.props.loggedIn ? (
+      <div className="dashboard">
+        <Header userName={user ? user.displayName : ''} />
+      </div>
+    ) : (
+      <Redirect to="/login" />
+    );
   }
 }
 
