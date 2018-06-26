@@ -12,7 +12,9 @@ const Header = (props: Props) => (
     <h1>Video Game Book Club Tracker</h1>
     <div className="user-container">
       <span className="user-name">{props.userName}</span>
-      <span>Logout</span>
+      <span onClick={props.onLogout} className="logout-link">
+        Logout
+      </span>
     </div>
   </div>
 );

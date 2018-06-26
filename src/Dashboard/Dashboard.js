@@ -12,11 +12,15 @@ type Props = {
 };
 
 class Dashboard extends Component<Props> {
+  handleLogout = () => {
+    firebase.auth().signOut();
+  };
+
   render() {
     const user = firebase.auth().currentUser;
     return this.props.loggedIn ? (
       <div className="dashboard">
-        <Header userName={user ? user.displayName : ''} />
+        <Header userName={user ? user.displayName : ''} onLogout={this.handleLogout} />
       </div>
     ) : (
       <Redirect to="/login" />
