@@ -1,17 +1,19 @@
+@import "../theme";
+
 .game-detail {
   display: flex;
   flex-direction: row;
 
   height: 350px;
 
-  border: 1px solid #dedede;
   border-radius: 5px;
 
   padding: 10px;
-  background-color: #444444;
 
   .game-poster {
     margin-right: 25px;
+    height: 350px;
+    width: auto;
   }
 
   .game-title {
