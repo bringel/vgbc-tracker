@@ -1,8 +1,9 @@
+//@flow
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import type { RouterHistory } from 'react-router-dom';
 
-import firebase, { loginProvider } from '../services/firebase';
+import firebase, { loginProvider, database } from '../services/firebase';
 
 import Button from '../components/Button';
 import './Login.scss';
@@ -20,8 +21,7 @@ class Login extends Component<Props> {
       .then((result) => {
         const { displayName, email, photoURL, uid } = result.user;
 
-        const db = firebase.firestore();
-        db
+        database
           .collection('users')
           .doc(uid)
           .set({

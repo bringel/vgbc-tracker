@@ -1,3 +1,4 @@
+//@flow
 export type Game = {
   id: string,
   giantBombID: string,
