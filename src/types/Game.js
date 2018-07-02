@@ -1,6 +1,5 @@
 //@flow
 export type Game = {
-  id: string,
   giantBombID: string,
   title: string,
   releaseDate: Date,
@@ -10,8 +9,17 @@ export type Game = {
   storeLinks: Array<{ type: string, url: string }>
 };
 
+export const emptyGame: Game = {
+  giantBombID: '',
+  title: '',
+  releaseDate: new Date('0001-01-01'),
+  description: '',
+  coverURL: '',
+  platforms: [],
+  storeLinks: []
+};
+
 export type GamePreview = {
-  id: string,
   giantBombID: string,
   title: string,
   releaseDate: Date,
@@ -19,12 +27,18 @@ export type GamePreview = {
 };
 
 export function toGamePreview(game: Game): GamePreview {
-  const { id, giantBombID, title, releaseDate, coverURL } = game;
+  const { giantBombID, title, releaseDate, coverURL } = game;
   return {
-    id,
     giantBombID,
     title,
     releaseDate,
     coverURL
   };
 }
+
+type GameOfTheMonthProps = {
+  activeMonth: Date,
+  current: boolean
+};
+
+export type GameOfTheMonthGame = Game & GameOfTheMonthProps;

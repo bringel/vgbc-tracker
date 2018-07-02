@@ -10,3 +10,4 @@ flow-typed
 [lints]
 
 [options]
+module.name_mapper.extension='scss' -> 'empty/object'
