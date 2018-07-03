@@ -18,7 +18,7 @@ export function initializeFirebase() {
   } else {
     return fetch('/__/firebase/init.json').then((response) => {
       // $FlowFixMe
-      return firebase.initializeApp(response.json());
+      response.json().then((res) => firebase.initializeApp(res));
     });
   }
 }
