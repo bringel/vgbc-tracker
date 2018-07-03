@@ -1,7 +1,10 @@
 //@flow
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import firebase from './services/firebase';
+import firebase, { usersCollection } from './services/firebase';
+
+import { FirebaseContextProvider } from './firebase-context';
+import type { User } from './types/User.js';
 
 import Login from './Login/Login';
 import Dashboard from './Dashboard/Dashboard';
@@ -9,33 +12,40 @@ import Dashboard from './Dashboard/Dashboard';
 import './App.scss';
 
 type State = {
-  loggedIn: boolean
+  loggedIn: boolean,
+  currentUser: User
 };
 
 class App extends Component<{}, State> {
   state = {
-    loggedIn: true
+    loggedIn: false,
+    currentUser: null
   };
 
   componentDidMount() {
     const auth = firebase.auth();
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ loggedIn: true });
+        const userDoc = usersCollection().doc(user.uid);
+        userDoc.get().then((doc) => {
+          this.setState({ loggedIn: true, currentUser: doc.data() });
+        });
       } else {
-        this.setState({ loggedIn: false });
+        this.setState({ loggedIn: false, currentUser: null });
       }
     });
   }
   render() {
     return (
       <div className="app">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login" render={({ history }) => <Login loggedIn={this.state.loggedIn} history={history} />} />
-            <Route path="/" exact render={() => <Dashboard loggedIn={this.state.loggedIn} />} />
-          </Switch>
-        </BrowserRouter>
+        <FirebaseContextProvider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/login" render={({ history }) => <Login history={history} />} />
+              <Route path="/" exact render={() => <Dashboard />} />
+            </Switch>
+          </BrowserRouter>
+        </FirebaseContextProvider>
       </div>
     );
   }

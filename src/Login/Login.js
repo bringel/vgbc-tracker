@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import type { RouterHistory } from 'react-router-dom';
 
-import firebase, { loginProvider, database } from '../services/firebase';
+import firebase, { loginProvider } from '../services/firebase';
+import { FirebaseContextConsumer } from '../firebase-context';
 
 import Button from '../components/Button';
 import './Login.scss';
 
 type Props = {
-  loggedIn: boolean,
   history: RouterHistory
 };
 
@@ -21,7 +21,8 @@ class Login extends Component<Props> {
       .then((result) => {
         const { displayName, email, photoURL, uid } = result.user;
 
-        database
+        firebase
+          .firestore()
           .collection('users')
           .doc(uid)
           .set({
@@ -36,15 +37,20 @@ class Login extends Component<Props> {
   };
 
   render() {
-    if (this.props.loggedIn) {
-      return <Redirect to="/" />;
-    }
     return (
-      <div className="login">
-        <Button className="login-button" onClick={this.handleLoginClick}>
-          Login in with Facebook
-        </Button>
-      </div>
+      <FirebaseContextConsumer>
+        {(context) =>
+          context.isLoggedIn ? (
+            <Redirect to="/" />
+          ) : (
+            <div className="login">
+              <Button className="login-button" onClick={this.handleLoginClick}>
+                Login in with Facebook
+              </Button>
+            </div>
+          )
+        }
+      </FirebaseContextConsumer>
     );
   }
 }
