@@ -6,12 +6,15 @@ import format from 'date-fns/format';
 import type { GameOfTheMonthGame } from '../types/Game';
 
 import firebase, { gamesCollection } from '../services/firebase';
-import { FirebaseContextConsumer } from '../firebase-context';
 
 import Header from '../components/Header';
 import GameDetail from '../Game/GameDetail';
 
 import './Dashboard.scss';
+
+type Props = {
+  loggedIn: boolean
+};
 
 type State = {
   currentGame: GameOfTheMonthGame,
@@ -46,31 +49,33 @@ type State = {
 //   storeLinks: []
 // };
 
-class Dashboard extends Component<{}, State> {
+class Dashboard extends Component<Props, State> {
   state = {
     currentGame: null,
     gamesHistory: []
   };
   componentDidMount() {
-    gamesCollection()
-      .get()
-      .then((querySnapshot) => {
-        const currentDoc = querySnapshot.docs.find((g) => {
-          return ((g.data(): any): GameOfTheMonthGame).current;
+    if (this.props.loggedIn) {
+      gamesCollection()
+        .get()
+        .then((querySnapshot) => {
+          const currentDoc = querySnapshot.docs.find((g) => {
+            return ((g.data(): any): GameOfTheMonthGame).current;
+          });
+          const gamesHistoryDocs = querySnapshot.docs.filter((g) => {
+            return !((g.data(): any): GameOfTheMonthGame).current;
+          });
+
+          if (!currentDoc) {
+            return;
+          }
+
+          const current = ((currentDoc.data(): any): GameOfTheMonthGame);
+          const gamesHistory = gamesHistoryDocs.map((d) => ((d.data(): any): GameOfTheMonthGame));
+
+          this.setState({ currentGame: current, gamesHistory: gamesHistory });
         });
-        const gamesHistoryDocs = querySnapshot.docs.filter((g) => {
-          return !((g.data(): any): GameOfTheMonthGame).current;
-        });
-
-        if (!currentDoc) {
-          return;
-        }
-
-        const current = ((currentDoc.data(): any): GameOfTheMonthGame);
-        const gamesHistory = gamesHistoryDocs.map((d) => ((d.data(): any): GameOfTheMonthGame));
-
-        this.setState({ currentGame: current, gamesHistory: gamesHistory });
-      });
+    }
   }
 
   handleLogout = () => {
@@ -84,22 +89,16 @@ class Dashboard extends Component<{}, State> {
   }
   render() {
     const user = firebase.auth().currentUser;
-    return (
-      <FirebaseContextConsumer>
-        {(context) =>
-          context.isLoggedIn ? (
-            <div className="dashboard">
-              <Header userName={user ? user.displayName || '' : ''} onLogout={this.handleLogout} />
-              <div className="content-wrapper">
-                <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
-                <GameDetail game={this.state.currentGame} />
-              </div>
-            </div>
-          ) : (
-            <Redirect to="/login" />
-          )
-        }
-      </FirebaseContextConsumer>
+    return this.props.loggedIn ? (
+      <div className="dashboard">
+        <Header userName={user ? user.displayName || '' : ''} onLogout={this.handleLogout} />
+        <div className="content-wrapper">
+          <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
+          <GameDetail game={this.state.currentGame} />
+        </div>
+      </div>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }

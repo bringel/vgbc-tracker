@@ -41,8 +41,11 @@ class App extends Component<{}, State> {
         <FirebaseContextProvider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
           <BrowserRouter>
             <Switch>
-              <Route path="/login" render={({ history }) => <Login history={history} />} />
-              <Route path="/" exact render={() => <Dashboard />} />
+              <Route
+                path="/login"
+                render={({ history }) => <Login history={history} loggedIn={this.state.loggedIn} />}
+              />
+              <Route path="/" exact render={() => <Dashboard loggedIn={this.state.loggedIn} />} />
             </Switch>
           </BrowserRouter>
         </FirebaseContextProvider>

@@ -4,13 +4,13 @@ import { Redirect } from 'react-router';
 import type { RouterHistory } from 'react-router-dom';
 
 import firebase, { loginProvider } from '../services/firebase';
-import { FirebaseContextConsumer } from '../firebase-context';
 
 import Button from '../components/Button';
 import './Login.scss';
 
 type Props = {
-  history: RouterHistory
+  history: RouterHistory,
+  loggedIn: boolean
 };
 
 class Login extends Component<Props> {
@@ -37,20 +37,14 @@ class Login extends Component<Props> {
   };
 
   render() {
-    return (
-      <FirebaseContextConsumer>
-        {(context) =>
-          context.isLoggedIn ? (
-            <Redirect to="/" />
-          ) : (
-            <div className="login">
-              <Button className="login-button" onClick={this.handleLoginClick}>
-                Login in with Facebook
-              </Button>
-            </div>
-          )
-        }
-      </FirebaseContextConsumer>
+    return this.props.loggedIn ? (
+      <Redirect to="/" />
+    ) : (
+      <div className="login">
+        <Button className="login-button" onClick={this.handleLoginClick}>
+          Login in with Facebook
+        </Button>
+      </div>
     );
   }
 }
