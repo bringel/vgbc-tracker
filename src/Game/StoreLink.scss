@@ -1,0 +1,22 @@
+@import "../theme";
+
+.store-link {
+  color: $text-main;
+  text-decoration: none;
+
+  border: 1px solid $text-main;
+  border-radius: 4px;
+
+  padding: 6px 12px;
+
+  margin-right: 12px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+
+  svg {
+    padding-right: 6px;
+  }
+}
