@@ -27,7 +27,7 @@ function iconNameFromType(type: string) {
 }
 
 const storeLink = (props: Props) => (
-  <a href={props.linkURL} className="store-link" target="_blank">
+  <a href={props.linkURL} className="store-link" target="_blank" rel="noopener noreferrer">
     <FontAwesomeIcon icon={['fab', iconNameFromType(props.type)]} />
     {props.type.toUpperCase()}
   </a>

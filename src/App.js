@@ -13,13 +13,15 @@ import './App.scss';
 
 type State = {
   loggedIn: boolean,
-  currentUser: User
+  currentUser: User,
+  loaded: boolean
 };
 
 class App extends Component<{}, State> {
   state = {
     loggedIn: false,
-    currentUser: null
+    currentUser: null,
+    loaded: false
   };
 
   componentDidMount() {
@@ -28,15 +30,15 @@ class App extends Component<{}, State> {
       if (user) {
         const userDoc = usersCollection().doc(user.uid);
         userDoc.get().then((doc) => {
-          this.setState({ loggedIn: true, currentUser: doc.data() });
+          this.setState({ loggedIn: true, currentUser: doc.data(), loaded: true });
         });
       } else {
-        this.setState({ loggedIn: false, currentUser: null });
+        this.setState({ loggedIn: false, currentUser: null, loaded: true });
       }
     });
   }
   render() {
-    return (
+    return this.state.loaded ? (
       <div className="app">
         <FirebaseContextProvider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
           <BrowserRouter>
@@ -50,6 +52,8 @@ class App extends Component<{}, State> {
           </BrowserRouter>
         </FirebaseContextProvider>
       </div>
+    ) : (
+      <div>Loading...</div>
     );
   }
 }

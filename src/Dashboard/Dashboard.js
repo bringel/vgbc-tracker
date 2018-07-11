@@ -5,7 +5,7 @@ import format from 'date-fns/format';
 
 import type { GameOfTheMonthGame } from '../types/Game';
 
-import firebase, { gamesCollection } from '../services/firebase';
+import { gamesCollection } from '../services/firebase';
 
 import Header from '../components/Header';
 import GameDetail from '../Game/GameDetail';
@@ -78,20 +78,15 @@ class Dashboard extends Component<Props, State> {
     }
   }
 
-  handleLogout = () => {
-    firebase.auth().signOut();
-  };
-
   getCurrentMonth() {
     if (this.state.currentGame) {
       return format(this.state.currentGame.activeMonth, 'MMMM YYYY');
     }
   }
   render() {
-    const user = firebase.auth().currentUser;
     return this.props.loggedIn ? (
       <div className="dashboard">
-        <Header userName={user ? user.displayName || '' : ''} onLogout={this.handleLogout} />
+        <Header />
         <div className="content-wrapper">
           <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
           <GameDetail game={this.state.currentGame} />
