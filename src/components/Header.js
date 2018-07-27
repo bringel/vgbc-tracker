@@ -10,12 +10,14 @@ const Header = () => (
     {(context) => (
       <div className="header">
         <h1>Video Game Book Club Tracker</h1>
-        <div className="user-container">
-          <span className="user-name">{context.currentUser.displayName || ''}</span>
-          <span onClick={() => firebase.auth().signOut()} className="logout-link">
-            Logout
-          </span>
-        </div>
+        {context.isLoggedIn && (
+          <div className="user-container">
+            <span className="user-name">{context.currentUser.displayName || ''}</span>
+            <span onClick={() => firebase.auth().signOut()} className="logout-link">
+              Logout
+            </span>
+          </div>
+        )}
       </div>
     )}
   </FirebaseContextConsumer>
