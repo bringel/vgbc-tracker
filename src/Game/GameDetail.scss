@@ -1,18 +1,28 @@
 @import "../theme";
+@import "../media";
 
 .game-detail {
   display: flex;
-  flex-direction: row;
-
-  height: 350px;
+  flex-direction: column;
 
   padding: 10px;
 
-  .game-poster {
-    margin-right: 25px;
+  @media(min-width: $mobile) {
+    flex-direction: row;
     height: 350px;
+  }
+
+  .game-poster {
+    margin-bottom: 15px;
     width: auto;
     max-width: 400px;
+
+    @media(min-width:$mobile) {
+      height: 350px;
+
+      margin-right: 25px;
+      margin-bottom: 0;
+    }
   }
 
   .game-title {
@@ -32,8 +42,8 @@
   .store-links {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
-    margin-top: 10px;
   }
 
   .store {
