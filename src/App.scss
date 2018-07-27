@@ -1,6 +1,13 @@
+@import "./media";
+
 .app {
+
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+
+  @media(min-width:$mobile) {
+    height: 100vh;
+  }
 
   color: #dedede;
 }
