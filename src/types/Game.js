@@ -37,7 +37,8 @@ export function toGamePreview(game: Game): GamePreview {
 }
 
 type GameOfTheMonthProps = {
-  activeMonth: Date,
+  activeMonth: number,
+  activeYear: number,
   current: boolean
 };
 

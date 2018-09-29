@@ -11,7 +11,7 @@ import StoreLink from './StoreLink';
 import './GameDetail.scss';
 
 type Props = {
-  game: Game
+  game: ?Game
 };
 
 function getAvailableStores(game: Game): Array<Store> {
@@ -58,31 +58,34 @@ function makeStoreLink(type: Store, gameTitle: string) {
 
 class GameDetail extends React.Component<Props> {
   render() {
-    if (this.props.game) {
-      const releaseYear = format(this.props.game.releaseDate, 'YYYY');
-      const platformNames = this.props.game.platforms.map((p) => p.name);
+    const game = this.props.game;
+    if (game) {
+      const releaseYear = format(game.releaseDate, 'YYYY');
+      const platformNames = game.platforms.map((p) => p.name);
 
-      const storeSearchLinks = getAvailableStores(this.props.game).map((s) => {
+      const storeSearchLinks = getAvailableStores(game).map((s) => {
         return {
           type: s,
-          link: makeStoreLink(s, this.props.game.title)
+          link: makeStoreLink(s, game.title)
         };
       });
 
       return (
         <div className="game-detail">
-          <img className="game-poster" src={this.props.game.coverURL} alt="current game poster" />
+          <img className="game-poster" src={game.coverURL} alt="current game poster" />
           <div className="game-info">
             <div className="game-title">
-              {this.props.game.title} ({releaseYear})
+              {game.title} ({releaseYear})
             </div>
-            <div className="game-description">{this.props.game.description}</div>
+            <div className="game-description">{game.description}</div>
             <div className="platforms">Available Platforms: {platformNames.join(', ')}</div>
             {storeSearchLinks.length > 0 ? (
               <div className="stores">
                 Search for this game on these stores:
                 <div className="store-links">
-                  {storeSearchLinks.map((link) => <StoreLink key={link.type} type={link.type} linkURL={link.link} />)}
+                  {storeSearchLinks.map((link) => (
+                    <StoreLink key={link.type} type={link.type} linkURL={link.link} />
+                  ))}
                 </div>
               </div>
             ) : null}

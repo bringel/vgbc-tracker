@@ -17,7 +17,7 @@ type Props = {
 };
 
 type State = {
-  currentGame: GameOfTheMonthGame,
+  currentGame: ?GameOfTheMonthGame,
   gamesHistory: Array<GameOfTheMonthGame>
 };
 
@@ -80,7 +80,8 @@ class Dashboard extends Component<Props, State> {
 
   getCurrentMonth() {
     if (this.state.currentGame) {
-      return format(this.state.currentGame.activeMonth, 'MMMM YYYY');
+      const activeDate = new Date(this.state.currentGame.activeYear, this.state.currentGame.activeMonth - 1);
+      return format(activeDate, 'MMMM YYYY');
     }
   }
   render() {
