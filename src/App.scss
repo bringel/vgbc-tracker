@@ -1,3 +1,4 @@
+@import "./theme";
 @import "./media";
 
 .app {
@@ -9,5 +10,5 @@
     height: 100vh;
   }
 
-  color: #dedede;
+  color: $text-main;
 }

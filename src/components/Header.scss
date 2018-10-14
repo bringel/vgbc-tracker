@@ -1,9 +1,10 @@
+@import "../theme";
 @import "../media";
 
 .header {
   padding: 16px 0 0 10px;
 
-  color: #dedede;
+  color: $text-main;
 
   display: flex;
   justify-content: space-between;
