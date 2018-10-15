@@ -23,7 +23,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged",
     "deploy:dev": "firebase use vgbc-tracker-dev && firebase deploy",
     "deploy:prod": "firebase use vgbc-tracker && firebase deploy"
   },
@@ -39,9 +38,9 @@
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.2",
-    "flow-bin": "^0.72.0",
+    "flow-bin": "^0.83.0",
     "flow-typed": "^2.4.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "lint-staged": "^7.1.0",
     "prettier": "^1.12.1"
   },
@@ -50,5 +49,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

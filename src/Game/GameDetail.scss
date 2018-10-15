@@ -8,6 +8,11 @@
 
   padding: 10px;
 
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    padding: 10px 10px 100px 10px;
+  }
+
   // @media(min-width: $mobile) {
   // flex-direction: column;
   //
@@ -21,6 +26,11 @@
 
     margin-right: 25px;
     margin-bottom: 0;
+
+    @media (max-width: $mobile) {
+      margin-bottom: 15px;
+      margin-right: 0;
+    }
 
     // @media(min-width:$mobile) {
     // margin-bottom: 15px;

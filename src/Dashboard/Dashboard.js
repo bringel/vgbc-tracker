@@ -85,10 +85,10 @@ class Dashboard extends Component<Props, State> {
   }
   render() {
     return this.props.loggedIn ? (
-      <React.Fragment>
+      <>
         <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
         <GameDetail game={this.state.currentGame} />
-      </React.Fragment>
+      </>
     ) : (
       <Redirect to="/login" />
     );
