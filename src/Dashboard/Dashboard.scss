@@ -1,6 +1,6 @@
-@import "../mixins";
-@import "../theme";
-@import "../media";
+@import '../mixins';
+@import '../theme';
+@import '../media';
 
 .dashboard {
   width: 100%;
@@ -8,16 +8,14 @@
   @include gradientBackground($green);
 
   .content-wrapper {
+    margin: 50px 150px;
 
-    margin: 5px 10px;
-
-    @media(min-width: $mobile) {
-      margin: 15px 30px;
-    }
-
-    @media(min-width: $small-desktop) {
-      margin: 50px 150px;
-    }
-
+    // @media(min-width: $mobile) {
+    //   margin: 15px 30px;
+    // }
+    //
+    // @media(min-width: $small-desktop) {
+    // margin: 5px 10px;
+    // }
   }
 }

@@ -1,21 +1,11 @@
-@import "../theme";
-@import "../mixins";
-@import "../media";
+@import '../theme';
+@import '../mixins';
+@import '../media';
 
 .login {
-  width: 100%;
-  height: 100%;
-  @include gradientBackground($blue);
-
-  .content-wrapper {
-    height: calc(100vh - 44px);
-    @media(min-width:$mobile) {
-      height: 750px;
-    }
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-button {

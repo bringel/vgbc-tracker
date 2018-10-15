@@ -7,7 +7,6 @@ import type { GameOfTheMonthGame } from '../types/Game';
 
 import { gamesCollection } from '../services/firebase';
 
-import Header from '../components/Header';
 import GameDetail from '../Game/GameDetail';
 
 import './Dashboard.scss';
@@ -86,13 +85,10 @@ class Dashboard extends Component<Props, State> {
   }
   render() {
     return this.props.loggedIn ? (
-      <div className="dashboard">
-        <Header />
-        <div className="content-wrapper">
-          <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
-          <GameDetail game={this.state.currentGame} />
-        </div>
-      </div>
+      <React.Fragment>
+        <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
+        <GameDetail game={this.state.currentGame} />
+      </React.Fragment>
     ) : (
       <Redirect to="/login" />
     );

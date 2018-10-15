@@ -5,7 +5,6 @@ import type { RouterHistory } from 'react-router-dom';
 
 import firebase, { loginProvider } from '../services/firebase';
 
-import Header from '../components/Header';
 import Button from '../components/Button';
 import './Login.scss';
 
@@ -42,12 +41,9 @@ class Login extends Component<Props> {
       <Redirect to="/" />
     ) : (
       <div className="login">
-        <Header />
-        <div className="content-wrapper">
-          <Button className="login-button" onClick={this.handleLoginClick}>
-            Login in with Facebook
-          </Button>
-        </div>
+        <Button className="login-button" onClick={this.handleLoginClick}>
+          Login in with Facebook
+        </Button>
       </div>
     );
   }

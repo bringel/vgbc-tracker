@@ -1,15 +1,15 @@
 //@flow
-import React, { Component } from 'react';
+import './App.scss';
+
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import firebase, { usersCollection } from './services/firebase';
+import React, { Component } from 'react';
 
 import { FirebaseContextProvider } from './firebase-context';
 import type { User } from './types/User.js';
-
-import Login from './Login/Login';
 import Dashboard from './Dashboard/Dashboard';
-
-import './App.scss';
+import Header from './components/Header';
+import Login from './Login/Login';
+import firebase, { usersCollection } from './services/firebase';
 
 type State = {
   loggedIn: boolean,
@@ -41,15 +41,18 @@ class App extends Component<{}, State> {
     return this.state.loaded ? (
       <div className="app">
         <FirebaseContextProvider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
-          <BrowserRouter>
-            <Switch>
-              <Route
-                path="/login"
-                render={({ history }) => <Login history={history} loggedIn={this.state.loggedIn} />}
-              />
-              <Route path="/" exact render={() => <Dashboard loggedIn={this.state.loggedIn} />} />
-            </Switch>
-          </BrowserRouter>
+          <Header />
+          <div className="content-wrapper">
+            <BrowserRouter>
+              <Switch>
+                <Route
+                  path="/login"
+                  render={({ history }) => <Login history={history} loggedIn={this.state.loggedIn} />}
+                />
+                <Route path="/" exact render={() => <Dashboard loggedIn={this.state.loggedIn} />} />
+              </Switch>
+            </BrowserRouter>
+          </div>
         </FirebaseContextProvider>
       </div>
     ) : (
