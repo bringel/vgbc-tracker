@@ -1,6 +1,5 @@
 //@flow
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import type { RouterHistory } from 'react-router-dom';
 
 import firebase, { loginProvider } from '../services/firebase';
@@ -9,8 +8,7 @@ import Button from '../components/Button';
 import './Login.scss';
 
 type Props = {
-  history: RouterHistory,
-  loggedIn: boolean
+  history: RouterHistory
 };
 
 class Login extends Component<Props> {
@@ -37,9 +35,7 @@ class Login extends Component<Props> {
   };
 
   render() {
-    return this.props.loggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <div className="login">
         <Button className="login-button" onClick={this.handleLoginClick}>
           Login in with Facebook
