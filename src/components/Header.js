@@ -2,11 +2,11 @@
 import * as React from 'react';
 
 import firebase from '../services/firebase';
-import { FirebaseContextConsumer } from '../firebase-context';
+import FirebaseContext from '../firebase-context';
 import './Header.scss';
 
 const Header = () => (
-  <FirebaseContextConsumer>
+  <FirebaseContext.Consumer>
     {(context) => (
       <div className="header">
         <h1>Video Game Book Club Tracker</h1>
@@ -20,7 +20,7 @@ const Header = () => (
         )}
       </div>
     )}
-  </FirebaseContextConsumer>
+  </FirebaseContext.Consumer>
 );
 
 export default Header;

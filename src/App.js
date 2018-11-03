@@ -4,7 +4,7 @@ import './App.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import { FirebaseContextProvider } from './firebase-context';
+import FirebaseContext from './firebase-context';
 import type { User } from './types/User.js';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
@@ -40,7 +40,7 @@ class App extends Component<{}, State> {
   render() {
     return this.state.loaded ? (
       <div className="app">
-        <FirebaseContextProvider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
+        <FirebaseContext.Provider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
           <Header />
           <div className="content-wrapper">
             <BrowserRouter>
@@ -53,7 +53,7 @@ class App extends Component<{}, State> {
               </Switch>
             </BrowserRouter>
           </div>
-        </FirebaseContextProvider>
+        </FirebaseContext.Provider>
       </div>
     ) : (
       <div>Loading...</div>
