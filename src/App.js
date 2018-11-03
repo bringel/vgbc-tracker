@@ -5,7 +5,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
 import FirebaseContext from './firebase-context';
-import AuthenticatedRoute from './components/AuthenticatedRoute';
 import type { User } from './types/User.js';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
@@ -47,7 +46,7 @@ class App extends Component<{}, State> {
             <BrowserRouter>
               <Switch>
                 <Route path="/login" render={({ history }) => <Login history={history} />} />
-                <AuthenticatedRoute path="/" exact render={() => <Dashboard />} />
+                <Route path="/" exact render={() => <Dashboard />} />
               </Switch>
             </BrowserRouter>
           </div>
