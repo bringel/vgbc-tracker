@@ -1,3 +1,14 @@
 language: node_js
 node_js:
-  - 'node'
+  - lts/*
+deploy:
+  - provider: firebase
+    on:
+      branch: develop
+    token:
+      secure: s7xHmJGwKQ6GvwC2H63RdoHSHzGL+I1GKDtYkL1oQgm0z9ahcrqK9pPoA0VgQs2/KqibZ+AAIyYYHbH92CAQVOgMKkyUTtBH52zdJ56BWyFP83K3XDRnyFY3QYmI+XhmyJDlyC9oISmOezwziFfKs0i4VjG257EgWI0jhNT6I8Nqc/l/rO6ntevsRECkdJdpFQMR6ibuHOYEHO8fcBpja8S1N4pQ8zKUA6WhCY/dcCYh7/Cm7rlMIIzMB1Tq/FURHI/yDRUN+vR1u+Bo0I+lZBUXR/W1suNnDx/XYJg1LXBw2Fz2YMsbC5h2aDLr49SJhghD9QdSBu6ECUEVar2NApFhw8uJv5jitBbeVHEbaUdeq946Sy6KXEzgsw5fGFOegdj/AMFT9SydIzPZwLBZC9jPGfbMhS7FdQ3a3jUzopg3Ak6Q00LJESydLQp6aziwvMDqrnGDpUkAzMFHF5YeO08QRgovxzLiMtI1gnsb7tTgMknPDRpmvrBKj+ga+CNaEA7Rh5ERgQgX0F6PQxzoXLCg+ZQ3oeYsm47OPljkyCQCyhBGMTJ0vdtaAzjLo0Vtj4aasqUn6p9fuPGiXyTdCeZGH7BPxjtEli3/bQdo3Efp6qR9iqkzd5HEkZwwZB+tr0XiMGWV9UxhMZkiPRZgRBsZuHKSVVvkjMiIN1RcHpw=
+  - provider: firebase
+    on:
+      branch: master
+      token:
+        secure: Np0+ZNu9JKj/YO1VdGdeKNY/hnSsiSb9M+8PY1+JwvMnN+kJURCRu5zvuSaaONXKRqdDLgFT+x5Fknudj+CNJnO8GIAj2/SlcW42cHxJR25neXeSNf7IZd/1KzBNqO7zGUlzAdVXCBSkeuCnGfL8kNL49cxbwGkwzcKZMKrdfoCWEYpSXfarPVE1Wba98OW5uZxId0Mv7B9uCpX7dOqpa93wg7Zob/A7YnqVgDhOVzZ2ouLnd04aGNdYn9SVi1/ygeGrb5f5QjQzPazNyGxhCf8YkMlgfjtyPvdMtQPwQSYca1ONQKyNm5od7QNv8sJPNOc6Blo/CNC2GpcY5jkBDrAT2Po9guXwl9MUGO/h4MpLBvLGTzIJulhwDqfGpiSoAvGg/ejSsFxfv/drClYcV4BntXsTwvbj2M3VwpZQtFajQTPiqdClRi1uNdk9TsCFea44GOTlkj2PmrCKPN7aRHfRy5R0efmSsSvthFKpAhhVSn9ARpdZSpftpj6ci5YxogNH6ugKENaWRzDYfx+6bO7r7A41kJH36fFZxkSor+8Rv7PtBDHQV2pVHuBSvtYhI9djOhHyA0HKfLFZ4c0eRm4lxPwuhFwZHgktZBqmdOL+AYidlsjGKFHQQ94zHiCf+0PH9tzd+bWmlQv3nnoBtas224vZFQ+wrG1/DKN/he4=
