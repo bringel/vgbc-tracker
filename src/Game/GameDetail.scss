@@ -1,24 +1,18 @@
 @import '../theme';
-@import '../media';
+@import '../mixins';
 
 .game-detail {
   display: flex;
   flex-direction: row;
-  height: 350px;
+  // height: 350px;
 
   padding: 10px;
 
-  @media (max-width: $mobile) {
+  @include mobile-portrait {
     flex-direction: column;
     padding: 10px 10px 100px 10px;
     height: 100%;
   }
-
-  // @media(min-width: $mobile) {
-  // flex-direction: column;
-  //
-  // padding: 10px 10px 100px 10px;
-  // }
 
   .game-poster {
     width: auto;
@@ -28,14 +22,10 @@
     margin-right: 25px;
     margin-bottom: 0;
 
-    @media (max-width: $mobile) {
+    @include mobile-portrait {
       margin-bottom: 15px;
       margin-right: 0;
     }
-
-    // @media(min-width:$mobile) {
-    // margin-bottom: 15px;
-    // }
   }
 
   .game-title {

@@ -1,5 +1,4 @@
 @import '../theme';
-@import '../media';
 @import '../mixins';
 
 .header {
@@ -7,14 +6,17 @@
 
   display: flex;
   justify-content: space-between;
-  padding: 24px 0 0 24px;
+  padding: 24px 24px 0 24px;
   flex-wrap: nowrap;
 
   @include gradientBackground($green);
 
-  @media (max-width: $mobile) {
+  @include mobile-portrait {
     flex-wrap: wrap;
-    padding: 32px 0 0 10px;
+  }
+  @include mobile-landscape {
+    flex-wrap: wrap;
+    padding: 32px calc(10px + env(safe-area-inset-right)) 0 calc(10px + env(safe-area-inset-left));
   }
 
   h1 {
@@ -25,8 +27,7 @@
 
 .user-container {
   margin-top: 0;
-  margin-right: 24px;
-  @media (max-width: $mobile) {
+  @include mobile-portrait {
     margin-top: 12px;
   }
 

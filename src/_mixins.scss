@@ -1,4 +1,24 @@
 @import './theme';
+@import './media';
+
 @mixin gradientBackground($color) {
   background: linear-gradient(to bottom, $color 10%, $background 35%);
+}
+
+@mixin mobile-portrait {
+  @media (max-width: $mobile-width-portrait) and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin mobile-landscape {
+  @media (max-width: $mobile-width-landscape) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin small-desktop {
+  @media (max-width: $small-desktop) {
+    @content;
+  }
 }
