@@ -3,15 +3,9 @@ node_js:
   - lts/*
 script: yarn build
 deploy:
-  - provider: firebase
-    on:
-      branch: develop
-    token:
-      secure: s7xHmJGwKQ6GvwC2H63RdoHSHzGL+I1GKDtYkL1oQgm0z9ahcrqK9pPoA0VgQs2/KqibZ+AAIyYYHbH92CAQVOgMKkyUTtBH52zdJ56BWyFP83K3XDRnyFY3QYmI+XhmyJDlyC9oISmOezwziFfKs0i4VjG257EgWI0jhNT6I8Nqc/l/rO6ntevsRECkdJdpFQMR6ibuHOYEHO8fcBpja8S1N4pQ8zKUA6WhCY/dcCYh7/Cm7rlMIIzMB1Tq/FURHI/yDRUN+vR1u+Bo0I+lZBUXR/W1suNnDx/XYJg1LXBw2Fz2YMsbC5h2aDLr49SJhghD9QdSBu6ECUEVar2NApFhw8uJv5jitBbeVHEbaUdeq946Sy6KXEzgsw5fGFOegdj/AMFT9SydIzPZwLBZC9jPGfbMhS7FdQ3a3jUzopg3Ak6Q00LJESydLQp6aziwvMDqrnGDpUkAzMFHF5YeO08QRgovxzLiMtI1gnsb7tTgMknPDRpmvrBKj+ga+CNaEA7Rh5ERgQgX0F6PQxzoXLCg+ZQ3oeYsm47OPljkyCQCyhBGMTJ0vdtaAzjLo0Vtj4aasqUn6p9fuPGiXyTdCeZGH7BPxjtEli3/bQdo3Efp6qR9iqkzd5HEkZwwZB+tr0XiMGWV9UxhMZkiPRZgRBsZuHKSVVvkjMiIN1RcHpw=
-    project: 'vgbc-tracker-dev'
-  - provider: firebase
-    on:
-      branch: master
-    token:
-      secure: "gJHkEgVBGn/yic7drZ8slLLu/DFH+Zq9sN6QRqr2kAdBxJ2hf9zgbJ1v4zYYA9cc4FoQbOvyUPOI0sAvJbZtSgja/WEk5A+znm8WmAxDZSL3o983MZ6D+ciJzUsKoIdUzOSkT+L1T7xHLH4+cbbh21GkFhqpJ0NuL66SHosAPchxjKE/yjapQsBr6TnxTk0yuQDJg57pa/RzMNoPeeHWdL0Ieivfo5XX2fbuogbK/lEFx84ja1Jbga+hN920DLriLObqyea5B7oFVR+Kai2mCiIULoHRkOg8ZAE7+ckeNsE+uLybIDSCDnP8pO7ST3/5u1nxQZF4ypS15KxwGr1wzcboxFr891PH3gku1FM7NvRO352M4kuMDiA2jPdYIDfY12Muzq/jWUeXd1oW93gCi8Ajhp07ldQPNdI1fGob+cUMrYyp0BePcnW2I4iL2Ev6RFJXpxRTIip99o/dKSNvKGX+YA8sX2bBsiL26MKHcCU0xpF3QxMFWbN6mSFRORvGOoxhaUVk8aB6Lkq9fwt/P60UdTXXPuyO4VJ63MkszgjdE5iAMCn55x8FjVtsDe6DvuFcayHLnhJnDOfRaLr2F7WiX95SbvUxfeXxrzRFa7XpsmAW8LN93DiflqZ+yGyq0JLSK9tTk2044bSH4SmSx0krgr95KrWLDpDgWi5vCtw="
-    project: 'vgbc-tracker'
+  provider: firebase
+  on:
+    branch: master
+  token:
+    secure: "gJHkEgVBGn/yic7drZ8slLLu/DFH+Zq9sN6QRqr2kAdBxJ2hf9zgbJ1v4zYYA9cc4FoQbOvyUPOI0sAvJbZtSgja/WEk5A+znm8WmAxDZSL3o983MZ6D+ciJzUsKoIdUzOSkT+L1T7xHLH4+cbbh21GkFhqpJ0NuL66SHosAPchxjKE/yjapQsBr6TnxTk0yuQDJg57pa/RzMNoPeeHWdL0Ieivfo5XX2fbuogbK/lEFx84ja1Jbga+hN920DLriLObqyea5B7oFVR+Kai2mCiIULoHRkOg8ZAE7+ckeNsE+uLybIDSCDnP8pO7ST3/5u1nxQZF4ypS15KxwGr1wzcboxFr891PH3gku1FM7NvRO352M4kuMDiA2jPdYIDfY12Muzq/jWUeXd1oW93gCi8Ajhp07ldQPNdI1fGob+cUMrYyp0BePcnW2I4iL2Ev6RFJXpxRTIip99o/dKSNvKGX+YA8sX2bBsiL26MKHcCU0xpF3QxMFWbN6mSFRORvGOoxhaUVk8aB6Lkq9fwt/P60UdTXXPuyO4VJ63MkszgjdE5iAMCn55x8FjVtsDe6DvuFcayHLnhJnDOfRaLr2F7WiX95SbvUxfeXxrzRFa7XpsmAW8LN93DiflqZ+yGyq0JLSK9tTk2044bSH4SmSx0krgr95KrWLDpDgWi5vCtw="
+  project: 'vgbc-tracker'
