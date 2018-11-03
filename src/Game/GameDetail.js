@@ -28,7 +28,7 @@ function getAvailableStores(game: Game): Array<Store> {
       case platforms.mac:
       case platforms.pc:
       case platforms.linux:
-        return ['steam', 'gog'];
+        return 'steam';
       default:
         return null;
     }
@@ -49,8 +49,6 @@ function makeStoreLink(type: Store, gameTitle: string) {
       return `https://www.nintendo.com/games/game-guide?pv=true%23filter/--------------featureddes${gameTitle}-#filter/-|-|-|-|-|-|-|-|-|-|-|-|-|-|featured|des|${gameTitle}|-`;
     case 'steam':
       return `https://store.steampowered.com/search/?term=${gameTitle}`;
-    case 'gog':
-      return `https://www.gog.com/games?sort=popularity&search=${gameTitle}`;
     default:
       return '';
   }
