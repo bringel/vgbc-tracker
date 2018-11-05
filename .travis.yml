@@ -1,19 +1,19 @@
 language: node_js
 node_js:
-- lts/*
+  - lts/*
 script: yarn build
 deploy:
-- provider: firebase
-  on:
-    branch: master
-  project: vgbc-tracker
-  skip_cleanup: true
-  token:
-    secure: C+Z4rw1MZN5r2kBc0vj8kagF6MDM8klbvMw18IOCBOdkxvcoqNTj8MeishtKd6IuHj3A4oypDsd1CIY/hv0JM1DpK9gC025/raES77hudxeN58p96OL3nX/e76Q9VKfubDr2o1p9r1KXBTOLYKmZnE93pP2/FWDfgDOLk4/CaEreNNskeLDvdoiAo9jKRMZplocLaun0Q3089rU+Ifbck0+uSyZ7G3+B6l33F2vlp7GhuoFjdPt970qOdsNYi16niuopqoQz5sFJxI40l6v6EM881zjOYyh9Me8UDvLq8zJT30hel7UXfIBbklNNrLTpQIITKeI4NwHzaR6kFHereiQ9oTUfRQwHVzrH45JXAS24BPC2klrCarzLmuaHJfiTMznftQemtAzN3xF52Kws8S6xxB2UdG0fT4gwHbrqOukzgaFW1tr0dyttaMuevWz6w4tdxCH2PhU8JebbrktiYeMB07lvaUFcDlWMaT9s5cwhmRF12icI6BJLWtknYzrG0sp3b/ltlZaLJ7+nWL819zSLvGkoD27sRMBT3O0+dheXo+ryRCyNhon/10KBMqPv/lCs/Wkw2u7LJ/jzd/Eyoo9ANh6TdySOAJ4seM/I3II1g9TmfzssvbXV+ykqs+DFN8z9wNRFYOD8+OdV7KQi2BGIn34wuSrMxoKJvEs4ngE=
-- provider: firebase
-  on:
-    branch: develop
-  project: vgbc-tracker-dev
-  skip_cleanup: true
-  token:
-    secure: NlDS78sZLlSCCo18TcGi2JNhF1ZpKIRacp/T+VkXo/dMLNjzUelLhsJdC0I3nXnOy3ksH0dNWkYWFjVqTaIW8t3XU7+SblDrWFIf6FG0NcPTJW+0qBb3imsfOXp4Xto9rImCywp11rWi9DplRNU9IP7Km1vjawbsp+ysCi6P0EcuyUc3+6V/pUrub6jfkF0vwkTyQw9V46G9AV0X7tUXBp7SZta3Mw48+nE+cnuoEQZgdgbqklq8L5AyDnC1GlhJ4d9SbZOo1RO7hrdydYpcYqTDPP/fFookfCO5Lr7fx4IoC4Czg+2Bes/Z8Nr5MK16DMNrtLwP280eqh+wl/Kjr2F4oqUPKafxm0kZiQebgMg7yYJVfqpUhdJc3tFUGct3GY1q1QHxcCohr/kbPnGT9jYIUfs/j8uDB1FOG7yFD9p5ORsf+KhtX3jMM33tVq7aKf1jWM+u0v8i3Z0mjJOiYAYpwVeVgsiK0xBFHpXZ1VAo9s1hyDfQQWDpGoJfg6SLBbPeKpQJF3KeYz7aAlGelfhLDEWerkkXuewMsdgEDdmyQN5fw30WK3+uXL265bBFokqrqlgbD8rJyjCk2xgQilPkZx7yjn/2YfaNevGkjj0gOJ7ToYVfNo8gg+xXJGVWCoE4uRtL3z9sZW6vhy1vmA3PfzvGvFaCujGvCfpNX6I=
+  - provider: firebase
+    on:
+      branch: master
+    project: vgbc-tracker
+    skip_cleanup: true
+    token:
+      secure: BP5HPESh4TVyhGwHUZ5Ni/3N15qt1mILHTeDUkpdvoEX9KlYmEcoSc5sU9zDOpKTt/i4ncK9y5ixQs4l9LWg4N0swqmSEbzKRqNMUN6ALv+FNKmATTUvId1tK6N76BX7WlJqhynDv7GGqy00uQTVXVzW8Mqt9Hfqv/BRB+pvfigPCneekjXPbrCv8g2cuMNVuYX/q+54BStetRl/2AZVf2Y67LA5lxo7wYA4WUBv8r0jDY7veMyixh6sWNDHYSVZEEWoeKh3bkf7jmzauT+cArQPKlEuWNslFpAfjRfOEfQlkx06Sdn5lQVHrNlpR0Wz7knEWCNAgQcDyhAEZ/admUbTB9SgP7k0LD82WGmijrNZ72KftCYBBo7MTQgvI5Ag6Jh4ngBlwGJvG+TaFRlPkW0KTI2/gb6PwosIXiX1du6BuloFo+9W9hzIlHErlTd/gNnoTkLaO9qc2MHNBJ8gJH0H0TtRYORqDKcR+tFvXJVI6wlGcKNKoQKMTwIDO0sagkJUqIOLWex9lJ1/z0Og8kLtcK0NSL0+EZz3SXFrcEqyMd7WKdVgWntbWT281kryK46xn2PftGd9EXJcO5lCVYyD/0gJw+AIyEk28adGEAPMdeLRlg+ui9mTxCIAysc/I2IWzDG4oxHk91yo9mlUFTmE+5u20922Igy6jnCwc6o=
+  - provider: firebase
+    on:
+      branch: develop
+    project: vgbc-tracker-dev
+    skip_cleanup: true
+    token:
+      secure: mtGr5HuTEso9cok55e2jQ3YFEjOisG/SXOtGxtC9X9kzomIo1rfENjMwVMFXrCNFqfG4bF+9TSQpblcqdNJQtaSFtcBNELlbBGBzVwLLY26cVQdEkL7zFdd2hOSjIPPsc/jsILA2vrdbNYTVQWEQyyjC7uSRhmBrnbVXD6y3BN1yts1om1V6WobEJIq1k7axBaU9IXYFCTAucOwuyJes3MVQ0lnAdglLZXaFHbORrKTpVOu9bB2Ur1Dmhqlil9Lk+60EzRyuA+nPkrRMX+AqOAeDBoL3UpoyxLN63AVpvJ/t41NX6gEtrbM8/ju+5HffN5UeogcFh/8acltGD7oPLF+HE3VfurGYCrHtFySFzFBt/+01BfJqxYmueSgkm+oMTL1soeKGGi/PFgfH+L0eiRWE36pImQ1nuy3obsq99JU6kloP278tLjhmFuKq/IZZZEE2ByCblvk9vlXzqrjUW2bHdUhIcWed/aJg39yYXDWm1XdlVkZt7Imr4LvY59+RvQXDIu0ZXFh5Kt5oXIU1FhUkAJhOZ2RMk2kvzbMKElNgX0TE1DNkTTsOHHKpJWVAwQeYNBKxuvvdJxGuIcLWP4wne5TB3BhOQMjBnlBI9xKhdYmm/TVzoair12Cf3SJSqEuInRWtpBIfISCfLeDTTXn14GvO7j8HWo4qZsbD8V4=
