@@ -1,9 +1,8 @@
 //@flow
-import './App.scss';
-
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
+import ThemeContext, { type ThemeOption, type AccentColor } from './themeContext';
 import FirebaseContext from './firebase-context';
 import type { User } from './types/User.js';
 import Dashboard from './Dashboard/Dashboard';
@@ -11,17 +10,23 @@ import Header from './components/Header';
 import Login from './Login/Login';
 import firebase, { usersCollection } from './services/firebase';
 
+import './App.scss';
+
 type State = {
   loggedIn: boolean,
   currentUser: User,
-  loaded: boolean
+  loaded: boolean,
+  theme: ThemeOption,
+  accentColor: AccentColor
 };
 
 class App extends Component<{}, State> {
   state = {
     loggedIn: false,
     currentUser: null,
-    loaded: false
+    loaded: true,
+    theme: 'dark',
+    accentColor: 'green'
   };
 
   componentDidMount() {
@@ -37,21 +42,43 @@ class App extends Component<{}, State> {
       }
     });
   }
+
+  setTheme = (theme: *) => {
+    this.setState({ theme: theme });
+  };
+
+  setAccentColor = (accentColor: *) => {
+    this.setState({ accentColor: accentColor });
+  };
+
   render() {
     return this.state.loaded ? (
-      <div className="app">
-        <FirebaseContext.Provider value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
-          <Header />
-          <div className="content-wrapper">
-            <BrowserRouter>
-              <Switch>
-                <Route path="/login" render={({ history }) => <Login history={history} />} />
-                <Route path="/" exact render={() => <Dashboard />} />
-              </Switch>
-            </BrowserRouter>
-          </div>
-        </FirebaseContext.Provider>
-      </div>
+      <ThemeContext.Provider
+        value={{
+          theme: this.state.theme,
+          accentColor: this.state.accentColor,
+          setTheme: this.setTheme,
+          setAccentColor: this.setAccentColor
+        }}>
+        <ThemeContext.Consumer>
+          {(themeContext) => (
+            <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
+              <FirebaseContext.Provider
+                value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
+                <Header />
+                <div className="content-wrapper">
+                  <BrowserRouter>
+                    <Switch>
+                      <Route path="/login" render={({ history }) => <Login history={history} />} />
+                      <Route path="/" exact render={() => <Dashboard />} />
+                    </Switch>
+                  </BrowserRouter>
+                </div>
+              </FirebaseContext.Provider>
+            </div>
+          )}
+        </ThemeContext.Consumer>
+      </ThemeContext.Provider>
     ) : (
       <div>Loading...</div>
     );

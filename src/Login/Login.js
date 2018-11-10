@@ -4,6 +4,7 @@ import type { RouterHistory } from 'react-router-dom';
 
 import firebase, { loginProvider } from '../services/firebase';
 
+import { AccentColorUpdate } from '../themeContext';
 import Button from '../components/Button';
 import './Login.scss';
 
@@ -37,6 +38,7 @@ class Login extends Component<Props> {
   render() {
     return (
       <div className="login">
+        <AccentColorUpdate accentColor="facebook-blue" />
         <Button className="login-button" onClick={this.handleLoginClick}>
           Login in with Facebook
         </Button>
