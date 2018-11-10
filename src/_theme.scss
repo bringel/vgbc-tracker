@@ -1,11 +1,20 @@
-$blue: #00A1FF;
-$green: #2FF95B;
-$red: #FF3F26;
-$orange: #FF9D00;
-$purple: #C300FF;
+$blue: #00a1ff;
+$green: #2ff95b;
+$red: #ff3f26;
+$orange: #ff9d00;
+$purple: #c300ff;
 
 $facebook-blue: #4267b2;
 
 $text-main: #efefef;
 $background: #1d1d1d;
 $background-lighter: lighten($background, 10);
+
+$accentColors: (
+  blue: $blue,
+  green: $green,
+  red: $red,
+  orange: $orange,
+  purple: $purple,
+  facebook-blue: $facebook-blue
+) !global;

@@ -9,7 +9,9 @@
   padding: 24px 24px 0 24px;
   flex-wrap: nowrap;
 
-  @include gradientBackground($green);
+  @include withAccentColor {
+    @include gradientBackground($accentColor);
+  }
 
   @include mobile-portrait {
     flex-wrap: wrap;
@@ -22,10 +24,6 @@
   h1 {
     margin: 0;
     font-size: 1.5rem;
-  }
-
-  .accent-facebook-blue & {
-    @include gradientBackground($facebook-blue);
   }
 }
 

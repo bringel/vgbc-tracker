@@ -22,3 +22,13 @@
     @content;
   }
 }
+
+@mixin withAccentColor {
+  @each $colorName, $color in $accentColors {
+    .accent-#{$colorName} & {
+      $accentColor: $color !global;
+      @content;
+      $accentColor: null !global;
+    }
+  }
+}
