@@ -1,10 +1,13 @@
-@import "../theme";
+@import '../theme';
+@import '../mixins';
 
 .store-link {
-  color: $text-main;
+  @include withAccentColor {
+    color: $accentColor;
+    border: 1px solid $accentColor;
+  }
   text-decoration: none;
 
-  border: 1px solid $text-main;
   border-radius: 4px;
 
   padding: 6px 12px;
@@ -15,7 +18,6 @@
   &:last-child {
     margin-right: 0;
   }
-
 
   svg {
     padding-right: 6px;
