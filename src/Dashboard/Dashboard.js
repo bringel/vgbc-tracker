@@ -7,6 +7,7 @@ import type { GameOfTheMonthGame } from '../types/Game';
 import { gamesCollection } from '../services/firebase';
 
 import GameDetail from '../Game/GameDetail';
+import GameHistory from '../GameHistory/GameHistory';
 
 import './Dashboard.scss';
 
@@ -55,6 +56,7 @@ class Dashboard extends Component<Props, State> {
       <>
         <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
         <GameDetail game={this.state.currentGame} />
+        <GameHistory games={this.state.gamesHistory} />
       </>
     );
   }
