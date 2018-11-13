@@ -2,7 +2,10 @@
 import * as React from 'react';
 import { groupBy, flatMap } from 'lodash-es';
 
+import GamePreview from '../GamePreview/GamePreview';
 import type { GameOfTheMonthGame } from '../types/Game';
+
+import './GameHistory.scss';
 
 type Props = {
   games: Array<GameOfTheMonthGame>
@@ -18,7 +21,7 @@ function groupGames(games: Array<GameOfTheMonthGame>): Array<HistoryGroup> {
   return flatMap(grouped, (value, key) => {
     return {
       year: key,
-      games: value
+      games: value.sort((a, b) => b.activeMonth - a.activeMonth)
     };
   });
 }
@@ -26,7 +29,16 @@ function groupGames(games: Array<GameOfTheMonthGame>): Array<HistoryGroup> {
 class GameHistory extends React.Component<Props> {
   render() {
     const groupedGames = groupGames(this.props.games).sort((a, b) => b.year - a.year);
-    return groupedGames.map((g) => <div key={g.year}>{g.year}</div>);
+    return groupedGames.map((g) => (
+      <>
+        <div key={g.year} className="group-header">
+          {g.year}
+        </div>
+        {g.games.map((game) => (
+          <GamePreview key={game.giantBombID} game={game} />
+        ))}
+      </>
+    ));
   }
 }
 
