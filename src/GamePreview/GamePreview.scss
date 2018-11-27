@@ -1,0 +1,20 @@
+@import '../theme';
+
+.game-preview {
+  margin-bottom: 6px;
+  border-bottom: 1px solid $text-main;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+
+  img {
+    flex: 0 1 75px;
+  }
+}
