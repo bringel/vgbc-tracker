@@ -1,4 +1,5 @@
 @import '../theme';
+@import '../mixins';
 
 .group-header {
   color: $text-main;
@@ -12,4 +13,13 @@
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-column-gap: 12px;
+  @include mobile-landscape {
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 6px;
+  }
+
+  @include mobile-portrait {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 6px;
+  }
 }
