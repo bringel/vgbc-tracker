@@ -9,6 +9,7 @@ $facebook-blue: #4267b2;
 $text-main: #efefef;
 $background: #1d1d1d;
 $background-lighter: lighten($background, 10);
+$background-darker: darken($background, 3);
 
 $accentColors: (
   blue: $blue,
