@@ -40,14 +40,14 @@
 
   .icons-container {
     margin-top: 12px;
-  }
-
-  .icon {
     font-size: 20px;
 
     @include withAccentColor {
       color: $accentColor;
     }
+  }
+
+  .icon {
     margin-right: 12px;
 
     &:last-child {

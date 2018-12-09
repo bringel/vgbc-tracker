@@ -21,7 +21,7 @@ class GamePreview extends React.Component<Props> {
         <div className="active-month">{format(activeDate, 'MMMM')}</div>
         <div className="preview-info">
           <div className="preview-cover">
-            <img src={game.coverURL} />
+            <img src={game.coverURL} alt="Game cover art" />
           </div>
           <div>
             <div className="game-title">{game.title}</div>
