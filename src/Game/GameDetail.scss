@@ -15,9 +15,18 @@
   }
 
   .game-poster {
-    width: auto;
-    max-width: 400px;
+    display: flex;
+    justify-content: center;
+
+    flex: 0 1 400px;
+    min-width: 300px;
+    overflow-x: hidden;
+
     height: 350px;
+
+    img {
+      height: 100%;
+    }
 
     margin-right: 25px;
     margin-bottom: 0;

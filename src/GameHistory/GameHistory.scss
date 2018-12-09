@@ -3,6 +3,13 @@
 .group-header {
   color: $text-main;
 
-  font-size: 22px;
-  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.previews-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-column-gap: 12px;
 }

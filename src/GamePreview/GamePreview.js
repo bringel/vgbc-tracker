@@ -16,8 +16,13 @@ class GamePreview extends React.Component<Props> {
     const activeDate = new Date(game.activeYear, game.activeMonth - 1);
     return (
       <div className="game-preview">
-        {format(activeDate, 'MMMM')}
-        <div className="preview-info" />
+        <div className="active-month">{format(activeDate, 'MMMM')}</div>
+        <div className="preview-info">
+          <div className="preview-cover">
+            <img src={game.coverURL} />
+          </div>
+          <div className="game-title">{game.title}</div>
+        </div>
       </div>
     );
   }

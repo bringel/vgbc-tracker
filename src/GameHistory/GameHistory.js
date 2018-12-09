@@ -30,14 +30,14 @@ class GameHistory extends React.Component<Props> {
   render() {
     const groupedGames = groupGames(this.props.games).sort((a, b) => b.year - a.year);
     return groupedGames.map((g) => (
-      <>
-        <div key={g.year} className="group-header">
-          {g.year}
+      <React.Fragment key={g.year}>
+        <div className="group-header">{g.year}</div>
+        <div className="previews-grid">
+          {g.games.map((game) => (
+            <GamePreview key={game.giantBombID} game={game} />
+          ))}
         </div>
-        {g.games.map((game) => (
-          <GamePreview key={game.giantBombID} game={game} />
-        ))}
-      </>
+      </React.Fragment>
     ));
   }
 }

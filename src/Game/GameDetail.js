@@ -70,7 +70,9 @@ class GameDetail extends React.Component<Props> {
 
       return (
         <div className="game-detail">
-          <img className="game-poster" src={game.coverURL} alt="current game poster" />
+          <div className="game-poster">
+            <img src={game.coverURL} alt="current game poster" />
+          </div>
           <div className="game-info">
             <div className="game-title">
               {game.title} ({releaseYear})

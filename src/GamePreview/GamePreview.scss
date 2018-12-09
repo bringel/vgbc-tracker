@@ -1,20 +1,44 @@
 @import '../theme';
 
 .game-preview {
-  margin-bottom: 6px;
-  border-bottom: 1px solid $text-main;
+  grid-column: auto / span 3;
 
-  &:last-child {
-    border-bottom: none;
-  }
+  margin-bottom: 24px;
+  // border: 1px solid $text-main;
+  //
+  // &:last-child {
+  //   border-bottom: none;
+  // }
 }
 
 .preview-info {
   display: flex;
   flex-direction: row;
-  height: 100px;
+  // height: 200px;
+}
+
+.preview-cover {
+  flex: 0 1 225px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-right: 24px;
 
   img {
-    flex: 0 1 75px;
+    // height: 100%;
+    max-height: 300px;
+
+    flex: 0 0;
   }
+}
+
+.active-month {
+  font-size: 20px;
+  font-weight: 600;
+
+  margin-bottom: 6px;
+}
+
+.game-title {
+  font-size: 18px;
 }
