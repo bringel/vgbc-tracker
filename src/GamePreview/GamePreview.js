@@ -1,8 +1,10 @@
 //@flow
 import * as React from 'react';
 import format from 'date-fns/format';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import type { GameOfTheMonthGame } from '../types/Game';
+import { getPlatformIcons } from '../utils/gameFunctions';
 
 import './GamePreview.scss';
 
@@ -21,7 +23,17 @@ class GamePreview extends React.Component<Props> {
           <div className="preview-cover">
             <img src={game.coverURL} />
           </div>
-          <div className="game-title">{game.title}</div>
+          <div>
+            <div className="game-title">{game.title}</div>
+            <div>Available On</div>
+            <div className="icons-container">
+              {getPlatformIcons(game).map((icon) => (
+                <span className="icon">
+                  <FontAwesomeIcon icon={['fab', icon]} size="20px" />
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );
