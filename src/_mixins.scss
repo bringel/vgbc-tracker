@@ -1,5 +1,6 @@
 @import './theme';
 @import './media';
+@import './functions';
 
 @mixin gradientBackground($color) {
   background: linear-gradient(to bottom, $color 10%, $background 35%);
@@ -30,5 +31,32 @@
       @content;
       $accentColor: null !global;
     }
+  }
+}
+
+@mixin safeAreaPadding($padding...) {
+  $count: length($padding);
+  @if $count == 1 {
+    $value: nth($padding, 1);
+
+    padding: $value addRightSafeArea($value) $value addLeftSafeArea($value);
+  } @else if $count == 2 {
+    $vert: nth($padding, 1);
+    $horizontal: nth($padding, 2);
+
+    padding: $vert addRightSafeArea($horizontal) $vert addLeftSafeArea($horizontal);
+  } @else if $count == 3 {
+    $top: nth($padding, 1);
+    $horizontal: nth($padding, 2);
+    $bottom: nth($padding, 3);
+
+    padding: $top addRightSafeArea($horizontal) $bottom addLeftSafeArea($horizontal);
+  } @else {
+    $top: nth($padding, 1);
+    $right: nth($padding, 2);
+    $bottom: nth($padding, 3);
+    $left: nth($padding, 4);
+
+    padding: $top addRightSafeArea($right) $bottom addLeftSafeArea($left);
   }
 }

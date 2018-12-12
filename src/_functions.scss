@@ -1,0 +1,7 @@
+@function addLeftSafeArea($value) {
+  @return calc(#{$value} + env(safe-area-inset-left));
+}
+
+@function addRightSafeArea($value) {
+  @return calc(#{$value} + env(safe-area-inset-right));
+}

@@ -19,7 +19,7 @@
   }
   @include mobile-landscape {
     flex-wrap: wrap;
-    padding: 32px calc(10px + env(safe-area-inset-right)) 0 calc(10px + env(safe-area-inset-left));
+    @include safeAreaPadding(32px, 10px, 0, 10px);
   }
 
   h1 {
