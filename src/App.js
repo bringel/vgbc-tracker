@@ -34,10 +34,10 @@ class App extends Component<{}, State> {
     const auth = firebase.auth();
     auth.onAuthStateChanged((user) => {
       if (user) {
-        const userDoc = usersCollection().doc(user.uid);
-        userDoc.get().then((doc) => {
-          this.setState({ loggedIn: true, currentUser: doc.data(), loaded: true });
-        });
+        // const userDoc = usersCollection().doc(user.uid);
+        // userDoc.get().then((doc) => {
+        this.setState({ loggedIn: true, currentUser: user, loaded: true });
+        // });
       } else {
         this.setState({ loggedIn: false, currentUser: null, loaded: true });
       }
@@ -71,7 +71,10 @@ class App extends Component<{}, State> {
                   <BrowserRouter>
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
-                      <Route path="/signup" render={() => <SignUp />} />
+                      <Route
+                        path="/signup"
+                        render={({ history, match }) => <SignUp match={match} history={history} />}
+                      />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </BrowserRouter>
