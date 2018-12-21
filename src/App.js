@@ -7,6 +7,7 @@ import FirebaseContext from './firebase-context';
 import type { User } from './types/User.js';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
+import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
 import firebase, { usersCollection } from './services/firebase';
 
@@ -70,6 +71,7 @@ class App extends Component<{}, State> {
                   <BrowserRouter>
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
+                      <Route path="/signup" render={() => <SignUp />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </BrowserRouter>
