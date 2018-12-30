@@ -71,10 +71,7 @@ class App extends Component<{}, State> {
                   <BrowserRouter>
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
-                      <Route
-                        path="/signup"
-                        render={({ history, match }) => <SignUp match={match} history={history} />}
-                      />
+                      <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </BrowserRouter>

@@ -1,6 +1,6 @@
 //@flow
 import * as React from 'react';
-import { type Match, type RouterHistory } from 'react-router';
+import { type ContextRouter } from 'react-router';
 
 import firebase, { codesCollection } from '../services/firebase';
 
@@ -11,12 +11,12 @@ import { AccentColorUpdate } from '../themeContext';
 import './SignUp.scss';
 
 type Props = {
-  match: Match,
-  history: RouterHistory
+  ...ContextRouter
 };
 
 type State = {
   validCode: boolean,
+  signupCode: string,
   name: string,
   email: string,
   password: string,
@@ -27,12 +27,26 @@ type State = {
 class SignUp extends React.Component<Props, State> {
   state = {
     validCode: false,
+    signupCode: '',
     name: '',
     email: '',
     password: '',
     verifyPassword: '',
     error: ''
   };
+
+  componentDidMount() {
+    const { location } = this.props;
+
+    const queryParams = new URLSearchParams(location.search);
+    const code = queryParams.get('code');
+    if (code) {
+      this.setState({ signupCode: code });
+      this.verifySignupCode(code).then((valid) => {
+        this.setState({ validCode: valid });
+      });
+    }
+  }
 
   verifySignupCode(code: string) {
     return codesCollection()
@@ -50,8 +64,8 @@ class SignUp extends React.Component<Props, State> {
 
   handleSignupCodeChange = (event: SyntheticInputEvent<*>) => {
     const value = event.target.value;
+    this.setState({ signupCode: value });
     this.verifySignupCode(value).then((valid) => {
-      console.log(`code valid: ${valid}`);
       this.setState({ validCode: valid });
     });
   };
@@ -90,13 +104,20 @@ class SignUp extends React.Component<Props, State> {
   };
 
   render() {
-    const { validCode, name, email, password, verifyPassword, error } = this.state;
+    const { validCode, signupCode, name, email, password, verifyPassword, error } = this.state;
 
     return (
       <>
         <AccentColorUpdate accentColor="blue" />
         <div className="code-wrapper">
-          <Input id="code" name="code" type="text" label="Signup Code" onChange={this.handleSignupCodeChange} />
+          <Input
+            id="code"
+            name="code"
+            type="text"
+            label="Signup Code"
+            value={signupCode}
+            onChange={this.handleSignupCodeChange}
+          />
         </div>
         <div className="signup-wrapper">
           <div className="signup-form">
