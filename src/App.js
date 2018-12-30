@@ -9,7 +9,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
-import firebase, { usersCollection } from './services/firebase';
+import firebase /*, { usersCollection } */ from './services/firebase';
 
 import './App.scss';
 

@@ -21,7 +21,8 @@ type State = {
   email: string,
   password: string,
   verifyPassword: string,
-  error: string
+  error: string,
+  creating: boolean
 };
 
 class SignUp extends React.Component<Props, State> {
@@ -32,7 +33,8 @@ class SignUp extends React.Component<Props, State> {
     email: '',
     password: '',
     verifyPassword: '',
-    error: ''
+    error: '',
+    creating: false
   };
 
   componentDidMount() {
@@ -87,11 +89,24 @@ class SignUp extends React.Component<Props, State> {
   handleSignUpButton = () => {
     const { name, email, password, error } = this.state;
     if (error === '') {
+      this.setState({ creating: true });
       const auth = firebase.auth();
       auth
         .createUserWithEmailAndPassword(email, password)
         .catch((error) => {
-          console.log(`${error.code}: ${error.message}`);
+          const errorCode = error.code;
+          let errorMessage = '';
+
+          if (errorCode === 'auth/email-already-in-use') {
+            errorMessage = 'An account already exists for this email address';
+          } else if (errorCode === 'auth/invalid-email') {
+            errorMessage = 'Please enter a valid email address';
+          } else if (errorCode === 'auth/weak-password') {
+            errorMessage = 'Please enter a strong password';
+          } else if (errorCode === 'auth/operation-not-allowed') {
+            errorMessage = 'Sorry, creating new accounts is disabled for the moment';
+          }
+          this.setState({ error: errorMessage, creating: false });
         })
         .then((cred) => {
           if (cred) {
@@ -104,11 +119,18 @@ class SignUp extends React.Component<Props, State> {
   };
 
   render() {
-    const { validCode, signupCode, name, email, password, verifyPassword, error } = this.state;
+    const { validCode, signupCode, name, email, password, verifyPassword, error, creating } = this.state;
 
     return (
       <>
         <AccentColorUpdate accentColor="blue" />
+        <div className="message-wrapper">
+          {!validCode ? (
+            <div className="message warning">You need a valid sign up code to create a new account</div>
+          ) : error !== '' ? (
+            <div className="message error">{error}</div>
+          ) : null}
+        </div>
         <div className="code-wrapper">
           <Input
             id="code"
@@ -161,8 +183,8 @@ class SignUp extends React.Component<Props, State> {
               autoComplete="new-password"
               disabled={!validCode}
             />
-            <div className="error-container">{error}</div>
-            <Button onClick={this.handleSignUpButton} disabled={!validCode} type="submit">
+            {/* <div className="error-container">{error}</div> */}
+            <Button onClick={this.handleSignUpButton} disabled={!validCode || creating} type="submit">
               Sign Up
             </Button>
           </div>
