@@ -61,25 +61,25 @@ class App extends Component<{}, State> {
           setTheme: this.setTheme,
           setAccentColor: this.setAccentColor
         }}>
-        <ThemeContext.Consumer>
-          {(themeContext) => (
-            <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
-              <FirebaseContext.Provider
-                value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
-                <Header />
-                <div className="content-wrapper">
-                  <BrowserRouter>
+        <BrowserRouter>
+          <ThemeContext.Consumer>
+            {(themeContext) => (
+              <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
+                <FirebaseContext.Provider
+                  value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
+                  <Header />
+                  <div className="content-wrapper">
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
                       <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
-                  </BrowserRouter>
-                </div>
-              </FirebaseContext.Provider>
-            </div>
-          )}
-        </ThemeContext.Consumer>
+                  </div>
+                </FirebaseContext.Provider>
+              </div>
+            )}
+          </ThemeContext.Consumer>
+        </BrowserRouter>
       </ThemeContext.Provider>
     ) : (
       <div>Loading...</div>

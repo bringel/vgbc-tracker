@@ -25,6 +25,7 @@
   h1 {
     margin: 0;
     font-size: 1.5rem;
+    color: $text-main;
   }
 }
 
@@ -39,6 +40,23 @@
   }
 }
 
+.nav-container {
+  & > span {
+    margin-left: 12px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
 .logout-link {
   cursor: pointer;
+}
+
+.link {
+  @include withAccentColor {
+    color: lighten($accentColor, 5%);
+  }
+  text-decoration: none;
 }
