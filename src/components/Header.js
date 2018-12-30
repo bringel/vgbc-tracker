@@ -18,7 +18,7 @@ const Header = () => (
         {context.isLoggedIn ? (
           <div className="user-container">
             <span className="user-name">{context.currentUser.displayName || ''}</span>
-            <span onClick={() => firebase.auth().signOut()} className="logout-link">
+            <span onClick={() => firebase.auth().signOut()} className="link">
               Logout
             </span>
           </div>

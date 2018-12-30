@@ -9,6 +9,15 @@
   margin-top: 48px;
 }
 
-.login-button {
-  background-color: $facebook-blue;
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    margin-bottom: 12px;
+
+    &:last-of-type {
+      margin-bottom: 24px;
+    }
+  }
 }
