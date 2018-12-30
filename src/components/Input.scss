@@ -13,6 +13,10 @@
     border-style: solid;
 
     padding: 0 3px;
+
+    &[disabled] {
+      background-color: $text-darker;
+    }
   }
 
   label {

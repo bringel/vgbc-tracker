@@ -1,8 +1,8 @@
 //@flow
 import * as React from 'react';
-import { type Match, RouterHistory } from 'react-router';
+import { type Match, type RouterHistory } from 'react-router';
 
-import firebase from '../services/firebase';
+import firebase, { codesCollection } from '../services/firebase';
 
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -16,6 +16,7 @@ type Props = {
 };
 
 type State = {
+  validCode: boolean,
   name: string,
   email: string,
   password: string,
@@ -25,11 +26,34 @@ type State = {
 
 class SignUp extends React.Component<Props, State> {
   state = {
+    validCode: false,
     name: '',
     email: '',
     password: '',
     verifyPassword: '',
     error: ''
+  };
+
+  verifySignupCode(code: string) {
+    return codesCollection()
+      .doc('signupCode')
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const signupData: { code: string } = doc.data();
+          return code === signupData.code;
+        } else {
+          return false;
+        }
+      });
+  }
+
+  handleSignupCodeChange = (event: SyntheticInputEvent<*>) => {
+    const value = event.target.value;
+    this.verifySignupCode(value).then((valid) => {
+      console.log(`code valid: ${valid}`);
+      this.setState({ validCode: valid });
+    });
   };
 
   handleInputChange = (event: SyntheticInputEvent<*>) => {
@@ -66,10 +90,14 @@ class SignUp extends React.Component<Props, State> {
   };
 
   render() {
-    const { name, email, password, verifyPassword, error } = this.state;
+    const { validCode, name, email, password, verifyPassword, error } = this.state;
+
     return (
       <>
         <AccentColorUpdate accentColor="blue" />
+        <div className="code-wrapper">
+          <Input id="code" name="code" type="text" label="Signup Code" onChange={this.handleSignupCodeChange} />
+        </div>
         <div className="signup-wrapper">
           <div className="signup-form">
             <Input
@@ -79,6 +107,8 @@ class SignUp extends React.Component<Props, State> {
               label="Name"
               value={name}
               onChange={(event) => this.handleInputChange(event)}
+              autoComplete="name"
+              disabled={!validCode}
             />
             <Input
               id="email"
@@ -87,6 +117,8 @@ class SignUp extends React.Component<Props, State> {
               label="Email"
               value={email}
               onChange={(event) => this.handleInputChange(event)}
+              autoComplete="email"
+              disabled={!validCode}
             />
             <Input
               id="password"
@@ -95,6 +127,8 @@ class SignUp extends React.Component<Props, State> {
               label="Password"
               value={password}
               onChange={(event) => this.handleInputChange(event)}
+              autoComplete="new-password"
+              disabled={!validCode}
             />
             <Input
               id="verifyPassword"
@@ -103,9 +137,11 @@ class SignUp extends React.Component<Props, State> {
               label="Verify Password"
               value={verifyPassword}
               onChange={(event) => this.handleInputChange(event)}
+              autoComplete="new-password"
+              disabled={!validCode}
             />
             <div className="error-container">{error}</div>
-            <Button buttonStyle="blue" onClick={this.handleSignUpButton}>
+            <Button onClick={this.handleSignUpButton} disabled={!validCode} type="submit">
               Sign Up
             </Button>
           </div>
