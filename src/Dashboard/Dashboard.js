@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import format from 'date-fns/format';
 
+import { AccentColorUpdate } from '../themeContext';
+
 import type { GameOfTheMonthGame } from '../types/Game';
 
 import { gamesCollection } from '../services/firebase';
@@ -54,6 +56,7 @@ class Dashboard extends Component<Props, State> {
   render() {
     return (
       <>
+        <AccentColorUpdate accentColor="green" />
         <h2>Game of the Month for {this.getCurrentMonth()}:</h2>
         <GameDetail game={this.state.currentGame} />
         <GameHistory games={this.state.gamesHistory} />

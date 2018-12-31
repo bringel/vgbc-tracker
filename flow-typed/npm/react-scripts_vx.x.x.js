@@ -1,4 +1,4 @@
-// flow-typed signature: 01fb6dc50b2cfbfedb7c66168487d4f4
+// flow-typed signature: 03e73093b4854004b1b3147b4d0d5298
 // flow-typed version: <<STUB>>/react-scripts_v^2.0.1/flow_v0.83.0
 
 /**
@@ -46,11 +46,7 @@ declare module 'react-scripts/config/paths' {
   declare module.exports: any;
 }
 
-declare module 'react-scripts/config/webpack.config.dev' {
-  declare module.exports: any;
-}
-
-declare module 'react-scripts/config/webpack.config.prod' {
+declare module 'react-scripts/config/webpack.config' {
   declare module.exports: any;
 }
 
@@ -125,11 +121,8 @@ declare module 'react-scripts/config/jest/fileTransform.js' {
 declare module 'react-scripts/config/paths.js' {
   declare module.exports: $Exports<'react-scripts/config/paths'>;
 }
-declare module 'react-scripts/config/webpack.config.dev.js' {
-  declare module.exports: $Exports<'react-scripts/config/webpack.config.dev'>;
-}
-declare module 'react-scripts/config/webpack.config.prod.js' {
-  declare module.exports: $Exports<'react-scripts/config/webpack.config.prod'>;
+declare module 'react-scripts/config/webpack.config.js' {
+  declare module.exports: $Exports<'react-scripts/config/webpack.config'>;
 }
 declare module 'react-scripts/config/webpackDevServer.config.js' {
   declare module.exports: $Exports<'react-scripts/config/webpackDevServer.config'>;

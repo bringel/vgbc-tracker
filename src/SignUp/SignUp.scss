@@ -1,0 +1,22 @@
+@import '../theme';
+
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin-bottom: 12px;
+  }
+}
+
+.code-wrapper {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 72px;
+}

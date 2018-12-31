@@ -28,8 +28,8 @@ class GamePreview extends React.Component<Props> {
             <div>Available On</div>
             <div className="icons-container">
               {getPlatformIcons(game).map((icon) => (
-                <span className="icon">
-                  <FontAwesomeIcon icon={['fab', icon]} size="20px" />
+                <span className="icon" key={icon}>
+                  <FontAwesomeIcon icon={['fab', icon]} />
                 </span>
               ))}
             </div>
