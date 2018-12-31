@@ -6,6 +6,7 @@ import firebase, { codesCollection, usersCollection } from '../services/firebase
 
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Message from '../components/Message';
 import { AccentColorUpdate } from '../themeContext';
 
 import './SignUp.scss';
@@ -126,16 +127,11 @@ class SignUp extends React.Component<Props, State> {
   render() {
     const { validCode, signupCode, name, email, password, verifyPassword, error, creating } = this.state;
 
+    const message = !validCode ? 'You need a valid sign up code to create a new account' : error !== '' ? error : '';
     return (
       <>
         <AccentColorUpdate accentColor="blue" />
-        <div className="message-wrapper">
-          {!validCode ? (
-            <div className="message warning">You need a valid sign up code to create a new account</div>
-          ) : error !== '' ? (
-            <div className="message error">{error}</div>
-          ) : null}
-        </div>
+        <Message type={!validCode ? 'warning' : error !== '' ? 'error' : 'placeholder'}>{message}</Message>
         <div className="code-wrapper">
           <Input
             id="code"

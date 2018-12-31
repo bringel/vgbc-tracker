@@ -1,0 +1,32 @@
+@import '../theme';
+
+.message-wrapper {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 12px;
+}
+
+.message {
+  border-radius: 3px;
+  padding: 12px;
+  flex: 0 1 500px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message.warning {
+  border: 1px solid $orange;
+  background-color: rgba($orange, 0.3);
+  color: lighten($orange, 10%);
+}
+
+.message.error {
+  border: 1px solid $red;
+  background-color: rgba($red, 0.3);
+  color: lighten($red, 10%);
+}
