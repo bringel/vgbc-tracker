@@ -9,7 +9,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
-import firebase /*, { usersCollection } */ from './services/firebase';
+import firebase from './services/firebase';
 
 import './App.scss';
 
@@ -34,10 +34,14 @@ class App extends Component<{}, State> {
     const auth = firebase.auth();
     auth.onAuthStateChanged((user) => {
       if (user) {
-        // const userDoc = usersCollection().doc(user.uid);
-        // userDoc.get().then((doc) => {
-        this.setState({ loggedIn: true, currentUser: user, loaded: true });
-        // });
+        user.getIdTokenResult().then((token) => {
+          const currentUser = {
+            displayName: user.displayName,
+            email: user.email,
+            role: token.claims.role
+          };
+          this.setState({ loggedIn: true, currentUser: currentUser, loaded: true });
+        });
       } else {
         this.setState({ loggedIn: false, currentUser: null, loaded: true });
       }

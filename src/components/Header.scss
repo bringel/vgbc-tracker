@@ -50,13 +50,10 @@
   }
 }
 
-.logout-link {
-  cursor: pointer;
-}
-
 .link {
   @include withAccentColor {
     color: lighten($accentColor, 5%);
   }
   text-decoration: none;
+  cursor: pointer;
 }

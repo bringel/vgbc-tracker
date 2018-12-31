@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type ContextRouter } from 'react-router';
 
-import firebase, { codesCollection } from '../services/firebase';
+import firebase, { codesCollection, usersCollection } from '../services/firebase';
 
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -111,7 +111,12 @@ class SignUp extends React.Component<Props, State> {
         .then((cred) => {
           if (cred) {
             cred.user.updateProfile({ displayName: name }).then(() => {
-              this.props.history.push('/');
+              usersCollection()
+                .doc(cred.user.uid)
+                .set({ displayName: name }, { merge: true })
+                .then(() => {
+                  this.props.history.push('/');
+                });
             });
           }
         });
