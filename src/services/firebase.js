@@ -14,11 +14,21 @@ export function initializeFirebase() {
       messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || ''
     };
 
-    return Promise.resolve(firebase.initializeApp(config));
+    const app = firebase.initializeApp(config);
+    const firestore = app.firestore();
+    const settings = { timestampsInSnapshots: true };
+    firestore.settings(settings);
+    return Promise.resolve(app);
   } else {
     return fetch('/__/firebase/init.json').then((response) => {
       // $FlowFixMe
-      response.json().then((res) => firebase.initializeApp(res));
+      response.json().then((res) => {
+        const app = firebase.initializeApp(res);
+        const firestore = app.firestore();
+        const settings = { timestampsInSnapshots: true };
+        firestore.settings(settings);
+        return app;
+      });
     });
   }
 }

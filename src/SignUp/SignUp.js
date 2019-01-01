@@ -1,6 +1,7 @@
 //@flow
 import * as React from 'react';
 import { type ContextRouter } from 'react-router';
+import isAfter from 'date-fns/is_after';
 
 import firebase, { codesCollection, usersCollection } from '../services/firebase';
 
@@ -57,8 +58,11 @@ class SignUp extends React.Component<Props, State> {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          const signupData: { code: string } = doc.data();
-          return code === signupData.code;
+          const signupData: { code: string, expiration: any } = doc.data();
+          const now = new Date();
+          const expirationDate: Date = signupData.expiration.toDate();
+
+          return code === signupData.code && !isAfter(now, expirationDate);
         } else {
           return false;
         }

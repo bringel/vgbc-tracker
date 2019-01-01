@@ -10,7 +10,7 @@ export type ThemeContextValue = {
   setAccentColor: (accentColor: AccentColor) => void
 };
 
-const defaultTheme = {
+const defaultTheme: ThemeContextValue = {
   theme: 'dark',
   accentColor: 'green',
   setTheme: (theme) => {}, //eslint-disable-line
@@ -19,16 +19,18 @@ const defaultTheme = {
 
 const ThemeContext = React.createContext(defaultTheme);
 
-export const AccentColorUpdate = (props: { accentColor: AccentColor }) => {
-  return (
-    <ThemeContext.Consumer>
-      {(themeContext) => {
-        if (themeContext.accentColor !== props.accentColor) {
-          themeContext.setAccentColor(props.accentColor);
-        }
-      }}
-    </ThemeContext.Consumer>
-  );
-};
+export class AccentColorUpdate extends React.Component<{ accentColor: AccentColor }> {
+  static contextType = ThemeContext;
+
+  componentDidMount() {
+    if (this.context.accentColor !== this.props.accentColor) {
+      this.context.setAccentColor(this.props.accentColor);
+    }
+  }
+
+  render() {
+    return null;
+  }
+}
 
 export default ThemeContext;
