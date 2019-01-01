@@ -34,6 +34,7 @@ class App extends Component<{}, State> {
     const auth = firebase.auth();
     auth.onAuthStateChanged((user) => {
       if (user) {
+        //$FlowFixMe - getIdTokenResult is a real function of the user object, just not in the types
         user.getIdTokenResult().then((token) => {
           const currentUser = {
             displayName: user.displayName,

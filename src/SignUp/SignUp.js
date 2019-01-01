@@ -58,11 +58,15 @@ class SignUp extends React.Component<Props, State> {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          const signupData: { code: string, expiration: any } = doc.data();
+          const signupData: { code: string, expiration: ?any } = doc.data();
           const now = new Date();
-          const expirationDate: Date = signupData.expiration.toDate();
+          const expirationDate: ?Date = signupData.expiration ? signupData.expiration.toDate() : null;
 
-          return code === signupData.code && !isAfter(now, expirationDate);
+          if (expirationDate) {
+            return code === signupData.code && !isAfter(now, expirationDate);
+          } else {
+            return code === signupData.code;
+          }
         } else {
           return false;
         }
