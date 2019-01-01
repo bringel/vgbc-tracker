@@ -22,3 +22,14 @@
     }
   }
 }
+
+.signup-link {
+  margin-top: 12px;
+
+  a {
+    font-size: 18px;
+    @include withAccentColor() {
+      color: $accentColor;
+    }
+  }
+}

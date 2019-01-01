@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import type { RouterHistory } from 'react-router-dom';
+import { Link, type RouterHistory } from 'react-router-dom';
 
 import firebase from '../services/firebase';
 
@@ -87,6 +87,9 @@ class Login extends Component<Props, State> {
           <Button onClick={this.handleLoginClick} disabled={email === '' || password === ''}>
             Log In
           </Button>
+        </div>
+        <div className="signup-link">
+          <Link to="/signup">Sign up for a new account</Link>
         </div>
       </div>
     );

@@ -29,11 +29,6 @@ const Header = () => (
                 Log In
               </Link>
             </span>
-            <span>
-              <Link to="/signup" className="link">
-                Sign Up
-              </Link>
-            </span>
           </div>
         )}
       </div>
