@@ -7,12 +7,24 @@ import TabViewTab from '../components/TabViewTab';
 
 type Props = {};
 
-class AdminDashboard extends React.Component<Props> {
+type State = {
+  activeTab: string
+};
+
+class AdminDashboard extends React.Component<Props, State> {
+  state = {
+    activeTab: 'Tab 1'
+  };
+
+  handleTabChanged = (tabTitle: string) => {
+    this.setState({ activeTab: tabTitle });
+  };
+
   render() {
     return (
       <>
         <AccentColorUpdate accentColor="orange" />
-        <TabView activeTab="Tab 1">
+        <TabView activeTab={this.state.activeTab} onTabClicked={this.handleTabChanged}>
           <TabViewTab tabTitle="Tab 1">Tab 1 content</TabViewTab>
           <TabViewTab tabTitle="Tab 2">Tab 2 content</TabViewTab>
           <TabViewTab tabTitle="Tab 3">Tab 3 content</TabViewTab>
