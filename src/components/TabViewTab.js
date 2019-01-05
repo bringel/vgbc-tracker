@@ -2,9 +2,14 @@
 import * as React from 'react';
 
 type Props = {
+  tabTitle: string,
   children: React.Node
 };
 
-const TabViewTab = (props: Props) => props.children;
+class TabViewTab extends React.Component<Props> {
+  render() {
+    return this.props.children;
+  }
+}
 
 export default TabViewTab;
