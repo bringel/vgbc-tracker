@@ -14,7 +14,9 @@ type Props = {
 
 class TabView extends React.Component<Props> {
   handleTabClick = (title: string) => {
-    this.props.onTabClicked(title);
+    if (title !== this.props.activeTab) {
+      this.props.onTabClicked(title);
+    }
   };
 
   render() {

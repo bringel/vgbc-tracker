@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
 import ThemeContext, { type ThemeOption, type AccentColor } from './themeContext';
-import FirebaseContext from './firebase-context';
+import FirebaseContext, { defaultContext } from './firebase-context';
 import type { User } from './types/User.js';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
@@ -25,7 +25,7 @@ type State = {
 class App extends Component<{}, State> {
   state = {
     loggedIn: false,
-    currentUser: null,
+    currentUser: defaultContext.currentUser,
     loaded: true,
     theme: 'dark',
     accentColor: 'green'
@@ -38,14 +38,14 @@ class App extends Component<{}, State> {
         //$FlowFixMe - getIdTokenResult is a real function of the user object, just not in the types
         user.getIdTokenResult().then((token) => {
           const currentUser = {
-            displayName: user.displayName,
-            email: user.email,
+            displayName: user.displayName || '',
+            email: user.email || '',
             role: token.claims.role
           };
           this.setState({ loggedIn: true, currentUser: currentUser, loaded: true });
         });
       } else {
-        this.setState({ loggedIn: false, currentUser: null, loaded: true });
+        this.setState({ loggedIn: false, currentUser: defaultContext.currentUser, loaded: true });
       }
     });
   }

@@ -33,7 +33,6 @@ export function initializeFirebase() {
   }
 }
 
-export const loginProvider = new firebase.auth.FacebookAuthProvider();
 export const usersCollection = () => firebase.firestore().collection('users');
 export const gamesCollection = () => firebase.firestore().collection('games'); // holds the game of the month from each month
 export const codesCollection = () => firebase.firestore().collection('codes');

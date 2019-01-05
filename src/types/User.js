@@ -1,6 +1,6 @@
+//@flow
 export type User = {
   displayName: string,
   email: string,
-  isAdmin: boolean,
-  photoURL: string
+  role: 'user' | 'admin'
 };

@@ -8,9 +8,9 @@ type FirebaseContextValue = {
   currentUser: User
 };
 
-const defaultContext: FirebaseContextValue = {
+export const defaultContext: FirebaseContextValue = {
   isLoggedIn: false,
-  currentUser: null
+  currentUser: { displayName: '', email: '', role: 'user' }
 };
 
 const FirebaseContext = React.createContext(defaultContext);
