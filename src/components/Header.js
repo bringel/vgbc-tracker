@@ -15,22 +15,27 @@ const Header = () => (
             Video Game Book Club Tracker
           </Link>
         </h1>
-        {context.isLoggedIn ? (
-          <div className="user-container">
-            <span className="user-name">{context.currentUser.displayName || ''}</span>
-            <span onClick={() => firebase.auth().signOut()} className="link">
-              Logout
-            </span>
-          </div>
-        ) : (
-          <div className="nav-container">
+        <div className="nav-container">
+          {context.isLoggedIn ? (
+            <>
+              <span>
+                <Link to="/admin" className="link">
+                  Admin
+                </Link>
+              </span>
+              <span onClick={() => firebase.auth().signOut()} className="link">
+                Logout
+              </span>
+              <span>{context.currentUser.displayName || ''}</span>
+            </>
+          ) : (
             <span>
               <Link to="/login" className="link">
                 Log In
               </Link>
             </span>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     )}
   </FirebaseContext.Consumer>

@@ -29,16 +29,16 @@
   }
 }
 
-.user-container {
-  margin-top: 0;
-  @include mobile-portrait {
-    margin-top: 12px;
-  }
-
-  .user-name {
-    margin-right: 12px;
-  }
-}
+// .user-container {
+//   margin-top: 0;
+//   @include mobile-portrait {
+//     margin-top: 12px;
+//   }
+//
+//   .user-name {
+//     margin-right: 12px;
+//   }
+// }
 
 .nav-container {
   & > span {

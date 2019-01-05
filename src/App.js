@@ -9,6 +9,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Header from './components/Header';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
+import AdminDashboard from './AdminDashboard/AdminDashboard';
 import firebase from './services/firebase';
 
 import './App.scss';
@@ -77,6 +78,8 @@ class App extends Component<{}, State> {
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
                       <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
+                      {/* TODO: admin route should be authenticated */}
+                      <Route path="/admin" render={() => <AdminDashboard />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </div>
