@@ -1,6 +1,7 @@
 //@flow
 import './UserList.scss';
 
+import { upperFirst } from 'lodash-es';
 import * as React from 'react';
 
 import type { User } from '../../types/User';
@@ -11,6 +12,14 @@ type Props = {
 };
 
 class UserList extends React.Component<Props> {
+  handleUserActionButton = (user: User) => {
+    if (user.role === 'user') {
+      console.log('making user an admin');
+    } else {
+      console.log('removing admin privileges');
+    }
+  };
+
   render() {
     const { users } = this.props;
     return (
@@ -22,11 +31,11 @@ class UserList extends React.Component<Props> {
                 <div>
                   {user.displayName} {user.email}
                 </div>
-                <div>Role: {user.role}</div>
+                <div>Role: {upperFirst(user.role)}</div>
               </div>
               <div className="user-actions-container">
-                <Button buttonStyle="outline" onClick={() => {}}>
-                  Make Admin
+                <Button buttonStyle="outline" onClick={() => this.handleUserActionButton(user)}>
+                  {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
                 </Button>
               </div>
             </div>

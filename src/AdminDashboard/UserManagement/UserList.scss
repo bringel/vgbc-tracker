@@ -9,8 +9,7 @@
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 12px;
-
+  padding: 12px 6px;
   border-bottom: 1px solid $text-main;
 
   &:last-child {
@@ -19,9 +18,6 @@
 }
 
 .user-info-container {
-  & div {
-    margin-bottom: 6px;
-  }
 }
 
 .user-actions-container {
