@@ -1,0 +1,29 @@
+@import '../../theme';
+
+.user-list {
+  max-width: 500px;
+}
+
+.user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+
+  border-bottom: 1px solid $text-main;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.user-info-container {
+  & div {
+    margin-bottom: 6px;
+  }
+}
+
+.user-actions-container {
+  margin-left: 36px;
+}
