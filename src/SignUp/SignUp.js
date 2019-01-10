@@ -122,15 +122,29 @@ class SignUp extends React.Component<Props, State> {
             cred.user.updateProfile({ displayName: name }).then(() => {
               usersCollection()
                 .doc(cred.user.uid)
-                .set({ displayName: name }, { merge: true })
-                .then(() => {
-                  this.props.history.push('/');
-                });
+                .set({ displayName: name }, { merge: true });
             });
+            this.unsubscribeUserDoc = usersCollection()
+              .doc(cred.user.uid)
+              .onSnapshot((snapshot) => {
+                //wait for the firebase function to set the role before navigating
+                const data = snapshot.data();
+                if (data && data.role) {
+                  this.props.history.push('/');
+                }
+              });
           }
         });
     }
   };
+
+  componentWillUnmount() {
+    if (this.unsubscribeUserDoc) {
+      this.unsubscribeUserDoc();
+    }
+  }
+
+  unsubscribeUserDoc = null;
 
   render() {
     const { validCode, signupCode, name, email, password, verifyPassword, error, creating } = this.state;

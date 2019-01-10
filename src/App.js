@@ -10,7 +10,7 @@ import Header from './components/Header';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
-import firebase from './services/firebase';
+import firebase, { usersCollection } from './services/firebase';
 
 import './App.scss';
 
@@ -35,20 +35,31 @@ class App extends Component<{}, State> {
     const auth = firebase.auth();
     auth.onAuthStateChanged((user) => {
       if (user) {
-        //$FlowFixMe - getIdTokenResult is a real function of the user object, just not in the types
-        user.getIdTokenResult().then((token) => {
-          const currentUser = {
-            displayName: user.displayName || '',
-            email: user.email || '',
-            role: token.claims.role
-          };
-          this.setState({ loggedIn: true, currentUser: currentUser, loaded: true });
-        });
+        this.unsubscribeUserDoc = usersCollection()
+          .doc(user.uid)
+          .onSnapshot((snapshot) => {
+            user.getIdToken(true);
+
+            const currentUser: User = {
+              userID: user.uid,
+              ...snapshot.data()
+            };
+
+            this.setState({ loggedIn: true, currentUser: currentUser, loaded: true });
+          });
       } else {
         this.setState({ loggedIn: false, currentUser: defaultContext.currentUser, loaded: true });
       }
     });
   }
+
+  componentWillUnmount() {
+    if (this.unsubscribeUserDoc) {
+      this.unsubscribeUserDoc();
+    }
+  }
+
+  unsubscribeUserDoc = null;
 
   setTheme = (theme: *) => {
     this.setState({ theme: theme });

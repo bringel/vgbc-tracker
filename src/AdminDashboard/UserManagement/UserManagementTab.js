@@ -16,7 +16,7 @@ class UserManagementTab extends React.Component<Props, State> {
     users: []
   };
   componentDidMount() {
-    usersCollection().onSnapshot((snapshot) => {
+    this.unsubscribeUsersCollection = usersCollection().onSnapshot((snapshot) => {
       const users = snapshot.docs.map((userDoc) => ({
         userID: userDoc.id,
         ...userDoc.data()
@@ -24,6 +24,15 @@ class UserManagementTab extends React.Component<Props, State> {
       this.setState({ users: users });
     });
   }
+
+  componentWillUnmount() {
+    if (this.unsubscribeUsersCollection) {
+      this.unsubscribeUsersCollection();
+    }
+  }
+
+  unsubscribeUsersCollection = null;
+
   render() {
     return <UserList users={this.state.users} />;
   }
