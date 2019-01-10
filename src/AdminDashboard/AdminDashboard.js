@@ -7,6 +7,8 @@ import TabViewTab from '../components/TabViewTab';
 
 import UserManagementTab from './UserManagement/UserManagementTab';
 
+import './AdminDashboard.scss';
+
 type Props = {};
 
 type State = {
@@ -24,14 +26,14 @@ class AdminDashboard extends React.Component<Props, State> {
 
   render() {
     return (
-      <>
+      <div className="admin-wrapper">
         <AccentColorUpdate accentColor="orange" />
         <TabView activeTab={this.state.activeTab} onTabClicked={this.handleTabChanged}>
           <TabViewTab tabTitle="User Management">
             <UserManagementTab />
           </TabViewTab>
         </TabView>
-      </>
+      </div>
     );
   }
 }

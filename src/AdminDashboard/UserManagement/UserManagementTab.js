@@ -16,15 +16,13 @@ class UserManagementTab extends React.Component<Props, State> {
     users: []
   };
   componentDidMount() {
-    usersCollection()
-      .get()
-      .then((snapshot) => {
-        const users = snapshot.docs.map((userDoc) => ({
-          userID: userDoc.id,
-          ...userDoc.data()
-        }));
-        this.setState({ users: users });
-      });
+    usersCollection().onSnapshot((snapshot) => {
+      const users = snapshot.docs.map((userDoc) => ({
+        userID: userDoc.id,
+        ...userDoc.data()
+      }));
+      this.setState({ users: users });
+    });
   }
   render() {
     return <UserList users={this.state.users} />;

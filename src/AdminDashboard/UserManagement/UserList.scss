@@ -1,7 +1,10 @@
 @import '../../theme';
 
 .user-list {
-  max-width: 500px;
+  max-width: 720px;
+
+  list-style: none;
+  padding: 0;
 }
 
 .user-row {

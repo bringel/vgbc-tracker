@@ -23,25 +23,28 @@ class UserList extends React.Component<Props> {
   render() {
     const { users } = this.props;
     return (
-      <div className="user-list">
-        {users.map((user) => {
-          return (
-            <div key={user.userID} className="user-row">
-              <div className="user-info-container">
-                <div>
-                  {user.displayName} {user.email}
+      <>
+        <h2>All Users</h2>
+        <ul className="user-list">
+          {users.map((user) => {
+            return (
+              <li key={user.userID} className="user-row">
+                <div className="user-info-container">
+                  <div>
+                    {user.displayName} {user.email}
+                  </div>
+                  <div>Role: {upperFirst(user.role)}</div>
                 </div>
-                <div>Role: {upperFirst(user.role)}</div>
-              </div>
-              <div className="user-actions-container">
-                <Button buttonStyle="outline" onClick={() => this.handleUserActionButton(user)}>
-                  {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
-                </Button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                <div className="user-actions-container">
+                  <Button buttonStyle="outline" onClick={() => this.handleUserActionButton(user)}>
+                    {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
+                  </Button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </>
     );
   }
 }
