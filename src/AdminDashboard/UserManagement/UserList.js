@@ -20,9 +20,9 @@ class UserList extends React.Component<Props> {
     };
 
     if (user.role === 'user') {
-      payload.role = 'user';
-    } else {
       payload.role = 'admin';
+    } else {
+      payload.role = 'user';
     }
 
     axios.post('/updaterole', payload);
