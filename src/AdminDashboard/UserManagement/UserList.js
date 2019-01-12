@@ -1,8 +1,9 @@
 //@flow
 import './UserList.scss';
 
-import { upperFirst } from 'lodash-es';
 import * as React from 'react';
+import { upperFirst } from 'lodash-es';
+import superagent from 'superagent';
 
 import type { User } from '../../types/User';
 import Button from '../../components/Button';
@@ -13,11 +14,25 @@ type Props = {
 
 class UserList extends React.Component<Props> {
   handleUserActionButton = (user: User) => {
+    let payload = {
+      userID: user.userID,
+      role: ''
+    };
+
     if (user.role === 'user') {
+      payload.role = 'user';
       console.log('making user an admin');
     } else {
+      payload.role = 'admin';
       console.log('removing admin privileges');
     }
+
+    superagent
+      .post('/updaterole')
+      .send(payload)
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   render() {
@@ -30,9 +45,8 @@ class UserList extends React.Component<Props> {
             return (
               <li key={user.userID} className="user-row">
                 <div className="user-info-container">
-                  <div>
-                    {user.displayName} {user.email}
-                  </div>
+                  <div>{user.displayName}</div>
+                  <div>{user.email}</div>
                   <div>Role: {upperFirst(user.role)}</div>
                 </div>
                 <div className="user-actions-container">

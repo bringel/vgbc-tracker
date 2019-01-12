@@ -18,11 +18,13 @@ const Header = () => (
         <div className="nav-container">
           {context.isLoggedIn ? (
             <>
-              <span>
-                <Link to="/admin" className="link">
-                  Admin
-                </Link>
-              </span>
+              {context.currentUser.role === 'admin' ? (
+                <span>
+                  <Link to="/admin" className="link">
+                    Admin
+                  </Link>
+                </span>
+              ) : null}
               <span onClick={() => firebase.auth().signOut()} className="link">
                 Logout
               </span>
