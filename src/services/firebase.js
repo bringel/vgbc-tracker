@@ -37,4 +37,9 @@ export const usersCollection = () => firebase.firestore().collection('users');
 export const gamesCollection = () => firebase.firestore().collection('games'); // holds the game of the month from each month
 export const codesCollection = () => firebase.firestore().collection('codes');
 
+export const getCurrentUserToken = () => {
+  const user = firebase.auth().currentUser;
+  return user ? user.getIdToken() : Promise.resolve('');
+};
+
 export default firebase;

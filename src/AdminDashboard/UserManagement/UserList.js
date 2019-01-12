@@ -1,12 +1,12 @@
 //@flow
-import './UserList.scss';
-
 import * as React from 'react';
 import { upperFirst } from 'lodash-es';
-import superagent from 'superagent';
+import axios from 'axios';
 
 import type { User } from '../../types/User';
 import Button from '../../components/Button';
+
+import './UserList.scss';
 
 type Props = {
   users: Array<User>
@@ -21,18 +21,11 @@ class UserList extends React.Component<Props> {
 
     if (user.role === 'user') {
       payload.role = 'user';
-      console.log('making user an admin');
     } else {
       payload.role = 'admin';
-      console.log('removing admin privileges');
     }
 
-    superagent
-      .post('/updaterole')
-      .send(payload)
-      .then((response) => {
-        console.log(response);
-      });
+    axios.post('/updaterole', payload);
   };
 
   render() {
