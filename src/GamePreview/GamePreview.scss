@@ -1,5 +1,6 @@
 @import '../theme';
 @import '../mixins';
+@import '../media';
 
 .game-preview {
   grid-column: auto / span 3;
@@ -8,15 +9,18 @@
 
   .preview-info {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    @include desktop-md-and-up {
+      flex-direction: row;
+    }
   }
 
   .preview-cover {
-    flex: 0 0 225px;
+    flex: 1 1 300px;
+
     display: flex;
     justify-content: center;
     overflow: hidden;
-    margin-right: 24px;
     background-color: $background-darker;
     border-radius: 5px;
 
@@ -24,6 +28,16 @@
       max-height: 300px;
 
       flex: 0 0;
+    }
+
+    @include desktop-md-and-up {
+      flex: 0 0 225px;
+      margin-right: 24px;
+      img {
+        max-height: 300px;
+
+        flex: 0 0;
+      }
     }
   }
 
@@ -36,10 +50,12 @@
 
   .game-title {
     font-size: 18px;
+
+    margin-bottom: 6px;
   }
 
   .icons-container {
-    margin-top: 12px;
+    margin-top: 6px;
     font-size: 20px;
 
     @include withAccentColor {
