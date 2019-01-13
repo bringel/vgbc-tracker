@@ -155,14 +155,16 @@ class SignUp extends React.Component<Props, State> {
         <AccentColorUpdate accentColor="blue" />
         <Message type={!validCode ? 'warning' : error !== '' ? 'error' : 'placeholder'}>{message}</Message>
         <div className="code-wrapper">
-          <Input
-            id="code"
-            name="code"
-            type="text"
-            label="Signup Code"
-            value={signupCode}
-            onChange={this.handleSignupCodeChange}
-          />
+          <div className="code-form-wrapper">
+            <Input
+              id="code"
+              name="code"
+              type="text"
+              label="Signup Code"
+              value={signupCode}
+              onChange={this.handleSignupCodeChange}
+            />
+          </div>
         </div>
         <div className="signup-wrapper">
           <div className="signup-form">

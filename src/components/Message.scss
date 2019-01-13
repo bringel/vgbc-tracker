@@ -2,7 +2,7 @@
 
 .message-wrapper {
   min-height: 48px;
-  min-width: 350px;
+  min-width: 284px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  word-break: break-word;
 }
 
 .message.warning {
