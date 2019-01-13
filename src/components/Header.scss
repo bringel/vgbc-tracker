@@ -1,44 +1,39 @@
 @import '../theme';
 @import '../mixins';
+@import '../media';
+@import '../functions';
 
 .header {
   color: $text-main;
 
   display: flex;
-  justify-content: space-between;
-  padding: 24px 24px 0 24px;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  @include safeAreaPadding(48px, 18px, 0, 18px);
+
+  @include desktop-md-and-up {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 32px 24px 0 24px;
+    flex-wrap: nowrap;
+  }
 
   @include withAccentColor {
     @include gradientBackground($accentColor);
-  }
-
-  @include mobile-portrait {
-    flex-wrap: wrap;
-    padding: 32px 24px 0 24px;
-  }
-  @include mobile-landscape {
-    flex-wrap: wrap;
-    @include safeAreaPadding(32px, 10px, 0, 10px);
   }
 
   h1 {
     margin: 0;
     font-size: 1.5rem;
     color: $text-main;
+
+    margin-bottom: 12px;
+
+    @include desktop-md-and-up {
+      margin-bottom: 0;
+    }
   }
 }
-
-// .user-container {
-//   margin-top: 0;
-//   @include mobile-portrait {
-//     margin-top: 12px;
-//   }
-//
-//   .user-name {
-//     margin-right: 12px;
-//   }
-// }
 
 .nav-container {
   & > span {

@@ -1,5 +1,7 @@
 @import './theme';
 @import './mixins';
+@import './media';
+@import './functions';
 
 .app {
   width: 100%;
@@ -10,18 +12,22 @@
 }
 
 .content-wrapper {
-  margin: 50px 50px 0 50px;
   height: 100%;
 
-  @include small-desktop {
-    margin: 25px 25px 0 25px;
+  margin: 12px addRightSafeArea(18px) 12px addLeftSafeArea(18px);
+  @include desktop-md-and-up {
+    margin: 50px 50px 0 50px;
   }
 
-  @include mobile-landscape {
-    margin: 5px calc(10px + env(safe-area-inset-right)) 0 calc(10px + env(safe-area-inset-left));
-  }
-  @include mobile-portrait {
-    margin: 15px calc(20px + env(safe-area-inset-right)) env(safe-area-inset-bottom)
-      calc(20px + env(safe-area-inset-left));
-  }
+  // @include small-desktop {
+  //   margin: 25px 25px 0 25px;
+  // }
+  //
+  // @include mobile-landscape {
+  //   margin: 5px calc(10px + env(safe-area-inset-right)) 0 calc(10px + env(safe-area-inset-left));
+  // }
+  // @include mobile-portrait {
+  //   margin: 15px calc(20px + env(safe-area-inset-right)) env(safe-area-inset-bottom)
+  //     calc(20px + env(safe-area-inset-left));
+  // }
 }

@@ -1,3 +1,11 @@
-$mobile-width-portrait: 470px;
-$mobile-width-landscape: 815px;
-$small-desktop: 925px;
+// $mobile-width-portrait: 470px;
+// $mobile-width-landscape: 815px;
+// $small-desktop: 925px;
+
+$desktop-md: 1224px;
+
+@mixin desktop-md-and-up {
+  @media (min-width: $desktop-md) {
+    @content;
+  }
+}
