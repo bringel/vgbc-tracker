@@ -9,11 +9,13 @@
 
   background-color: $background;
   color: $text-main;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .content-wrapper {
-  height: 100%;
-
+  flex-grow: 1;
   margin: 12px addRightSafeArea(18px) 12px addLeftSafeArea(18px);
   @include desktop-md-and-up {
     margin: 50px 50px 0 50px;

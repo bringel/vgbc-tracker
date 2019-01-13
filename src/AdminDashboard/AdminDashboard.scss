@@ -1,3 +1,7 @@
+@import '../media';
+
 .admin-wrapper {
-  margin-left: 240px;
+  @include desktop-md-and-up {
+    margin-left: 240px;
+  }
 }

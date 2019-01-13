@@ -38,9 +38,21 @@ class UserList extends React.Component<Props> {
             return (
               <li key={user.userID} className="user-row">
                 <div className="user-info-container">
-                  <div>{user.displayName}</div>
-                  <div>{user.email}</div>
-                  <div>Role: {upperFirst(user.role)}</div>
+                  <div className="info-row">
+                    <div className="row-label">Display Name</div>
+                    <div>{user.displayName}</div>
+                  </div>
+                  <div className="info-row">
+                    <div className="row-label">Email</div>
+                    <div>{user.email}</div>
+                  </div>
+                  <div className="info-row">
+                    <div className="row-label">Role</div>
+                    <div>{upperFirst(user.role)}</div>
+                  </div>
+                  {/* <div>Display Name: {user.displayName}</div>
+                  <div>Email: {user.email}</div>
+                  <div>Role: {upperFirst(user.role)}</div> */}
                 </div>
                 <div className="user-actions-container">
                   <Button buttonStyle="outline" onClick={() => this.handleUserActionButton(user)}>
