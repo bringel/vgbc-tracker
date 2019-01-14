@@ -3,6 +3,8 @@ import * as React from 'react';
 import { upperFirst } from 'lodash-es';
 import axios from 'axios';
 
+import FirebaseContext from '../../firebase-context';
+import type { FirebaseContextValue } from '../../firebase-context';
 import type { User } from '../../types/User';
 import Button from '../../components/Button';
 
@@ -13,19 +15,24 @@ type Props = {
 };
 
 class UserList extends React.Component<Props> {
+  static contextType = FirebaseContext;
+  context: FirebaseContextValue;
+
   handleUserActionButton = (user: User) => {
-    let payload = {
-      userID: user.userID,
-      role: ''
-    };
+    if (user.userID !== this.context.currentUser.userID) {
+      let payload = {
+        userID: user.userID,
+        role: ''
+      };
 
-    if (user.role === 'user') {
-      payload.role = 'admin';
-    } else {
-      payload.role = 'user';
+      if (user.role === 'user') {
+        payload.role = 'admin';
+      } else {
+        payload.role = 'user';
+      }
+
+      axios.post('/updaterole', payload);
     }
-
-    axios.post('/updaterole', payload);
   };
 
   render() {
@@ -55,7 +62,10 @@ class UserList extends React.Component<Props> {
                   <div>Role: {upperFirst(user.role)}</div> */}
                 </div>
                 <div className="user-actions-container">
-                  <Button buttonStyle="outline" onClick={() => this.handleUserActionButton(user)}>
+                  <Button
+                    buttonStyle="outline"
+                    onClick={() => this.handleUserActionButton(user)}
+                    disabled={user.userID === this.context.currentUser.userID}>
                     {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
                   </Button>
                 </div>

@@ -1,18 +1,19 @@
 //@flow
+import './App.scss';
+
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import ThemeContext, { type ThemeOption, type AccentColor } from './themeContext';
-import FirebaseContext, { defaultContext } from './firebase-context';
 import type { User } from './types/User.js';
-import Dashboard from './Dashboard/Dashboard';
-import Header from './components/Header';
-import SignUp from './SignUp/SignUp';
-import Login from './Login/Login';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import Dashboard from './Dashboard/Dashboard';
+import FirebaseContext, { defaultContext } from './firebase-context';
+import Header from './components/Header';
+import Login from './Login/Login';
+import SignUp from './SignUp/SignUp';
+import ThemeContext, { type ThemeOption, type AccentColor } from './themeContext';
 import firebase, { usersCollection } from './services/firebase';
-
-import './App.scss';
 
 type State = {
   loggedIn: boolean,
@@ -89,8 +90,7 @@ class App extends Component<{}, State> {
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
                       <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
-                      {/* TODO: admin route should be authenticated */}
-                      <Route path="/admin" render={() => <AdminDashboard />} />
+                      <AuthenticatedRoute path="/admin" render={() => <AdminDashboard />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </div>
