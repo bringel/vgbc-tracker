@@ -10,7 +10,7 @@
   .preview-info {
     display: flex;
     flex-direction: column;
-    @include desktop-md-and-up {
+    @include large-and-up {
       flex-direction: row;
     }
   }
@@ -32,7 +32,7 @@
       flex: 0 0;
     }
 
-    @include desktop-md-and-up {
+    @include large-and-up {
       flex: 0 0 225px;
       margin-right: 24px;
       img {

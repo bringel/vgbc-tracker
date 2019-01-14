@@ -15,12 +15,12 @@
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 6px;
 
-  @include tablet-and-up {
+  @include small-and-up {
     grid-template-columns: repeat(6, 1fr);
     grid-column-gap: 12px;
   }
 
-  @include desktop-md-and-up {
+  @include large-and-up {
     grid-template-columns: repeat(9, 1fr);
     grid-column-gap: 12px;
   }

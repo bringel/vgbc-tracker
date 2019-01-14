@@ -23,7 +23,7 @@
 
   margin-bottom: 42px;
 
-  @include desktop-md-and-up {
+  @include large-and-up {
     margin-bottom: 72px;
   }
 }

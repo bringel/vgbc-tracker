@@ -1,7 +1,7 @@
 @import '../media';
 
 .admin-wrapper {
-  @include desktop-md-and-up {
+  @include large-and-up {
     margin-left: 240px;
   }
 }

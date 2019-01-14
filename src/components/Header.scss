@@ -10,7 +10,7 @@
   flex-direction: column;
   @include safeAreaPadding(48px, 18px, 0, 18px);
 
-  @include desktop-md-and-up {
+  @include large-and-up {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -29,7 +29,7 @@
 
     margin-bottom: 12px;
 
-    @include desktop-md-and-up {
+    @include large-and-up {
       margin-bottom: 0;
     }
   }

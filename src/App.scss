@@ -17,7 +17,7 @@
 .content-wrapper {
   flex-grow: 1;
   margin: 12px addRightSafeArea(18px) 12px addLeftSafeArea(18px);
-  @include desktop-md-and-up {
+  @include large-and-up {
     margin: 50px 50px 0 50px;
   }
 
