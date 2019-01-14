@@ -20,7 +20,7 @@
     grid-column-gap: 12px;
   }
 
-  @include large-and-up {
+  @include medium-and-up {
     grid-template-columns: repeat(9, 1fr);
     grid-column-gap: 12px;
   }

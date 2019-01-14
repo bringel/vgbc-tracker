@@ -10,7 +10,7 @@
   flex-direction: column;
   @include safeAreaPadding(48px, 18px, 0, 18px);
 
-  @include large-and-up {
+  @include medium-and-up {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
