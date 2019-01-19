@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 
 import type { User } from './types/User.js';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
-import AuthenticatedRoute from './components/AuthenticatedRoute';
+import AdminRoute from './components/AdminRoute';
 import Dashboard from './Dashboard/Dashboard';
 import FirebaseContext, { defaultContext } from './firebase-context';
 import Header from './components/Header';
@@ -90,7 +90,7 @@ class App extends Component<{}, State> {
                     <Switch>
                       <Route path="/login" render={({ history }) => <Login history={history} />} />
                       <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
-                      <AuthenticatedRoute path="/admin" render={() => <AdminDashboard />} />
+                      <AdminRoute path="/admin" render={() => <AdminDashboard />} />
                       <Route path="/" exact render={() => <Dashboard />} />
                     </Switch>
                   </div>
