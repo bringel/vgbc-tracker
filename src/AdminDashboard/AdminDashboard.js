@@ -2,9 +2,9 @@
 import * as React from 'react';
 
 import { AccentColorUpdate } from '../themeContext';
+import SuggestionsTab from './Suggestions/SuggestionsTab';
 import TabView from '../components/TabView';
 import TabViewTab from '../components/TabViewTab';
-
 import UserManagementTab from './UserManagement/UserManagementTab';
 
 import './AdminDashboard.scss';
@@ -31,6 +31,9 @@ class AdminDashboard extends React.Component<Props, State> {
         <TabView activeTab={this.state.activeTab} onTabClicked={this.handleTabChanged}>
           <TabViewTab tabTitle="User Management">
             <UserManagementTab />
+          </TabViewTab>
+          <TabViewTab tabTitle="Game Suggestions">
+            <SuggestionsTab />
           </TabViewTab>
         </TabView>
       </div>
