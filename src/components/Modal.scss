@@ -1,0 +1,38 @@
+@import '../theme';
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  z-index: 1;
+
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+  min-height: 300px;
+  min-width: 300px;
+  max-height: calc(100% - 200px);
+  max-width: calc(100% - 200px);
+
+  background-color: $background;
+}
+
+.modal-header {
+  padding: 6px 6px;
+  display: flex;
+  align-items: space-between;
+}
+
+.modal-title {
+  flex: 1 0 24px;
+}

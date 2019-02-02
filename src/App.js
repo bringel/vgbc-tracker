@@ -99,6 +99,7 @@ class App extends Component<{}, State> {
             )}
           </ThemeContext.Consumer>
         </BrowserRouter>
+        <div id="modal-portal" />
       </ThemeContext.Provider>
     ) : (
       <div>Loading...</div>
