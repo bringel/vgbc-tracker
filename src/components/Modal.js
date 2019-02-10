@@ -7,10 +7,22 @@ import './Modal.scss';
 
 type Props = {
   title: string,
+  onClose: () => void,
   children: React.Node
 };
 
 class Modal extends React.Component<Props> {
+  static defaultProps = {
+    title: '',
+    onClose: () => {}
+  };
+
+  handleCloseIconClick = (event: SyntheticMouseEvent<*>) => {
+    event.stopPropagation();
+
+    this.props.onClose();
+  };
+
   render() {
     const portalTarget = document.querySelector('#modal-portal');
 
@@ -21,7 +33,7 @@ class Modal extends React.Component<Props> {
             <div className="modal">
               <div className="modal-header">
                 <div className="modal-title">{this.props.title}</div>
-                <Icon type="cross" color="white" size={18} />
+                <Icon type="cross" color="white" size={18} onClick={this.handleCloseIconClick} />
               </div>
               <div>{this.props.children}</div>
             </div>

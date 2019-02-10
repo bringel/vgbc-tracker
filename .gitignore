@@ -22,3 +22,7 @@ yarn-error.log*
 
 /.firebase
 functions/node_modules
+
+*.sublime-project
+*.sublime-workspace
+/.je-project-settings
