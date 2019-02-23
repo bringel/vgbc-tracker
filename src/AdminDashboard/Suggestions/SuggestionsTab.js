@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import GBGameSearch from '../components/GBGameSearch';
 
 type Props = {};
 type State = {
@@ -21,7 +22,11 @@ class SuggestionsTab extends React.Component<Props, State> {
     return (
       <>
         <Button onClick={this.handleAddButtonClick}>Add suggestion</Button>
-        {this.state.showAddModal && <Modal />}
+        {this.state.showAddModal && (
+          <Modal>
+            <GBGameSearch />
+          </Modal>
+        )}
       </>
     );
   }

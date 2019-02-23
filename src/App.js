@@ -82,24 +82,26 @@ class App extends Component<{}, State> {
         <BrowserRouter>
           <ThemeContext.Consumer>
             {(themeContext) => (
-              <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
-                <FirebaseContext.Provider
-                  value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
-                  <Header />
-                  <div className="content-wrapper">
-                    <Switch>
-                      <Route path="/login" render={({ history }) => <Login history={history} />} />
-                      <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
-                      <AdminRoute path="/admin" render={() => <AdminDashboard />} />
-                      <Route path="/" exact render={() => <Dashboard />} />
-                    </Switch>
-                  </div>
-                </FirebaseContext.Provider>
-              </div>
+              <>
+                <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
+                  <FirebaseContext.Provider
+                    value={{ isLoggedIn: this.state.loggedIn, currentUser: this.state.currentUser }}>
+                    <Header />
+                    <div className="content-wrapper">
+                      <Switch>
+                        <Route path="/login" render={({ history }) => <Login history={history} />} />
+                        <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
+                        <AdminRoute path="/admin" render={() => <AdminDashboard />} />
+                        <Route path="/" exact render={() => <Dashboard />} />
+                      </Switch>
+                    </div>
+                  </FirebaseContext.Provider>
+                </div>
+                <div id="modal-portal" className={`${themeContext.theme} accent-${themeContext.accentColor}`} />
+              </>
             )}
           </ThemeContext.Consumer>
         </BrowserRouter>
-        <div id="modal-portal" />
       </ThemeContext.Provider>
     ) : (
       <div>Loading...</div>
