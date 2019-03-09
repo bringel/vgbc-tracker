@@ -59,8 +59,25 @@ class GBGameSearch extends React.Component<Props, State> {
     });
   };
 
+  handleLoadMoreClicked = () => {
+    const { query, currentResultPage } = this.state;
+
+    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then((response) => {
+      const { currentPage, totalPages, results } = response.data;
+
+      this.setState((prevState) => {
+        return {
+          currentResultPage: currentPage,
+          totalResultPages: totalPages,
+          results: [...prevState.results, ...results]
+        };
+      });
+    });
+  };
+
   render() {
-    const { query, results } = this.state;
+    const { query, results, currentResultPage, totalResultPages } = this.state;
+    const hasMoreResults = currentResultPage < totalResultPages;
     return (
       <>
         <div className="search-field-wrapper">
@@ -76,6 +93,7 @@ class GBGameSearch extends React.Component<Props, State> {
                 this.search();
               }
             }}
+            autofocus
           />
           <Button onClick={this.search}>Search</Button>
         </div>
@@ -95,6 +113,11 @@ class GBGameSearch extends React.Component<Props, State> {
                 </div>
               </div>
             ))}
+            {hasMoreResults && (
+              <div className="load-more" onClick={this.handleLoadMoreClicked}>
+                Load More
+              </div>
+            )}
           </div>
         )}
       </>

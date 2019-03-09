@@ -64,3 +64,13 @@
     }
   }
 }
+
+.load-more {
+  color: $text-main;
+  padding: 6px 0;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
