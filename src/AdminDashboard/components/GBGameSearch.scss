@@ -4,6 +4,7 @@
 .search-field-wrapper {
   display: flex;
   align-items: flex-end;
+  flex-shrink: 0;
 
   padding: 0 12px;
 
@@ -13,7 +14,7 @@
 }
 .results {
   overflow-y: auto;
-  height: calc(100% - 30px);
+  // height: calc(100% - 30px);
 
   margin-top: 24px;
 }
@@ -23,6 +24,11 @@
 
   border-bottom: 1px solid $text-main;
   padding: 12px;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   cursor: pointer;
 
