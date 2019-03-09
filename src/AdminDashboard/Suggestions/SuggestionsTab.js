@@ -5,6 +5,8 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import GBGameSearch from '../components/GBGameSearch';
 
+import './SuggestionsTab.scss';
+
 type Props = {};
 type State = {
   showAddModal: boolean
@@ -24,7 +26,9 @@ class SuggestionsTab extends React.Component<Props, State> {
         <Button onClick={this.handleAddButtonClick}>Add suggestion</Button>
         {this.state.showAddModal && (
           <Modal>
-            <GBGameSearch />
+            <div className="game-search">
+              <GBGameSearch />
+            </div>
           </Modal>
         )}
       </>

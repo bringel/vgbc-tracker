@@ -60,5 +60,5 @@
       "pre-commit": "lint-staged"
     }
   },
-  "proxy": "http://localhost:5001/vgbc-tracker-dev/us-central1"
+  "proxy": "https://dev.videogamebookclub.xyz"
 }

@@ -1,3 +1,6 @@
+@import '../../theme';
+@import '../../mixins';
+
 .search-field-wrapper {
   display: flex;
   align-items: flex-end;
@@ -6,5 +9,52 @@
 
   & > :first-child {
     margin-right: 12px;
+  }
+}
+.results {
+  overflow-y: auto;
+  height: calc(100% - 30px);
+
+  margin-top: 24px;
+}
+
+.search-result {
+  display: flex;
+
+  border-bottom: 1px solid $text-main;
+  padding: 12px;
+
+  cursor: pointer;
+
+  .poster {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 200px;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: $background-darker;
+    border-radius: 5px;
+
+    margin-right: 24px;
+
+    img {
+      max-height: 250px;
+      flex: 0 0;
+    }
+  }
+
+  .result-details {
+    color: $text-main;
+  }
+
+  .result-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &.selected {
+    @include withAccentColor {
+      background-color: transparentize($accentColor, 0.75);
+    }
   }
 }
