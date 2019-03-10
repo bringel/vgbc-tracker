@@ -17,7 +17,7 @@ const defaultTheme: ThemeContextValue = {
   setAccentColor: (accentColor) => {} //eslint-disable-line
 };
 
-const ThemeContext = React.createContext(defaultTheme);
+const ThemeContext = React.createContext<ThemeContextValue>(defaultTheme);
 
 export class AccentColorUpdate extends React.Component<{ accentColor: AccentColor }> {
   static contextType = ThemeContext;

@@ -17,6 +17,9 @@
   // height: calc(100% - 30px);
 
   margin-top: 24px;
+
+  border-top: 1px solid $text-main;
+  border-bottom: 1px solid $text-main;
 }
 
 .search-result {
@@ -73,4 +76,12 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
+}
+
+.save-area {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+
+  padding: 12px;
 }

@@ -4,20 +4,25 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import classnames from 'classnames';
 
+import { suggetionsCollection } from '../../services/firebase';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
+import type { GameSuggestion } from '../../types/GameSuggestion';
 
 import './GBGameSearch.scss';
 
-type Props = {};
+type Props = {
+  onSave: (savePromise: Promise<*>) => void
+};
 
 type State = {
   query: string,
   currentResultPage: number,
   totalResultPages: number,
   results: ?Array<SearchResponseGame>,
-  selectedResult: ?number
+  selectedResult: ?number,
+  loading: boolean
 };
 
 class GBGameSearch extends React.Component<Props, State> {
@@ -26,7 +31,8 @@ class GBGameSearch extends React.Component<Props, State> {
     currentResultPage: 0,
     totalResultPages: 0,
     results: null,
-    selectedResult: null
+    selectedResult: null,
+    loading: false
   };
 
   handleSearchTextUpdate = (event: SyntheticInputEvent<*>) => {
@@ -37,11 +43,12 @@ class GBGameSearch extends React.Component<Props, State> {
 
   search = () => {
     const { query } = this.state;
+    this.setState({ loading: true });
 
     axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}`).then((response) => {
       const { currentPage, totalPages, results } = response.data;
 
-      this.setState({ currentResultPage: currentPage, totalResultPages: totalPages, results: results });
+      this.setState({ currentResultPage: currentPage, totalResultPages: totalPages, results: results, loading: false });
     });
   };
 
@@ -61,22 +68,50 @@ class GBGameSearch extends React.Component<Props, State> {
 
   handleLoadMoreClicked = () => {
     const { query, currentResultPage } = this.state;
+    if (this.state.loading) {
+      return;
+    }
+    this.setState({ loading: true });
 
     axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then((response) => {
       const { currentPage, totalPages, results } = response.data;
 
       this.setState((prevState) => {
+        const previousResults = prevState.results || [];
         return {
           currentResultPage: currentPage,
           totalResultPages: totalPages,
-          results: [...prevState.results, ...results]
+          results: [...previousResults, ...results],
+          loading: false
         };
       });
     });
   };
 
+  save = () => {
+    const { onSave } = this.props;
+    const { selectedResult, results } = this.state;
+    if (selectedResult && results) {
+      const selectedGame = results.find((r) => r.id === selectedResult);
+      if (selectedGame) {
+        const suggestionDoc: GameSuggestion = {
+          giantBombID: selectedGame.id,
+          displayName: selectedGame.name,
+          coverURL: selectedGame.image.medium_url,
+          giantBombLink: selectedGame.site_detail_url,
+          user: {
+            userID: '',
+            userName: ''
+          }
+        };
+
+        onSave(suggetionsCollection().add(suggestionDoc));
+      }
+    }
+  };
+
   render() {
-    const { query, results, currentResultPage, totalResultPages } = this.state;
+    const { query, results, currentResultPage, totalResultPages, selectedResult } = this.state;
     const hasMoreResults = currentResultPage < totalResultPages;
     return (
       <>
@@ -93,7 +128,7 @@ class GBGameSearch extends React.Component<Props, State> {
                 this.search();
               }
             }}
-            autofocus
+            autoFocus
           />
           <Button onClick={this.search}>Search</Button>
         </div>
@@ -120,6 +155,12 @@ class GBGameSearch extends React.Component<Props, State> {
             )}
           </div>
         )}
+
+        <div className="save-area">
+          <Button onClick={this.save} disabled={!selectedResult}>
+            Save
+          </Button>
+        </div>
       </>
     );
   }

@@ -27,7 +27,11 @@ class SuggestionsTab extends React.Component<Props, State> {
         {this.state.showAddModal && (
           <Modal>
             <div className="game-search">
-              <GBGameSearch />
+              <GBGameSearch
+                onSave={(savePromise) => {
+                  savePromise.then(() => this.setState({ showAddModal: false }));
+                }}
+              />
             </div>
           </Modal>
         )}

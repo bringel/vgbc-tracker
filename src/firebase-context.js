@@ -13,6 +13,6 @@ export const defaultContext: FirebaseContextValue = {
   currentUser: { userID: '', displayName: '', email: '', role: 'user' }
 };
 
-const FirebaseContext = React.createContext(defaultContext);
+const FirebaseContext = React.createContext<FirebaseContextValue>(defaultContext);
 
 export default FirebaseContext;

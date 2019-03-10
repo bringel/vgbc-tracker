@@ -21,7 +21,6 @@ export function initializeFirebase() {
     return Promise.resolve(app);
   } else {
     return fetch('/__/firebase/init.json').then((response) => {
-      // $FlowFixMe
       response.json().then((res) => {
         const app = firebase.initializeApp(res);
         const firestore = app.firestore();
@@ -36,6 +35,7 @@ export function initializeFirebase() {
 export const usersCollection = () => firebase.firestore().collection('users');
 export const gamesCollection = () => firebase.firestore().collection('games'); // holds the game of the month from each month
 export const codesCollection = () => firebase.firestore().collection('codes');
+export const suggetionsCollection = () => firebase.firestore().collection('suggestions');
 
 export const getCurrentUserToken = () => {
   const user = firebase.auth().currentUser;
