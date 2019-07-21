@@ -15,17 +15,11 @@ export function initializeFirebase() {
     };
 
     const app = firebase.initializeApp(config);
-    const firestore = app.firestore();
-    const settings = { timestampsInSnapshots: true };
-    firestore.settings(settings);
     return Promise.resolve(app);
   } else {
     return fetch('/__/firebase/init.json').then((response) => {
       response.json().then((res) => {
         const app = firebase.initializeApp(res);
-        const firestore = app.firestore();
-        const settings = { timestampsInSnapshots: true };
-        firestore.settings(settings);
         return app;
       });
     });
