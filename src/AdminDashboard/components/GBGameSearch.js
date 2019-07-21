@@ -140,7 +140,7 @@ class GBGameSearch extends React.Component<Props, State> {
                 className={classnames('search-result', { selected: r.id === this.state.selectedResult })}
                 onClick={() => this.handleResultClicked(r.id)}>
                 <div className="poster">
-                  <img src={r.image.small_url} />
+                  <img src={r.image.small_url} alt="" />
                 </div>
                 <div className="result-details">
                   <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
