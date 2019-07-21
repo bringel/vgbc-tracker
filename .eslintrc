@@ -17,7 +17,7 @@
     "plugin:prettier/recommended",
     "plugin:flowtype/recommended"
   ],
-  "plugins": ["react", "prettier", "flowtype"],
+  "plugins": ["react", "prettier", "flowtype", "react-hooks"],
   "settings": {
     "react": {
       "createClass": "createReactClass",
@@ -32,6 +32,8 @@
     "process": false
   },
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
