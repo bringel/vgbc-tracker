@@ -18,7 +18,7 @@ export function initializeFirebase() {
     return Promise.resolve(app);
   } else {
     return fetch('/__/firebase/init.json').then((response) => {
-      response.json().then((res) => {
+      return response.json().then((res) => {
         const app = firebase.initializeApp(res);
         return app;
       });
