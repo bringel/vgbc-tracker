@@ -3,10 +3,9 @@ import * as React from 'react';
 import axios from 'axios';
 import format from 'date-fns/format';
 import classnames from 'classnames';
+import { Button, Input, Label } from 'reactstrap';
 
 import { suggetionsCollection } from '../../services/firebase';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
 import type { GameSuggestion } from '../../types/GameSuggestion';
 
@@ -116,8 +115,8 @@ class GBGameSearch extends React.Component<Props, State> {
     return (
       <>
         <div className="search-field-wrapper">
+          <Label for="searchField">Search</Label>
           <Input
-            label="Search"
             id="searchField"
             type="text"
             value={query}

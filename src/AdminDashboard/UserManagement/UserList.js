@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { upperFirst } from 'lodash-es';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 import FirebaseContext from '../../firebase-context';
 import type { FirebaseContextValue } from '../../firebase-context';
 import type { User } from '../../types/User';
-import Button from '../../components/Button';
 
 import './UserList.scss';
 

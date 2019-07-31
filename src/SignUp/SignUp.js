@@ -2,12 +2,10 @@
 import * as React from 'react';
 import { type ContextRouter } from 'react-router';
 import isAfter from 'date-fns/is_after';
+import { Button, Input, Label, Alert } from 'reactstrap';
 
 import firebase, { codesCollection, usersCollection } from '../services/firebase';
 
-import Input from '../components/Input';
-import Button from '../components/Button';
-import Message from '../components/Message';
 import { AccentColorUpdate } from '../themeContext';
 
 import './SignUp.scss';
@@ -152,57 +150,55 @@ class SignUp extends React.Component<Props, State> {
     const message = !validCode ? 'You need a valid sign up code to create a new account' : error !== '' ? error : '';
     return (
       <>
-        <AccentColorUpdate accentColor="blue" />
-        <Message type={!validCode ? 'warning' : error !== '' ? 'error' : 'placeholder'}>{message}</Message>
+        {/* <Message type={!validCode ? 'warning' : error !== '' ? 'error' : 'placeholder'}>{message}</Message> */}
         <div className="code-wrapper">
+          <AccentColorUpdate accentColor="blue" />
           <div className="code-form-wrapper">
-            <Input
-              id="code"
-              name="code"
-              type="text"
-              label="Signup Code"
-              value={signupCode}
-              onChange={this.handleSignupCodeChange}
-            />
+            {/* TODO: come back and re-layout this page so the alert doesnt need to be inside the form */}
+            {(!validCode || error !== '') && (
+              <Alert color={!validCode ? 'warning' : error !== '' ? 'danger' : ''}>{message}</Alert>
+            )}
+            <Label for="code">Signup Code</Label>
+            <Input id="code" name="code" type="text" value={signupCode} onChange={this.handleSignupCodeChange} />
           </div>
         </div>
         <div className="signup-wrapper">
           <div className="signup-form">
+            <Label for="name">Name</Label>
             <Input
               id="name"
               name="name"
               type="text"
-              label="Name"
               value={name}
               onChange={(event) => this.handleInputChange(event)}
               autoComplete="name"
               disabled={!validCode}
             />
+            <Label for="email">Email</Label>
             <Input
               id="email"
               name="email"
               type="email"
-              label="Email"
               value={email}
               onChange={(event) => this.handleInputChange(event)}
               autoComplete="email"
               disabled={!validCode}
             />
+            <Label for="password">Password</Label>
             <Input
               id="password"
               name="password"
               type="password"
-              label="Password"
               value={password}
               onChange={(event) => this.handleInputChange(event)}
               autoComplete="new-password"
               disabled={!validCode}
             />
+            <Label for="verifyPassword">Verify Password</Label>
             <Input
               id="verifyPassword"
               name="verifyPassword"
               type="password"
-              label="Verify Password"
               value={verifyPassword}
               onChange={(event) => this.handleInputChange(event)}
               autoComplete="new-password"

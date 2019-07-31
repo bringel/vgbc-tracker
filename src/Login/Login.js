@@ -1,13 +1,11 @@
 //@flow
 import React, { Component } from 'react';
 import { Link, type RouterHistory } from 'react-router-dom';
+import { Button, Input, Label, Alert } from 'reactstrap';
 
 import firebase from '../services/firebase';
 
 import { AccentColorUpdate } from '../themeContext';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import Message from '../components/Message';
 import './Login.scss';
 
 type Props = {
@@ -64,22 +62,17 @@ class Login extends Component<Props, State> {
     return (
       <div className="login">
         <AccentColorUpdate accentColor="blue" />
-        <Message type={error !== '' ? 'error' : 'placeholder'}>{error}</Message>
+        {/* <Message type={error !== '' ? 'error' : 'placeholder'}>{error}</Message> */}
         <div className="login-form">
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            label="Email"
-            autoComplete="email"
-            value={email}
-            onChange={this.handleChange}
-          />
+          {/* TODO: come back and re-layout this page so the alert doesnt need to be inside the form */}
+          {error !== '' && <Alert color="danger">{error}</Alert>}
+          <Label for="email">Email</Label>
+          <Input id="email" name="email" type="email" autoComplete="email" value={email} onChange={this.handleChange} />
+          <Label for="password">Password</Label>
           <Input
             id="password"
             name="password"
             type="password"
-            label="Password"
             autoComplete="current-password"
             value={password}
             onChange={this.handleChange}
