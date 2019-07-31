@@ -1,44 +1,46 @@
 //@flow
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 import firebase from '../services/firebase';
 import FirebaseContext from '../firebase-context';
-import './Header.scss';
 
 const Header = () => (
   <FirebaseContext.Consumer>
     {(context) => (
-      <div className="header">
-        <h1>
-          <Link to="/" className="link">
-            Video Game Book Club Tracker
-          </Link>
-        </h1>
-        <div className="nav-container">
+      <Navbar dark expand className="justify-content-between">
+        <NavbarBrand href="/">Video Game Book Club Tracker</NavbarBrand>
+        <Nav navbar>
           {context.isLoggedIn ? (
             <>
               {context.currentUser.role === 'admin' ? (
-                <span>
-                  <Link to="/admin" className="link">
+                <NavItem>
+                  <NavLink tag={Link} to="/admin">
                     Admin
-                  </Link>
-                </span>
+                  </NavLink>
+                </NavItem>
               ) : null}
-              <span onClick={() => firebase.auth().signOut()} className="link">
-                Logout
-              </span>
-              <span>{context.currentUser.displayName || ''}</span>
+              <NavItem>
+                <NavLink style={{ cursor: 'pointer' }} onClick={() => firebase.auth().signOut()}>
+                  Logout
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <span className="navbar-text" style={{ margin: '0 0.5rem' }}>
+                  {context.currentUser.displayName || ''}
+                </span>
+              </NavItem>
             </>
           ) : (
-            <span>
-              <Link to="/login" className="link">
+            <NavItem>
+              <NavLink tag={Link} to="/login">
                 Log In
-              </Link>
-            </span>
+              </NavLink>
+            </NavItem>
           )}
-        </div>
-      </div>
+        </Nav>
+      </Navbar>
     )}
   </FirebaseContext.Consumer>
 );
