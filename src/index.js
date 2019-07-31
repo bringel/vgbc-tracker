@@ -11,6 +11,8 @@ import { getCurrentUserToken } from './services/firebase';
 
 import { initializeFirebase } from './services/firebase';
 
+import './custom.scss';
+
 library.add(faNintendoSwitch, faPlaystation, faWindows, faSteam, faXbox);
 
 initializeFirebase().then(() => {

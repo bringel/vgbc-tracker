@@ -1,0 +1,22 @@
+@import 'theme';
+
+$colors: (
+  $blue: $blue,
+  $green: $green,
+  $red: $red,
+  $orange: $orange,
+  $purple: $purple
+);
+
+$body-bg: $background;
+$body-color: $text-main;
+
+$theme-colors: (
+  $blue: $blue,
+  $green: $green,
+  $red: $red,
+  $orange: $orange,
+  $purple: $purple
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
