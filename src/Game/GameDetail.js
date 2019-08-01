@@ -34,7 +34,7 @@ function getAvailableStores(game: Game): Array<Store> {
     }
   });
 
-  const stores = new Set(flatten(platformStores).filter((s) => s));
+  const stores = new Set(flatten(platformStores).filter(Boolean));
 
   return [...stores];
 }

@@ -1,5 +1,6 @@
 //@flow
 import * as React from 'react';
+import { Link } from 'react-head';
 
 export type ThemeOption = 'dark' | 'light';
 export type AccentColor = 'blue' | 'green' | 'red' | 'orange' | 'purple' | 'facebook-blue';
@@ -29,7 +30,7 @@ export class AccentColorUpdate extends React.Component<{ accentColor: AccentColo
   }
 
   render() {
-    return null;
+    return <Link rel="stylesheet" href={`${process.env.PUBLIC_URL || ''}/accent-${this.props.accentColor}.css`} />;
   }
 }
 

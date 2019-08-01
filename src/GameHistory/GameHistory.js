@@ -29,6 +29,7 @@ function groupGames(games: Array<GameOfTheMonthGame>): Array<HistoryGroup> {
 class GameHistory extends React.Component<Props> {
   render() {
     const groupedGames = groupGames(this.props.games).sort((a, b) => b.year - a.year);
+    //$FlowFixMe
     return groupedGames.map((g) => (
       <React.Fragment key={g.year}>
         <div className="group-header">{g.year}</div>

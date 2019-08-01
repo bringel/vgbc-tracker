@@ -24,7 +24,7 @@ export function getPlatformIcons(game: Game): Array<string> {
     }
   });
 
-  const stores = new Set(flatten(platformStores).filter((s) => s));
+  const stores = new Set(flatten(platformStores).filter(Boolean));
 
   return [...stores];
 }
