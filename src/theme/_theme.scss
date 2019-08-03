@@ -19,3 +19,23 @@ $accentColors: (
   orange: $orange,
   purple: $purple
 ) !global;
+
+// bootstrap variables
+$colors: (
+  'blue': $blue,
+  'green': $green,
+  'red': $red,
+  'orange': $orange,
+  'purple': $purple
+);
+
+$body-bg: $background;
+$body-color: $text-main;
+
+$modal-content-bg: $background;
+$close-color: $text-main;
+
+$native-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+$font-family-sans-serif: 'Fira Sans', $native-font-stack;

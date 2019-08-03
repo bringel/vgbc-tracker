@@ -1,17 +1,4 @@
 @import 'theme';
-$colors: (
-  'blue': $blue,
-  'green': $green,
-  'red': $red,
-  'orange': $orange,
-  'purple': $purple
-);
-
-$body-bg: $background;
-$body-color: $text-main;
-
-$modal-content-bg: $background;
-$close-color: $text-main;
 
 $theme-colors: (
   'primary': $blue
