@@ -2,8 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faNintendoSwitch, faPlaystation, faWindows, faSteam, faXbox } from '@fortawesome/free-brands-svg-icons';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import { getCurrentUserToken } from './services/firebase';
@@ -11,8 +9,6 @@ import { getCurrentUserToken } from './services/firebase';
 import { initializeFirebase } from './services/firebase';
 
 import 'bootstrap/dist/css/bootstrap.css';
-
-library.add(faNintendoSwitch, faPlaystation, faWindows, faSteam, faXbox);
 
 initializeFirebase().then(() => {
   axios.interceptors.request.use((config) => {

@@ -2,6 +2,7 @@
 export const platforms = {
   mac: 17,
   gamecube: 23,
+  playstation3: 35,
   wii: 36,
   nintendo64: 43,
   pc: 94,

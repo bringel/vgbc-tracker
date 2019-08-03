@@ -2,13 +2,18 @@
 import * as React from 'react';
 import format from 'date-fns/format';
 import flatten from 'lodash-es/flatten';
+import nintendoIcon from 'simple-icons/icons/nintendo';
+import microsoftIcon from 'simple-icons/icons/microsoft';
+import playstationIcon from 'simple-icons/icons/playstation';
+import steamIcon from 'simple-icons/icons/steam';
+import { Button } from 'reactstrap';
 
 import type { Game } from '../types/Game';
 import { platforms } from '../types/platforms';
 import type { Store } from '../types/platforms';
-import StoreLink from './StoreLink';
 
 import './GameDetail.scss';
+import Icon from '../components/Icon';
 
 type Props = {
   game: ?Game
@@ -17,6 +22,7 @@ type Props = {
 function getAvailableStores(game: Game): Array<Store> {
   const platformStores = game.platforms.map((p) => {
     switch (p.id) {
+      case platforms.playstation3:
       case platforms.playstation4:
         return 'playstation';
       case platforms.xboxOne:
@@ -54,6 +60,21 @@ function makeStoreLink(type: Store, gameTitle: string) {
   }
 }
 
+function getStoreIcon(store: Store) {
+  switch (store) {
+    case 'playstation':
+      return playstationIcon;
+    case 'microsoft':
+      return microsoftIcon;
+    case 'nintendo':
+      return nintendoIcon;
+    case 'steam':
+      return steamIcon;
+    default:
+      return null;
+  }
+}
+
 class GameDetail extends React.Component<Props> {
   render() {
     const game = this.props.game;
@@ -83,9 +104,24 @@ class GameDetail extends React.Component<Props> {
               <div className="stores">
                 Search for this game on these stores:
                 <div className="store-links">
-                  {storeSearchLinks.map((link) => (
-                    <StoreLink key={link.type} type={link.type} linkURL={link.link} />
-                  ))}
+                  {storeSearchLinks.map((link) => {
+                    const storeIcon = getStoreIcon(link.type);
+                    return (
+                      <Button
+                        key={link.type}
+                        color="primary"
+                        outline
+                        tag="a"
+                        href={link.link}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <span className="store-name">
+                          {storeIcon && <Icon path={storeIcon.path} size={18} className="store-icon" />}
+                          {link.type.toUpperCase()}
+                        </span>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
             ) : null}
