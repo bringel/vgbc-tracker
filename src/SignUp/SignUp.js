@@ -205,7 +205,7 @@ class SignUp extends React.Component<Props, State> {
               disabled={!validCode}
             />
             {/* <div className="error-container">{error}</div> */}
-            <Button onClick={this.handleSignUpButton} disabled={!validCode || creating} type="submit">
+            <Button onClick={this.handleSignUpButton} disabled={!validCode || creating} type="submit" color="primary">
               Sign Up
             </Button>
           </div>

@@ -22,7 +22,9 @@ class SuggestionsTab extends React.Component<Props, State> {
   render() {
     return (
       <>
-        <Button onClick={() => this.toggleModal()}>Add suggestion</Button>
+        <Button onClick={() => this.toggleModal()} color="primary">
+          Add suggestion
+        </Button>
         {this.state.showAddModal && (
           <Modal isOpen={this.state.showAddModal} toggle={this.toggleModal} size="xl" backdrop="static">
             <ModalHeader toggle={this.toggleModal}>Add Game Suggestion</ModalHeader>

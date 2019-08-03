@@ -129,7 +129,9 @@ class GBGameSearch extends React.Component<Props, State> {
             }}
             autoFocus
           />
-          <Button onClick={this.search}>Search</Button>
+          <Button onClick={this.search} color="primary">
+            Search
+          </Button>
         </div>
         {results && (
           <div className="results">
@@ -156,7 +158,7 @@ class GBGameSearch extends React.Component<Props, State> {
         )}
 
         <div className="save-area">
-          <Button onClick={this.save} disabled={!selectedResult}>
+          <Button onClick={this.save} disabled={!selectedResult} color="primary">
             Save
           </Button>
         </div>

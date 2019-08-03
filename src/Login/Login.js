@@ -77,7 +77,7 @@ class Login extends Component<Props, State> {
             value={password}
             onChange={this.handleChange}
           />
-          <Button onClick={this.handleLoginClick} disabled={email === '' || password === ''}>
+          <Button onClick={this.handleLoginClick} disabled={email === '' || password === ''} color="primary">
             Log In
           </Button>
         </div>

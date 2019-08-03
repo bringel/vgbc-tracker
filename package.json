@@ -30,7 +30,9 @@
     "eject": "react-scripts eject",
     "deploy:dev": "firebase use vgbc-tracker-dev && firebase deploy",
     "deploy:prod": "firebase use vgbc-tracker && firebase deploy",
-    "compile-theme-styles": "node-sass src/theme -o public"
+    "compile-theme-styles": "node-sass src/theme -o public",
+    "prestart": "npm run compile-theme-styles",
+    "prebuild": "npm run compile-theme-styles"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

@@ -63,7 +63,8 @@ class UserList extends React.Component<Props> {
                 </div>
                 <div className="user-actions-container">
                   <Button
-                    buttonStyle="outline"
+                    color="primary"
+                    outline
                     onClick={() => this.handleUserActionButton(user)}
                     disabled={user.userID === this.context.currentUser.userID}>
                     {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
