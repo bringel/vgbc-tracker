@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { upperFirst } from 'lodash-es';
 import axios from 'axios';
-import { Button } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 import FirebaseContext from '../../firebase-context';
 import type { FirebaseContextValue } from '../../firebase-context';
@@ -40,7 +40,39 @@ class UserList extends React.Component<Props> {
     return (
       <>
         <h2>All Users</h2>
-        <ul className="user-list">
+        <ListGroup className="user-list">
+          {users.map((user) => (
+            <ListGroupItem key={user.userID}>
+              <div className="user-row">
+                <div className="user-info-container">
+                  <div className="info-row">
+                    <div className="row-label">Display Name</div>
+                    <div>{user.displayName}</div>
+                  </div>
+                  <div className="info-row">
+                    <div className="row-label">Email</div>
+                    <div>{user.email}</div>
+                  </div>
+                  <div className="info-row">
+                    <div className="row-label">Role</div>
+                    <div>{upperFirst(user.role)}</div>
+                  </div>
+                </div>
+                <div className="user-actions-container">
+                  <Button
+                    color="primary"
+                    outline
+                    onClick={() => this.handleUserActionButton(user)}
+                    disabled={user.userID === this.context.currentUser.userID}>
+                    {user.role === 'user' ? 'Make Admin' : 'Remove Admin'}
+                  </Button>
+                </div>
+              </div>
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+
+        {/* <ul className="user-list">
           {users.map((user) => {
             return (
               <li key={user.userID} className="user-row">
@@ -57,9 +89,6 @@ class UserList extends React.Component<Props> {
                     <div className="row-label">Role</div>
                     <div>{upperFirst(user.role)}</div>
                   </div>
-                  {/* <div>Display Name: {user.displayName}</div>
-                  <div>Email: {user.email}</div>
-                  <div>Role: {upperFirst(user.role)}</div> */}
                 </div>
                 <div className="user-actions-container">
                   <Button
@@ -73,7 +102,7 @@ class UserList extends React.Component<Props> {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </>
     );
   }

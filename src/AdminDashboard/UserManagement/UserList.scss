@@ -1,10 +1,12 @@
 @import '../../theme/theme';
-@import '../../media';
+// @import '../../media';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 .user-list {
   max-width: 720px;
 
-  list-style: none;
   padding: 0;
 }
 
@@ -12,21 +14,13 @@
   display: flex;
   flex-direction: column;
 
-  @include medium-and-up {
+  @include media-breakpoint-up(md) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
   padding: 12px 6px;
-  border-bottom: 1px solid $text-main;
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.user-info-container {
 }
 
 .info-row {
@@ -42,7 +36,7 @@
 
 .user-actions-container {
   margin-top: 12px;
-  @include medium-and-up {
+  @include media-breakpoint-up(md) {
     margin-left: 36px;
   }
 
