@@ -3,7 +3,7 @@ import * as React from 'react';
 import axios from 'axios';
 import format from 'date-fns/format';
 import classnames from 'classnames';
-import { Button, Input, Label } from 'reactstrap';
+import { Button, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { suggetionsCollection } from '../../services/firebase';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
@@ -12,6 +12,8 @@ import type { GameSuggestion } from '../../types/GameSuggestion';
 import './GBGameSearch.scss';
 
 type Props = {
+  isOpen: boolean,
+  toggleOpen: () => void,
   onSave: (savePromise: Promise<*>) => void
 };
 
@@ -110,59 +112,63 @@ class GBGameSearch extends React.Component<Props, State> {
   };
 
   render() {
+    const { isOpen, toggleOpen } = this.props;
     const { query, results, currentResultPage, totalResultPages, selectedResult } = this.state;
+
     const hasMoreResults = currentResultPage < totalResultPages;
     return (
-      <>
-        <div className="search-field-wrapper">
-          <Label for="searchField">Search</Label>
-          <Input
-            id="searchField"
-            type="text"
-            value={query}
-            onChange={this.handleSearchTextUpdate}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                event.preventDefault();
-                this.search();
-              }
-            }}
-            autoFocus
-          />
-          <Button onClick={this.search} color="primary">
-            Search
-          </Button>
-        </div>
-        {results && (
-          <div className="results">
-            {results.map((r) => (
-              <div
-                key={r.id}
-                className={classnames('search-result', { selected: r.id === this.state.selectedResult })}
-                onClick={() => this.handleResultClicked(r.id)}>
-                <div className="poster">
-                  <img src={r.image.small_url} alt="" />
-                </div>
-                <div className="result-details">
-                  <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
-                  <div className="result-description">{r.deck}</div>
-                </div>
-              </div>
-            ))}
-            {hasMoreResults && (
-              <div className="load-more" onClick={this.handleLoadMoreClicked}>
-                Load More
-              </div>
-            )}
+      <Modal isOpen={isOpen} toggle={toggleOpen} size="xl" backdrop="static" scrollable>
+        <ModalHeader toggle={toggleOpen}>Add Game Suggestion</ModalHeader>
+        <ModalBody>
+          <div className="search-field-wrapper">
+            <Label for="searchField">Search</Label>
+            <Input
+              id="searchField"
+              type="text"
+              value={query}
+              onChange={this.handleSearchTextUpdate}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                  this.search();
+                }
+              }}
+              autoFocus
+            />
+            <Button onClick={this.search} color="primary">
+              Search
+            </Button>
           </div>
-        )}
-
-        <div className="save-area">
+          {results && (
+            <div className="results">
+              {results.map((r) => (
+                <div
+                  key={r.id}
+                  className={classnames('search-result', { selected: r.id === this.state.selectedResult })}
+                  onClick={() => this.handleResultClicked(r.id)}>
+                  <div className="poster">
+                    <img src={r.image.small_url} alt="" />
+                  </div>
+                  <div className="result-details">
+                    <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
+                    <div className="result-description">{r.deck}</div>
+                  </div>
+                </div>
+              ))}
+              {hasMoreResults && (
+                <div className="load-more" onClick={this.handleLoadMoreClicked}>
+                  Load More
+                </div>
+              )}
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
           <Button onClick={this.save} disabled={!selectedResult} color="primary">
             Save
           </Button>
-        </div>
-      </>
+        </ModalFooter>
+      </Modal>
     );
   }
 }
