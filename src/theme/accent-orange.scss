@@ -4,4 +4,6 @@ $theme-colors: (
   'primary': $orange
 );
 
+$list-group-active-bg: transparentize($orange, 0.75);
+
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

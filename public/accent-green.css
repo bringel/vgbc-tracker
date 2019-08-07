@@ -3735,8 +3735,8 @@ input[type="button"].btn-block {
   display: block;
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125); }
+  background-color: #1d1d1d;
+  border: 1px solid rgba(239, 239, 239, 0.125); }
   .list-group-item:first-child {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem; }
@@ -3747,12 +3747,12 @@ input[type="button"].btn-block {
   .list-group-item.disabled, .list-group-item:disabled {
     color: #6c757d;
     pointer-events: none;
-    background-color: #fff; }
+    background-color: #1d1d1d; }
   .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #2ff95b;
-    border-color: #2ff95b; }
+    background-color: rgba(47, 249, 91, 0.25);
+    border-color: rgba(47, 249, 91, 0.25); }
 
 .list-group-horizontal {
   flex-direction: row; }

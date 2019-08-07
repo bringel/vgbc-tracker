@@ -39,3 +39,6 @@ $native-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
   sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
 $font-family-sans-serif: 'Fira Sans', $native-font-stack;
+
+$list-group-bg: $background;
+$list-group-border-color: rgba($text-main, 0.125);

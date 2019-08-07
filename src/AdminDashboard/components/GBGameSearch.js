@@ -2,8 +2,18 @@
 import * as React from 'react';
 import axios from 'axios';
 import format from 'date-fns/format';
-import classnames from 'classnames';
-import { Button, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button,
+  Input,
+  Label,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ListGroup,
+  ListGroupItem,
+  Media
+} from 'reactstrap';
 
 import { suggetionsCollection } from '../../services/firebase';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
@@ -140,27 +150,33 @@ class GBGameSearch extends React.Component<Props, State> {
             </Button>
           </div>
           {results && (
-            <div className="results">
-              {results.map((r) => (
-                <div
-                  key={r.id}
-                  className={classnames('search-result', { selected: r.id === this.state.selectedResult })}
-                  onClick={() => this.handleResultClicked(r.id)}>
-                  <div className="poster">
-                    <img src={r.image.small_url} alt="" />
-                  </div>
-                  <div className="result-details">
-                    <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
-                    <div className="result-description">{r.deck}</div>
-                  </div>
-                </div>
-              ))}
+            <>
+              <ListGroup>
+                {results.map((r) => (
+                  <ListGroupItem
+                    key={r.id}
+                    active={r.id === this.state.selectedResult}
+                    onClick={() => this.handleResultClicked(r.id)}>
+                    <Media>
+                      <Media className="poster">
+                        <img src={r.image.small_url} alt="" />
+                      </Media>
+                      <Media body>
+                        <div className="result-details">
+                          <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
+                          <div className="result-description">{r.deck}</div>
+                        </div>
+                      </Media>
+                    </Media>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
               {hasMoreResults && (
                 <div className="load-more" onClick={this.handleLoadMoreClicked}>
                   Load More
                 </div>
               )}
-            </div>
+            </>
           )}
         </ModalBody>
         <ModalFooter>
