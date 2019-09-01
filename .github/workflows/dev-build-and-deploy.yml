@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - '*'
+      - '!/functions/*'
 
 jobs:
   build:
@@ -16,3 +19,11 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
+      - name: deploy
+        uses: w9jds/firebase-action@v1.0.1
+        if: success()
+        with:
+          args: deploy --only hosting
+        env:
+          PROJECT_ID: vgbc-tracker-dev
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
