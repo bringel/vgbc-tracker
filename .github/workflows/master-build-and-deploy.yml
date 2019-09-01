@@ -1,4 +1,4 @@
-name: Develop CI
+name: Master CI
 
 on:
   push:
@@ -16,3 +16,14 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: deploy
+        uses: w9jds/firebase-action@v1.0.1
+        if: success()
+        with:
+          args: deploy --only hosting
+        env:
+          PROJECT_ID: vgbc-tracker
+          FIREBASE_TOKEN: ${{ secrects.FIREBASE_TOKEN_PROD }}
