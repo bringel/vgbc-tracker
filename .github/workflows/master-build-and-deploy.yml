@@ -16,10 +16,6 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-  deploy:
-    runs-on: ubuntu-18.04
-    needs: build
-    steps:
       - name: deploy
         uses: w9jds/firebase-action@v1.0.1
         if: success()
