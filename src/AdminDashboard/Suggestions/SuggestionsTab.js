@@ -23,7 +23,7 @@ const SuggestionsTab = () => {
   }, []);
 
   return (
-    <div className="tab-content">
+    <div>
       <Button onClick={() => setShowAddModal(true)} color="primary">
         Add suggestion
       </Button>

@@ -35,7 +35,7 @@ class UserManagementTab extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="tab-content">
+      <div>
         <UserList users={this.state.users} />
       </div>
     );

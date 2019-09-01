@@ -92,7 +92,10 @@ class App extends Component<{}, State> {
                         <Switch>
                           <Route path="/login" render={({ history }) => <Login history={history} />} />
                           <Route path="/signup" render={(routeProps: *) => <SignUp {...routeProps} />} />
-                          <AdminRoute path="/admin" render={() => <AdminDashboard />} />
+                          <AdminRoute
+                            path="/admin"
+                            render={(routeProps: *) => <AdminDashboard match={routeProps.match} />}
+                          />
                           <Route path="/" exact render={() => <Dashboard />} />
                         </Switch>
                       </div>

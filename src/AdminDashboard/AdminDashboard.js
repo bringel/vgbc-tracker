@@ -1,71 +1,40 @@
 //@flow
 import * as React from 'react';
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import classnames from 'classnames';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import { NavLink as RouterNavLink, Route, Switch, type Match, Redirect } from 'react-router-dom';
 
 import { AccentColorUpdate } from '../themeContext';
 import SuggestionsTab from './Suggestions/SuggestionsTab';
-// import TabView from '../components/TabView';
-// import TabViewTab from '../components/TabViewTab';
 import UserManagementTab from './UserManagement/UserManagementTab';
 
 import './AdminDashboard.scss';
 
-type Props = {};
-
-type State = {
-  activeTab: string
+type Props = {
+  match: Match
 };
 
-class AdminDashboard extends React.Component<Props, State> {
-  state = {
-    activeTab: 'User Management'
-  };
-
-  handleTabChanged = (tabTitle: string) => {
-    this.setState({ activeTab: tabTitle });
-  };
-
+class AdminDashboard extends React.Component<Props> {
   render() {
     return (
       <div className="admin-wrapper">
         <AccentColorUpdate accentColor="orange" />
-        <Nav tabs>
+        <Nav pills vertical className="admin-nav">
           <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === 'User Management' })}
-              onClick={() => {
-                this.handleTabChanged('User Management');
-              }}>
+            <NavLink tag={RouterNavLink} to={`${this.props.match.path}/users`}>
               User Management
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === 'Game Suggestions' })}
-              onClick={() => {
-                this.handleTabChanged('Game Suggestions');
-              }}>
+            <NavLink tag={RouterNavLink} to={`${this.props.match.path}/suggestions`}>
               Game Suggestions
             </NavLink>
           </NavItem>
         </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="User Management">
-            <UserManagementTab />
-          </TabPane>
-          <TabPane tabId="Game Suggestions">
-            <SuggestionsTab />
-          </TabPane>
-        </TabContent>
-        {/* <TabView activeTab={this.state.activeTab} onTabClicked={this.handleTabChanged}>
-          <TabViewTab tabTitle="User Management">
-            <UserManagementTab />
-          </TabViewTab>
-          <TabViewTab tabTitle="Game Suggestions">
-            <SuggestionsTab />
-          </TabViewTab>
-        </TabView> */}
+        <Switch>
+          <Route path={`${this.props.match.path}/users`} render={() => <UserManagementTab />} />
+          <Route path={`${this.props.match.path}/suggestions`} render={() => <SuggestionsTab />} />
+          <Route exact render={() => <Redirect to={`${this.props.match.path}/users`} />} />
+        </Switch>
       </div>
     );
   }
