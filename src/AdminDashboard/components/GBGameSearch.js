@@ -15,7 +15,7 @@ import {
   Media
 } from 'reactstrap';
 
-import { suggetionsCollection } from '../../services/firebase';
+import { suggestionsCollection } from '../../services/firebase';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
 import type { GameSuggestion } from '../../types/GameSuggestion';
 
@@ -126,7 +126,7 @@ class GBGameSearch extends React.Component<Props, State> {
               )
         };
 
-        onSave(suggetionsCollection().add(suggestionDoc));
+        onSave(suggestionsCollection().add(suggestionDoc));
       }
     }
   };
