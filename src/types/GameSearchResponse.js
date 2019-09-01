@@ -25,7 +25,10 @@ export type SearchResponseGame = {
     abbreviation: string
   }>,
   site_detail_url: string,
-  resource_type: string
+  resource_type: string,
+  expected_release_day: number,
+  expected_release_month: number,
+  expected_release_year: number
 };
 
 export type GameSearchResponse = {

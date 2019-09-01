@@ -113,7 +113,16 @@ class GBGameSearch extends React.Component<Props, State> {
           user: {
             userID: '',
             userName: ''
-          }
+          },
+          releaseDate: selectedGame.original_release_date
+            ? format(selectedGame.original_release_date)
+            : format(
+                new Date(
+                  selectedGame.expected_release_year,
+                  selectedGame.expected_release_month - 1,
+                  selectedGame.expected_release_day
+                )
+              )
         };
 
         onSave(suggetionsCollection().add(suggestionDoc));
@@ -163,7 +172,9 @@ class GBGameSearch extends React.Component<Props, State> {
                       </Media>
                       <Media body>
                         <div className="result-details">
-                          <div className="result-title">{`${r.name} (${format(r.original_release_date, 'YYYY')})`}</div>
+                          <div className="result-title">{`${r.name} (${
+                            r.original_release_date ? format(r.original_release_date, 'YYYY') : r.expected_release_year
+                          })`}</div>
                           <div className="result-description">{r.deck}</div>
                         </div>
                       </Media>

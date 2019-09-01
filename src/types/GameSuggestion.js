@@ -7,5 +7,6 @@ export type GameSuggestion = {
   user: {
     userID: string,
     userName: string
-  }
+  },
+  releaseDate: string
 };

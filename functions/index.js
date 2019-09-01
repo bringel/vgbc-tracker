@@ -68,7 +68,8 @@ exports.searchForGame = functions.https.onRequest((request, response) => {
     format: 'json',
     resources: 'game',
     query: gameTitle,
-    field_list: 'id,name,deck,description,image,original_release_date,platforms,site_detail_url',
+    field_list:
+      'id,name,deck,description,image,original_release_date,platforms,site_detail_url,expected_release_day,expected_release_month,expected_release_year',
     limit: 10,
     page: page
   };
