@@ -21,7 +21,7 @@ class SuggestionsTab extends React.Component<Props, State> {
   };
   render() {
     return (
-      <>
+      <div className="tab-content">
         <Button onClick={() => this.toggleModal()} color="primary">
           Add suggestion
         </Button>
@@ -32,7 +32,7 @@ class SuggestionsTab extends React.Component<Props, State> {
             savePromise.then(() => this.setState({ showAddModal: false }));
           }}
         />
-      </>
+      </div>
     );
   }
 }

@@ -36,6 +36,7 @@ type State = {
   loading: boolean
 };
 
+//TODO: this should be extracted from the modal component to be used in other dialogs
 class GBGameSearch extends React.Component<Props, State> {
   state = {
     query: '',
