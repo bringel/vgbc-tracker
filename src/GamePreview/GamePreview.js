@@ -1,27 +1,28 @@
+import './GamePreview.scss';
+
+import format from 'date-fns/format';
 //@flow
 import * as React from 'react';
-import format from 'date-fns/format';
 import appleIcon from 'simple-icons/icons/apple';
-import gamecubeIcon from 'simple-icons/icons/nintendogamecube';
-import playstation3Icon from 'simple-icons/icons/playstation3';
-import wiiIcon from 'simple-icons/icons/wii';
-import nintendo64Icon from 'simple-icons/icons/nintendo';
-import pcIcon from 'simple-icons/icons/windows';
-import wiiUIcon from 'simple-icons/icons/wiiu';
-import xboxIcon from 'simple-icons/icons/xbox';
-import playstation4Icon from 'simple-icons/icons/playstation4';
 import linuxIcon from 'simple-icons/icons/linux';
+import nintendo64Icon from 'simple-icons/icons/nintendo';
+import gamecubeIcon from 'simple-icons/icons/nintendogamecube';
 import switchIcon from 'simple-icons/icons/nintendoswitch';
+import playstation3Icon from 'simple-icons/icons/playstation3';
+import playstation4Icon from 'simple-icons/icons/playstation4';
+import wiiIcon from 'simple-icons/icons/wii';
+import wiiUIcon from 'simple-icons/icons/wiiu';
+import pcIcon from 'simple-icons/icons/windows';
+import xboxIcon from 'simple-icons/icons/xbox';
 
-import type { GameOfTheMonthGame } from '../types/Game';
-
-import './GamePreview.scss';
-import { platforms } from '../types/platforms';
+import GameCoverImage from '../components/GameCoverImage';
 import Icon from '../components/Icon';
+import type { GameOfTheMonthGame } from '../types/Game';
+import { platforms } from '../types/platforms';
 
 function getPlatformIcons(game: GameOfTheMonthGame) {
   return game.platforms
-    .map((platform) => {
+    .map(platform => {
       switch (platform.id) {
         case platforms.mac:
           return appleIcon;
@@ -66,14 +67,12 @@ class GamePreview extends React.Component<Props> {
       <div className="game-preview">
         <div className="active-month">{format(activeDate, 'MMMM')}</div>
         <div className="preview-info">
-          <div className="preview-cover">
-            <img src={game.coverURL} alt="Game cover art" />
-          </div>
+          <GameCoverImage imageURL={game.coverURL} height={300} className="preview-cover" />
           <div>
             <div className="game-title">{game.title}</div>
             <div>Available On</div>
             <div className="icons-container">
-              {getPlatformIcons(game).map((icon) => (
+              {getPlatformIcons(game).map(icon => (
                 <span className="icon" key={icon.slug}>
                   <Icon path={icon.path} size={24} />
                 </span>

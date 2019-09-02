@@ -1,0 +1,17 @@
+@import '../theme/theme';
+
+.cover {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background-color: $background-darker;
+  border-radius: 5px;
+
+  margin-bottom: 12px;
+
+  img {
+    max-height: 300px;
+
+    flex: 0 0;
+  }
+}

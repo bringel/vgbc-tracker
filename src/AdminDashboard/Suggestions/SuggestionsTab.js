@@ -1,20 +1,21 @@
 //@flow
-import React, { useState, useEffect } from 'react';
+import './SuggestionsTab.scss';
+
+import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 
-import GBGameSearch from '../components/GBGameSearch';
-import { type GameSuggestion } from '../../types/GameSuggestion';
-
 import { suggestionsCollection } from '../../services/firebase';
-import './SuggestionsTab.scss';
+import { type GameSuggestion } from '../../types/GameSuggestion';
+import GBGameSearch from '../components/GBGameSearch';
+import GameSuggestionsList from './GameSuggestionsList';
 
 const SuggestionsTab = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [suggestions, setSuggestions] = useState<Array<GameSuggestion>>([]);
 
   useEffect(() => {
-    return suggestionsCollection().onSnapshot((snapshot) => {
-      const suggestions = snapshot.docs.map((suggestionDoc) => {
+    return suggestionsCollection().onSnapshot(snapshot => {
+      const suggestions = snapshot.docs.map(suggestionDoc => {
         return suggestionDoc.data();
       });
 
@@ -29,11 +30,12 @@ const SuggestionsTab = () => {
       </Button>
       <GBGameSearch
         isOpen={showAddModal}
-        toggleOpen={() => setShowAddModal((prevState) => !prevState)}
-        onSave={(savePromise) => {
+        toggleOpen={() => setShowAddModal(prevState => !prevState)}
+        onSave={savePromise => {
           savePromise.then(() => setShowAddModal(false));
         }}
       />
+      <GameSuggestionsList suggestions={suggestions}></GameSuggestionsList>
     </div>
   );
 };

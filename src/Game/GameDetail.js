@@ -1,26 +1,27 @@
-//@flow
-import * as React from 'react';
+import './GameDetail.scss';
+
 import format from 'date-fns/format';
 import flatten from 'lodash-es/flatten';
-import nintendoIcon from 'simple-icons/icons/nintendo';
+//@flow
+import * as React from 'react';
+import { Button } from 'reactstrap';
 import microsoftIcon from 'simple-icons/icons/microsoft';
+import nintendoIcon from 'simple-icons/icons/nintendo';
 import playstationIcon from 'simple-icons/icons/playstation';
 import steamIcon from 'simple-icons/icons/steam';
-import { Button } from 'reactstrap';
 
+import GameCoverImage from '../components/GameCoverImage';
+import Icon from '../components/Icon';
 import type { Game } from '../types/Game';
 import { platforms } from '../types/platforms';
 import type { Store } from '../types/platforms';
-
-import './GameDetail.scss';
-import Icon from '../components/Icon';
 
 type Props = {
   game: ?Game
 };
 
 function getAvailableStores(game: Game): Array<Store> {
-  const platformStores = game.platforms.map((p) => {
+  const platformStores = game.platforms.map(p => {
     switch (p.id) {
       case platforms.playstation3:
       case platforms.playstation4:
@@ -80,9 +81,9 @@ class GameDetail extends React.Component<Props> {
     const game = this.props.game;
     if (game) {
       const releaseYear = format(game.releaseDate, 'YYYY');
-      const platformNames = game.platforms.map((p) => p.name);
+      const platformNames = game.platforms.map(p => p.name);
 
-      const storeSearchLinks = getAvailableStores(game).map((s) => {
+      const storeSearchLinks = getAvailableStores(game).map(s => {
         return {
           type: s,
           link: makeStoreLink(s, game.title)
@@ -91,9 +92,7 @@ class GameDetail extends React.Component<Props> {
 
       return (
         <div className="game-detail">
-          <div className="game-poster">
-            <img src={game.coverURL} alt="current game poster" />
-          </div>
+          <GameCoverImage imageURL={game.coverURL} height={400} className="game-poster" />
           <div className="game-info">
             <div className="game-title">
               {game.title} ({releaseYear})
@@ -104,7 +103,7 @@ class GameDetail extends React.Component<Props> {
               <div className="stores">
                 Search for this game on these stores:
                 <div className="store-links">
-                  {storeSearchLinks.map((link) => {
+                  {storeSearchLinks.map(link => {
                     const storeIcon = getStoreIcon(link.type);
                     return (
                       <Button
