@@ -25,7 +25,7 @@ const SuggestionsTab = () => {
 
   return (
     <div>
-      <Button onClick={() => setShowAddModal(true)} color="primary">
+      <Button onClick={() => setShowAddModal(true)} color="primary" className="add-button">
         Add suggestion
       </Button>
       <GBGameSearch
