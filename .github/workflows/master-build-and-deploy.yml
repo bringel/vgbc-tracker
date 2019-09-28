@@ -24,19 +24,3 @@ jobs:
         env:
           PROJECT_ID: vgbc-tracker
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_PROD }}
-  build-functions:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies
-        run: yarn install --ignore-engines --cwd ./functions
-      - name: deploy
-        uses: w9jds/firebase-action@v1.0.1
-        if: success()
-        with:
-          args: deploy --only functions
-        env:
-          PROJECT_ID: vgbc-tracker
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_PROD }}
