@@ -1,8 +1,8 @@
+//@flow
 import './GameDetail.scss';
 
 import format from 'date-fns/format';
 import flatten from 'lodash-es/flatten';
-//@flow
 import * as React from 'react';
 import { Button } from 'reactstrap';
 import microsoftIcon from 'simple-icons/icons/microsoft';

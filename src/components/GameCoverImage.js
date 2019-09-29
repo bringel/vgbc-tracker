@@ -15,7 +15,7 @@ const GameCoverImage = (props: Props) => {
 
   return (
     <div className={`cover ${className}`} style={{ height: height, width: width }}>
-      <img src={imageURL} style={{ maxHeight: height }} />
+      <img src={imageURL} style={{ maxHeight: height }} alt="" />
     </div>
   );
 };

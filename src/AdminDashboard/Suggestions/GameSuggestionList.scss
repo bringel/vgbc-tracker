@@ -4,6 +4,20 @@
   min-width: 720px;
 }
 
-.suggestion-title {
+.suggestion-data {
   margin-left: 12px;
+  flex-grow: 1;
+}
+
+.suggestion-title {
+}
+
+.suggestion-user {
+}
+
+.suggestion-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
