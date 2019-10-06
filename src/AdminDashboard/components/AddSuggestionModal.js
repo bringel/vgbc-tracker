@@ -1,25 +1,25 @@
 //@flow
-import * as React from 'react';
+import './AddSuggestionModal.scss';
+
 import axios from 'axios';
 import format from 'date-fns/format';
+import * as React from 'react';
 import {
   Button,
   Input,
   Label,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   ListGroup,
   ListGroupItem,
-  Media
+  Media,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
 } from 'reactstrap';
 
 import { suggestionsCollection } from '../../services/firebase';
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
 import type { GameSuggestion } from '../../types/GameSuggestion';
-
-import './GBGameSearch.scss';
 
 type Props = {
   isOpen: boolean,
@@ -37,7 +37,7 @@ type State = {
 };
 
 //TODO: this should be extracted from the modal component to be used in other dialogs
-class GBGameSearch extends React.Component<Props, State> {
+class AddSuggestionModal extends React.Component<Props, State> {
   state = {
     query: '',
     currentResultPage: 0,
@@ -57,7 +57,7 @@ class GBGameSearch extends React.Component<Props, State> {
     const { query } = this.state;
     this.setState({ loading: true });
 
-    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}`).then((response) => {
+    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}`).then(response => {
       const { currentPage, totalPages, results } = response.data;
 
       this.setState({ currentResultPage: currentPage, totalResultPages: totalPages, results: results, loading: false });
@@ -65,7 +65,7 @@ class GBGameSearch extends React.Component<Props, State> {
   };
 
   handleResultClicked = (resultID: number) => {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       if (prevState.selectedResult === resultID) {
         return {
           selectedResult: null
@@ -85,10 +85,10 @@ class GBGameSearch extends React.Component<Props, State> {
     }
     this.setState({ loading: true });
 
-    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then((response) => {
+    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then(response => {
       const { currentPage, totalPages, results } = response.data;
 
-      this.setState((prevState) => {
+      this.setState(prevState => {
         const previousResults = prevState.results || [];
         return {
           currentResultPage: currentPage,
@@ -104,7 +104,7 @@ class GBGameSearch extends React.Component<Props, State> {
     const { onSave } = this.props;
     const { selectedResult, results } = this.state;
     if (selectedResult && results) {
-      const selectedGame = results.find((r) => r.id === selectedResult);
+      const selectedGame = results.find(r => r.id === selectedResult);
       if (selectedGame) {
         const suggestionDoc: GameSuggestion = {
           giantBombID: selectedGame.id,
@@ -147,7 +147,7 @@ class GBGameSearch extends React.Component<Props, State> {
               type="text"
               value={query}
               onChange={this.handleSearchTextUpdate}
-              onKeyDown={(event) => {
+              onKeyDown={event => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
                   this.search();
@@ -162,7 +162,7 @@ class GBGameSearch extends React.Component<Props, State> {
           {results && (
             <>
               <ListGroup>
-                {results.map((r) => (
+                {results.map(r => (
                   <ListGroupItem
                     key={r.id}
                     active={r.id === this.state.selectedResult}
@@ -201,4 +201,4 @@ class GBGameSearch extends React.Component<Props, State> {
   }
 }
 
-export default GBGameSearch;
+export default AddSuggestionModal;

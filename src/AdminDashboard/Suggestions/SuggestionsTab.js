@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 
 import { suggestionsCollection } from '../../services/firebase';
 import { type GameSuggestion } from '../../types/GameSuggestion';
-import GBGameSearch from '../components/GBGameSearch';
+import AddSuggestionModal from '../components/AddSuggestionModal';
 import ManualGameOfMonthModal from '../components/ManualGameOfMonthModal';
 import GameSuggestionsList from './GameSuggestionsList';
 
@@ -35,7 +35,7 @@ const SuggestionsTab = () => {
           Manually Select Game
         </Button>
       </div>
-      <GBGameSearch
+      <AddSuggestionModal
         isOpen={showAddModal}
         toggleOpen={() => setShowAddModal(prevState => !prevState)}
         onSave={savePromise => {
