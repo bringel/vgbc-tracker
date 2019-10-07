@@ -1,7 +1,9 @@
 //@flow
+import './GameSearch.scss';
+
 import axios from 'axios';
 import format from 'date-fns/format';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Button, Input, Label, ListGroup, ListGroupItem, Media } from 'reactstrap';
 
 import { type GameSearchResponse, type SearchResponseGame } from '../../types/GameSearchResponse';
@@ -55,12 +57,23 @@ function reducer(state: State, action: *): State {
   }
 }
 
-type Props = {};
+type Props = {
+  onSelectionChanged: (suggestion: ?SearchResponseGame) => void
+};
 
 const GameSearch = (props: Props) => {
+  const { onSelectionChanged } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { query, currentResultPage, totalResultPages, results, selectedResult, loading } = state;
+
+  useEffect(() => {
+    if (onSelectionChanged) {
+      const suggestion = results ? results.find(r => r.id === selectedResult) : null;
+
+      onSelectionChanged(suggestion);
+    }
+  }, [onSelectionChanged, results, selectedResult]);
 
   const handleSearchTextChange = (event: *) => {
     dispatch({ type: 'updateQuery', query: event.target.value });
