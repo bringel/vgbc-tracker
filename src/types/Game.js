@@ -43,3 +43,15 @@ type GameOfTheMonthProps = {
 };
 
 export type GameOfTheMonthGame = Game & GameOfTheMonthProps;
+
+export type GameOfTheMonthDoc = {
+  giantBombID: string,
+  title: string,
+  releaseDate: string,
+  description: string,
+  coverURL: string,
+  platforms: Array<{ id: number, name: string }>,
+  current: boolean,
+  activeMonth: number,
+  activeYear: number
+};

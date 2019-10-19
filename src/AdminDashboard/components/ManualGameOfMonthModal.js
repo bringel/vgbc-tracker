@@ -1,9 +1,10 @@
 //@flow
 import addMonths from 'date-fns/add_months';
-import format from 'date-fns/format';
-import React, { useState } from 'react';
-import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import React, { useCallback, useState } from 'react';
+import { Button, ButtonGroup, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
+import { responseToGameOfTheMonthDocument } from '../../functions';
+import { gamesCollection } from '../../services/firebase';
 import GameSearch from './GameSearch';
 
 type Props = {
@@ -13,47 +14,52 @@ type Props = {
 
 const ManualGameOfMonthModal = (props: Props) => {
   const { isOpen, toggle } = props;
-  const today = new Date();
-  const nextMonth = addMonths(today, 1);
-  const [month, setMonth] = useState(today.getMonth());
+  const [month, setMonth] = useState<'thisMonth' | 'nextMonth'>('thisMonth');
   const [game, setGame] = useState(null);
 
-  const handleRadioButton = e => {
-    setMonth(Number(e.target.value));
-  };
+  const handleSave = useCallback(() => {
+    if (!game) {
+      return;
+    }
+    const activeDate = month === 'thisMonth' ? new Date() : addMonths(new Date(), 1);
 
-  const handleSave = () => {};
+    const activeMonth = activeDate.getMonth() + 1;
+    const activeYear = activeDate.getFullYear();
+    const games = gamesCollection();
+
+    const gameDoc = responseToGameOfTheMonthDocument(game, activeMonth, activeYear, true);
+
+    games
+      .add(gameDoc)
+      .then(ref => {
+        return games
+          .where('current', '==', true)
+          .get()
+          .then(querySnapshot => {
+            const ids = querySnapshot.docs.map(d => d.id).filter(id => id !== ref.id);
+            ids.forEach(id => {
+              games.doc(id).update({ current: false });
+            });
+          });
+      })
+      .then(() => toggle());
+  }, [game, month, toggle]);
 
   return (
     <Modal isOpen={isOpen} toggle={toggle} size="xl" backdrop="static" scrollable>
       <ModalHeader toggle={toggle}>Set Game of the Month</ModalHeader>
       <ModalBody>
-        <Form>
-          <FormGroup check inline>
-            <Label check>
-              <Input
-                type="radio"
-                name="month"
-                value={today.getMonth()}
-                checked={month === today.getMonth()}
-                onChange={handleRadioButton}
-              />
-              {format(today, 'MMMM')}
-            </Label>
-          </FormGroup>
-          <FormGroup check inline>
-            <Label check>
-              <Input
-                type="radio"
-                name="month"
-                value={nextMonth.getMonth()}
-                checked={month === nextMonth.getMonth()}
-                onChange={handleRadioButton}
-              />
-              {format(nextMonth, 'MMMM')}
-            </Label>
-          </FormGroup>
-        </Form>
+        <div style={{ marginBottom: 12 }}>
+          {/** TODO: does this make sense since the game set by this modal will be set as "current" */}
+          <ButtonGroup>
+            <Button color="primary" active={month === 'thisMonth'} onClick={() => setMonth('thisMonth')}>
+              This Month
+            </Button>
+            <Button color="primary" active={month === 'nextMonth'} onClick={() => setMonth('nextMonth')}>
+              Next Month
+            </Button>
+          </ButtonGroup>
+        </div>
         <GameSearch onSelectionChanged={game => setGame(game)} />
       </ModalBody>
       <ModalFooter>
