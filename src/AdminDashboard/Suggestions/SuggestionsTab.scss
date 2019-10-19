@@ -3,8 +3,12 @@
   flex-direction: column;
 }
 
-.add-button {
+.actions {
   margin-bottom: 12px;
 
-  min-width: 200px;
+  button {
+    min-width: 200px;
+
+    margin-right: 6px;
+  }
 }
