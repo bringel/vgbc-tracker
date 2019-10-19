@@ -34,7 +34,11 @@ class UserManagementTab extends React.Component<Props, State> {
   }
 
   render() {
-    return <UserList users={this.state.users} />;
+    return (
+      <div>
+        <UserList users={this.state.users} />
+      </div>
+    );
   }
 }
 

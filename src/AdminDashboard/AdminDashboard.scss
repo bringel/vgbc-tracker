@@ -3,5 +3,13 @@
 .admin-wrapper {
   @include large-and-up {
     margin-left: 240px;
+
+    display: flex;
+  }
+}
+
+.admin-nav {
+  @include large-and-up {
+    margin-right: 24px;
   }
 }

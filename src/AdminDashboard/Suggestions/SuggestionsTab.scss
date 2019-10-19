@@ -2,3 +2,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.actions {
+  margin-bottom: 12px;
+
+  button {
+    min-width: 200px;
+
+    margin-right: 6px;
+  }
+}

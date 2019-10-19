@@ -12,16 +12,7 @@
   }
 
   .game-poster {
-    display: flex;
-    justify-content: center;
-
-    flex: 0 1 400px;
-    height: 100%;
-    overflow-x: hidden;
-
     margin-bottom: 24px;
-    border-radius: 5px;
-    background-color: $background-darker;
 
     @include medium-and-up {
       min-width: 300px;
@@ -53,7 +44,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    & button {
+    & a {
       margin-right: 12px;
     }
   }

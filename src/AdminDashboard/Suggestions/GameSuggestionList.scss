@@ -1,0 +1,23 @@
+.suggestion-row {
+  display: flex;
+
+  min-width: 720px;
+}
+
+.suggestion-data {
+  margin-left: 12px;
+  flex-grow: 1;
+}
+
+.suggestion-title {
+}
+
+.suggestion-user {
+}
+
+.suggestion-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
