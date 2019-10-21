@@ -17,12 +17,15 @@ export function responseToGameOfTheMonthDocument(
     };
   });
 
-  const $ = cheerio.load(apiResponse.description);
+  let descriptionText = '';
+  if (apiResponse.description) {
+    const $ = cheerio.load(apiResponse.description);
 
-  const descriptionText = $('h2')
-    .first()
-    .nextUntil('h2')
-    .text();
+    descriptionText = $('h2')
+      .first()
+      .nextUntil('h2')
+      .text();
+  }
 
   return {
     giantBombID: `${apiResponse.id}`,
