@@ -1,5 +1,5 @@
 //@flow
-import addMonths from 'date-fns/add_months';
+import { addMonths } from 'date-fns';
 import React, { useCallback, useState } from 'react';
 import { Button, ButtonGroup, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 

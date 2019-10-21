@@ -1,7 +1,7 @@
 //@flow
 import './GamePreview.scss';
 
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 import * as React from 'react';
 import appleIcon from 'simple-icons/icons/apple';
 import linuxIcon from 'simple-icons/icons/linux';

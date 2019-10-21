@@ -1,17 +1,14 @@
 //@flow
+import './Dashboard.scss';
+
+import { format } from 'date-fns';
 import React, { Component } from 'react';
-import format from 'date-fns/format';
-
-import { AccentColorUpdate } from '../themeContext';
-
-import type { GameOfTheMonthGame } from '../types/Game';
-
-import { gamesCollection } from '../services/firebase';
 
 import GameDetail from '../Game/GameDetail';
 import GameHistory from '../GameHistory/GameHistory';
-
-import './Dashboard.scss';
+import { gamesCollection } from '../services/firebase';
+import { AccentColorUpdate } from '../themeContext';
+import type { GameOfTheMonthGame } from '../types/Game';
 
 type Props = {};
 
@@ -28,11 +25,11 @@ class Dashboard extends Component<Props, State> {
   componentDidMount() {
     gamesCollection()
       .get()
-      .then((querySnapshot) => {
-        const currentDoc = querySnapshot.docs.find((g) => {
+      .then(querySnapshot => {
+        const currentDoc = querySnapshot.docs.find(g => {
           return ((g.data(): any): GameOfTheMonthGame).current;
         });
-        const gamesHistoryDocs = querySnapshot.docs.filter((g) => {
+        const gamesHistoryDocs = querySnapshot.docs.filter(g => {
           return !((g.data(): any): GameOfTheMonthGame).current;
         });
 
@@ -41,7 +38,7 @@ class Dashboard extends Component<Props, State> {
         }
 
         const current = ((currentDoc.data(): any): GameOfTheMonthGame);
-        const gamesHistory = gamesHistoryDocs.map((d) => ((d.data(): any): GameOfTheMonthGame));
+        const gamesHistory = gamesHistoryDocs.map(d => ((d.data(): any): GameOfTheMonthGame));
 
         this.setState({ currentGame: current, gamesHistory: gamesHistory });
       });
@@ -50,7 +47,7 @@ class Dashboard extends Component<Props, State> {
   getCurrentMonth() {
     if (this.state.currentGame) {
       const activeDate = new Date(this.state.currentGame.activeYear, this.state.currentGame.activeMonth - 1);
-      return format(activeDate, 'MMMM YYYY');
+      return format(activeDate, 'MMMM yyyy');
     }
   }
   render() {

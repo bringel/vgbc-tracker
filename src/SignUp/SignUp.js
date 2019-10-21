@@ -1,14 +1,13 @@
 //@flow
+import './SignUp.scss';
+
+import { isAfter } from 'date-fns';
 import * as React from 'react';
 import { type ContextRouter } from 'react-router';
-import isAfter from 'date-fns/is_after';
-import { Button, Input, Label, Alert } from 'reactstrap';
+import { Alert, Button, Input, Label } from 'reactstrap';
 
 import firebase, { codesCollection, usersCollection } from '../services/firebase';
-
 import { AccentColorUpdate } from '../themeContext';
-
-import './SignUp.scss';
 
 type Props = {
   ...ContextRouter
@@ -44,7 +43,7 @@ class SignUp extends React.Component<Props, State> {
     const code = queryParams.get('code');
     if (code) {
       this.setState({ signupCode: code });
-      this.verifySignupCode(code).then((valid) => {
+      this.verifySignupCode(code).then(valid => {
         this.setState({ validCode: valid });
       });
     }
@@ -54,7 +53,7 @@ class SignUp extends React.Component<Props, State> {
     return codesCollection()
       .doc('signupCode')
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           const signupData: { code: string, expiration: ?any } = doc.data();
           const now = new Date();
@@ -74,7 +73,7 @@ class SignUp extends React.Component<Props, State> {
   handleSignupCodeChange = (event: SyntheticInputEvent<*>) => {
     const value = event.target.value;
     this.setState({ signupCode: value });
-    this.verifySignupCode(value).then((valid) => {
+    this.verifySignupCode(value).then(valid => {
       this.setState({ validCode: valid });
     });
   };
@@ -100,7 +99,7 @@ class SignUp extends React.Component<Props, State> {
       const auth = firebase.auth();
       auth
         .createUserWithEmailAndPassword(email, password)
-        .catch((error) => {
+        .catch(error => {
           const errorCode = error.code;
           let errorMessage = '';
 
@@ -115,7 +114,7 @@ class SignUp extends React.Component<Props, State> {
           }
           this.setState({ error: errorMessage, creating: false });
         })
-        .then((cred) => {
+        .then(cred => {
           if (cred) {
             cred.user.updateProfile({ displayName: name }).then(() => {
               usersCollection()
@@ -124,7 +123,7 @@ class SignUp extends React.Component<Props, State> {
             });
             this.unsubscribeUserDoc = usersCollection()
               .doc(cred.user.uid)
-              .onSnapshot((snapshot) => {
+              .onSnapshot(snapshot => {
                 //wait for the firebase function to set the role before navigating
                 const data = snapshot.data();
                 if (data && data.role) {
@@ -170,7 +169,7 @@ class SignUp extends React.Component<Props, State> {
               name="name"
               type="text"
               value={name}
-              onChange={(event) => this.handleInputChange(event)}
+              onChange={event => this.handleInputChange(event)}
               autoComplete="name"
               disabled={!validCode}
             />
@@ -180,7 +179,7 @@ class SignUp extends React.Component<Props, State> {
               name="email"
               type="email"
               value={email}
-              onChange={(event) => this.handleInputChange(event)}
+              onChange={event => this.handleInputChange(event)}
               autoComplete="email"
               disabled={!validCode}
             />
@@ -190,7 +189,7 @@ class SignUp extends React.Component<Props, State> {
               name="password"
               type="password"
               value={password}
-              onChange={(event) => this.handleInputChange(event)}
+              onChange={event => this.handleInputChange(event)}
               autoComplete="new-password"
               disabled={!validCode}
             />
@@ -200,7 +199,7 @@ class SignUp extends React.Component<Props, State> {
               name="verifyPassword"
               type="password"
               value={verifyPassword}
-              onChange={(event) => this.handleInputChange(event)}
+              onChange={event => this.handleInputChange(event)}
               autoComplete="new-password"
               disabled={!validCode}
             />

@@ -2,7 +2,7 @@
 import './GameSearch.scss';
 
 import axios from 'axios';
-import format from 'date-fns/format';
+import { format, parseISO } from 'date-fns';
 import React, { useEffect, useReducer } from 'react';
 import { Button, Input, Label, ListGroup, ListGroupItem, Media } from 'reactstrap';
 
@@ -152,7 +152,9 @@ const GameSearch = (props: Props) => {
                   <Media body>
                     <div className="result-details">
                       <div className="result-title">{`${r.name} (${
-                        r.original_release_date ? format(r.original_release_date, 'YYYY') : r.expected_release_year
+                        r.original_release_date
+                          ? format(parseISO(r.original_release_date), 'yyyy')
+                          : r.expected_release_year
                       })`}</div>
                       <div className="result-description">{r.deck}</div>
                     </div>
