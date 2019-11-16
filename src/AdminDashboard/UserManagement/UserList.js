@@ -41,7 +41,7 @@ class UserList extends React.Component<Props> {
       <>
         <h2>All Users</h2>
         <ListGroup className="user-list">
-          {users.map((user) => (
+          {users.map(user => (
             <ListGroupItem key={user.userID}>
               <div className="user-row">
                 <div className="user-info-container">

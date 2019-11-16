@@ -85,7 +85,7 @@ const GameSearch = (props: Props) => {
 
   const search = () => {
     dispatch({ type: 'loading' });
-    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}`).then(res => {
+    axios.get<GameSearchResponse>(`/gameSearch?title=${query}`).then(res => {
       const { currentPage, totalPages, results } = res.data;
 
       dispatch({
@@ -104,7 +104,7 @@ const GameSearch = (props: Props) => {
 
     dispatch({ type: 'loading' });
 
-    axios.get<void, GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then(res => {
+    axios.get<GameSearchResponse>(`/gameSearch?title=${query}&page=${currentResultPage + 1}`).then(res => {
       const { currentPage, totalPages, results } = res.data;
 
       dispatch({
