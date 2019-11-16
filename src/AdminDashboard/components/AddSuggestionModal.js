@@ -48,6 +48,10 @@ class AddSuggestionModal extends React.Component<Props, State> {
     }
   };
 
+  onSelectionChange = suggestion => {
+    this.setState({ selectedResult: suggestion });
+  };
+
   render() {
     const { isOpen, toggleOpen } = this.props;
     const { selectedResult } = this.state;
@@ -56,11 +60,7 @@ class AddSuggestionModal extends React.Component<Props, State> {
       <Modal isOpen={isOpen} toggle={toggleOpen} size="xl" backdrop="static" scrollable>
         <ModalHeader toggle={toggleOpen}>Add Game Suggestion</ModalHeader>
         <ModalBody>
-          <GameSearch
-            onSelectionChanged={suggestion => {
-              this.setState({ selectedResult: suggestion });
-            }}
-          />
+          <GameSearch onSelectionChanged={this.onSelectionChange} />
         </ModalBody>
         <ModalFooter>
           <Button onClick={this.save} disabled={!selectedResult} color="primary">

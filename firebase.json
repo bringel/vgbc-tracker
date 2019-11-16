@@ -12,6 +12,10 @@
         "function": "searchForGame"
       },
       {
+        "source": "/selectGameOfTheMonth",
+        "function": "selectGameOfTheMonth"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
