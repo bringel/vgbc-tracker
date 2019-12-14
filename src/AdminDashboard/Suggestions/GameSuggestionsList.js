@@ -1,6 +1,7 @@
 //@flow
 import './GameSuggestionList.scss';
 
+import axios from 'axios';
 import React from 'react';
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
@@ -12,6 +13,18 @@ type Props = {
 };
 
 const GameSuggestionsList = (props: Props) => {
+  const handleSetGameClick = (gameID: number) => {
+    const today = new Date();
+    const activeMonth = today.getMonth() + 1;
+    const activeYear = today.getFullYear();
+
+    axios.post('/selectGameOfTheMonth', {
+      gameID: gameID,
+      month: activeMonth,
+      year: activeYear
+    });
+  };
+
   return (
     <ListGroup>
       {props.suggestions.map(g => (
@@ -23,7 +36,7 @@ const GameSuggestionsList = (props: Props) => {
               <div className="suggestion-user">Suggested by: </div>
             </div>
             <div className="suggestion-actions">
-              <Button>Set as Game of the Month</Button>
+              <Button onClick={() => handleSetGameClick(g.giantBombID)}>Set as Game of the Month</Button>
             </div>
           </div>
         </ListGroupItem>
