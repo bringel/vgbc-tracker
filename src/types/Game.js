@@ -38,8 +38,7 @@ export function toGamePreview(game: Game): GamePreview {
 
 type GameOfTheMonthProps = {
   activeMonth: number,
-  activeYear: number,
-  current: boolean
+  activeYear: number
 };
 
 export type GameOfTheMonthGame = Game & GameOfTheMonthProps;
@@ -51,7 +50,6 @@ export type GameOfTheMonthDoc = {
   description: string,
   coverURL: string,
   platforms: Array<{ id: number, name: string }>,
-  current: boolean,
   activeMonth: number,
   activeYear: number
 };

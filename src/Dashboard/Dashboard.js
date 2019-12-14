@@ -1,7 +1,7 @@
 //@flow
 import './Dashboard.scss';
 
-import { format } from 'date-fns';
+import { compareDesc, format, isAfter, isSameDay } from 'date-fns';
 import React, { Component } from 'react';
 
 import GameDetail from '../Game/GameDetail';
@@ -26,21 +26,36 @@ class Dashboard extends Component<Props, State> {
     gamesCollection()
       .get()
       .then(querySnapshot => {
-        const currentDoc = querySnapshot.docs.find(g => {
-          return ((g.data(): any): GameOfTheMonthGame).current;
+        // const currentDoc = querySnapshot.docs.find(g => {
+        //   return ((g.data(): any): GameOfTheMonthGame).current;
+        // });
+        // const gamesHistoryDocs = querySnapshot.docs.filter(g => {
+        //   return !((g.data(): any): GameOfTheMonthGame).current;
+        // });
+
+        // if (!currentDoc) {
+        //   return;
+        // }
+
+        // const current = ((currentDoc.data(): any): GameOfTheMonthGame);
+        // const gamesHistory = gamesHistoryDocs.map(d => ((d.data(): any): GameOfTheMonthGame));
+
+        // this.setState({ currentGame: current, gamesHistory: gamesHistory });
+        const today = new Date();
+        const documentData: Array<GameOfTheMonthGame> = querySnapshot.docs.map(d => d.data());
+        documentData.sort((a, b) => {
+          const aDate = new Date(a.activeYear, a.activeMonth - 1);
+          const bDate = new Date(b.activeYear, b.activeMonth - 1);
+          return compareDesc(aDate, bDate);
         });
-        const gamesHistoryDocs = querySnapshot.docs.filter(g => {
-          return !((g.data(): any): GameOfTheMonthGame).current;
+
+        const current = documentData.find(doc => {
+          const d = new Date(doc.activeYear, doc.activeMonth - 1);
+          return !isAfter(d, today) || isSameDay(d, today);
         });
+        const history = current ? documentData.filter(d => d.giantBombID !== current.giantBombID) : documentData;
 
-        if (!currentDoc) {
-          return;
-        }
-
-        const current = ((currentDoc.data(): any): GameOfTheMonthGame);
-        const gamesHistory = gamesHistoryDocs.map(d => ((d.data(): any): GameOfTheMonthGame));
-
-        this.setState({ currentGame: current, gamesHistory: gamesHistory });
+        this.setState({ currentGame: current, gamesHistory: history });
       });
   }
 
