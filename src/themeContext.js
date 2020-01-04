@@ -14,8 +14,8 @@ export type ThemeContextValue = {
 const defaultTheme: ThemeContextValue = {
   theme: 'dark',
   accentColor: 'green',
-  setTheme: (theme) => {}, //eslint-disable-line
-  setAccentColor: (accentColor) => {} //eslint-disable-line
+  setTheme: theme => {}, //eslint-disable-line
+  setAccentColor: accentColor => {} //eslint-disable-line
 };
 
 const ThemeContext = React.createContext<ThemeContextValue>(defaultTheme);

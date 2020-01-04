@@ -1,5 +1,4 @@
 //@flow
-import format from 'date-fns/format';
 import * as React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
@@ -37,18 +36,20 @@ class AddSuggestionModal extends React.Component<Props, State> {
           userName: ''
         },
         releaseDate: selectedResult.original_release_date
-          ? format(selectedResult.original_release_date)
-          : format(
-              new Date(
-                selectedResult.expected_release_year,
-                selectedResult.expected_release_month - 1,
-                selectedResult.expected_release_day
-              )
-            )
+          ? selectedResult.original_release_date
+          : new Date(
+              selectedResult.expected_release_year,
+              selectedResult.expected_release_month - 1,
+              selectedResult.expected_release_day
+            ).toISOString()
       };
 
       onSave(suggestionsCollection().add(suggestionDoc));
     }
+  };
+
+  onSelectionChange = suggestion => {
+    this.setState({ selectedResult: suggestion });
   };
 
   render() {
@@ -59,11 +60,7 @@ class AddSuggestionModal extends React.Component<Props, State> {
       <Modal isOpen={isOpen} toggle={toggleOpen} size="xl" backdrop="static" scrollable>
         <ModalHeader toggle={toggleOpen}>Add Game Suggestion</ModalHeader>
         <ModalBody>
-          <GameSearch
-            onSelectionChanged={suggestion => {
-              this.setState({ selectedResult: suggestion });
-            }}
-          />
+          <GameSearch onSelectionChanged={this.onSelectionChange} />
         </ModalBody>
         <ModalFooter>
           <Button onClick={this.save} disabled={!selectedResult} color="primary">

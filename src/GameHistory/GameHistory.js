@@ -17,7 +17,7 @@ type HistoryGroup = {
 };
 
 function groupGames(games: Array<GameOfTheMonthGame>): Array<HistoryGroup> {
-  const grouped = groupBy(games, (g) => g.activeYear);
+  const grouped = groupBy(games, g => g.activeYear);
   return flatMap(grouped, (value, key) => {
     return {
       year: key,
@@ -30,11 +30,11 @@ class GameHistory extends React.Component<Props> {
   render() {
     const groupedGames = groupGames(this.props.games).sort((a, b) => b.year - a.year);
     //$FlowFixMe
-    return groupedGames.map((g) => (
+    return groupedGames.map(g => (
       <React.Fragment key={g.year}>
         <div className="group-header">{g.year}</div>
         <div className="previews-grid">
-          {g.games.map((game) => (
+          {g.games.map(game => (
             <GamePreview key={game.giantBombID} game={game} />
           ))}
         </div>

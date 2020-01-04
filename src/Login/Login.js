@@ -36,7 +36,7 @@ class Login extends Component<Props, State> {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .catch((error) => {
+      .catch(error => {
         const errorCode = error.code;
         let errorMessage = '';
         if (errorCode === 'auth/invalid-email') {
@@ -50,7 +50,7 @@ class Login extends Component<Props, State> {
         }
         this.setState({ error: errorMessage });
       })
-      .then((user) => {
+      .then(user => {
         if (user) {
           this.props.history.push('/');
         }

@@ -11,8 +11,8 @@ import { initializeFirebase } from './services/firebase';
 import 'bootstrap/dist/css/bootstrap.css';
 
 initializeFirebase().then(() => {
-  axios.interceptors.request.use((config) => {
-    return getCurrentUserToken().then((token) => {
+  axios.interceptors.request.use(config => {
+    return getCurrentUserToken().then(token => {
       config.headers.common['Authorization'] = `Bearer ${token}`;
       return config;
     });

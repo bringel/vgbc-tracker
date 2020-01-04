@@ -1,7 +1,7 @@
 //@flow
 import './GameDetail.scss';
 
-import format from 'date-fns/format';
+import { format, parseISO } from 'date-fns';
 import flatten from 'lodash-es/flatten';
 import * as React from 'react';
 import { Button } from 'reactstrap';
@@ -80,7 +80,7 @@ class GameDetail extends React.Component<Props> {
   render() {
     const game = this.props.game;
     if (game) {
-      const releaseYear = format(game.releaseDate, 'YYYY');
+      const releaseYear = format(parseISO(game.releaseDate), 'yyyy');
       const platformNames = game.platforms.map(p => p.name);
 
       const storeSearchLinks = getAvailableStores(game).map(s => {

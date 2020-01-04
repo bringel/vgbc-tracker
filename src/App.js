@@ -34,11 +34,11 @@ class App extends Component<{}, State> {
 
   componentDidMount() {
     const auth = firebase.auth();
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(user => {
       if (user) {
         this.unsubscribeUserDoc = usersCollection()
           .doc(user.uid)
-          .onSnapshot((snapshot) => {
+          .onSnapshot(snapshot => {
             user.getIdToken(true);
 
             const currentUser: User = {
@@ -82,7 +82,7 @@ class App extends Component<{}, State> {
           }}>
           <BrowserRouter>
             <ThemeContext.Consumer>
-              {(themeContext) => (
+              {themeContext => (
                 <>
                   <div className={`app ${themeContext.theme} accent-${themeContext.accentColor}`}>
                     <FirebaseContext.Provider

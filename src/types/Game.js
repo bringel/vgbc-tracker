@@ -2,7 +2,7 @@
 export type Game = {
   giantBombID: string,
   title: string,
-  releaseDate: Date,
+  releaseDate: string,
   description: string,
   coverURL: string,
   platforms: Array<{ id: number, name: string }>,
@@ -12,7 +12,7 @@ export type Game = {
 export const emptyGame: Game = {
   giantBombID: '',
   title: '',
-  releaseDate: new Date('0001-01-01'),
+  releaseDate: '0001-01-01',
   description: '',
   coverURL: '',
   platforms: [],
@@ -22,7 +22,7 @@ export const emptyGame: Game = {
 export type GamePreview = {
   giantBombID: string,
   title: string,
-  releaseDate: Date,
+  releaseDate: string,
   coverURL: string
 };
 
@@ -38,8 +38,7 @@ export function toGamePreview(game: Game): GamePreview {
 
 type GameOfTheMonthProps = {
   activeMonth: number,
-  activeYear: number,
-  current: boolean
+  activeYear: number
 };
 
 export type GameOfTheMonthGame = Game & GameOfTheMonthProps;
@@ -51,7 +50,6 @@ export type GameOfTheMonthDoc = {
   description: string,
   coverURL: string,
   platforms: Array<{ id: number, name: string }>,
-  current: boolean,
   activeMonth: number,
   activeYear: number
 };

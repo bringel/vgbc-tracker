@@ -8,7 +8,7 @@ import FirebaseContext from '../firebase-context';
 
 const Header = () => (
   <FirebaseContext.Consumer>
-    {(context) => (
+    {context => (
       <Navbar dark expand className="justify-content-between">
         <NavbarBrand href="/" className="text-primary">
           Video Game Book Club Tracker
